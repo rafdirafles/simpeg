@@ -14,15 +14,15 @@ class CreatePendidikanNonFormalsTable extends Migration
     public function up()
     {
         Schema::create('pendidikan_non_formals', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_pegawai');
-            $table->foreign('id_pegawai')->references('id_pegawai')->on('pegawais')->onDelete('cascade');
-            $table->string('nama_pendidikan');
+            $table->Increments('id');
+            $table->string('nip_nrp',20)->index();
+            $table->foreign('nip_nrp')->references('nip_nrp')->on('users')->onDelete('cascade');
+            $table->string('nama_pendidikan',50);
             $table->integer('lama_pendidikan');
             $table->integer('tahun_pendidikan');
-            $table->string('tempat_pendidikan');
-            $table->string('keterangan');
-            $table->string('file');
+            $table->string('tempat_pendidikan',50);
+            $table->string('keterangan',50);
+            $table->string('file',100);
 
 
             $table->timestamps();

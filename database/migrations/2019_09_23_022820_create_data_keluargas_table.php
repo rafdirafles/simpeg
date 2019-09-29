@@ -15,6 +15,16 @@ class CreateDataKeluargasTable extends Migration
     {
         Schema::create('data_keluargas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nip_nrp',20)->index();
+            $table->foreign('nip_nrp')->references('nip_nrp')->on('users')->onDelete('cascade');
+            $table->string('nama',70);
+            $table->enum('jk',['L','P']);
+            $table->enum('hubungan_keluarga',['Ayah','Ibu','Anak kandung','Anak tiri','Saudara kandung','Saudara tiri']);
+            $table->string('tempat_lahir',50);
+            $table->date('tanggal_lahir');
+            $table->enum('status_hidu',['Hidup','Meninggal']);
+            $table->string('pekrjaan',50);
+            $table->string('keterangan',100);
             $table->timestamps();
         });
     }

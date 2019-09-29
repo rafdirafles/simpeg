@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tanda_jasa extends Model
+class Jabatan extends Model
 {
     //
 }

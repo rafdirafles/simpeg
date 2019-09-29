@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTandaJasasTable extends Migration
+class CreatePangkatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateTandaJasasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tanda_jasas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('pangkats', function (Blueprint $table) {
+            $table->Increments('id');
+            $table->string('nama_pangkat',50);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateTandaJasasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tanda_jasas');
+        Schema::dropIfExists('pangkats');
     }
 }

@@ -67,6 +67,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <form class="kt-form" action="{{ route('login') }}" method="post">
                         @csrf
 						<div class="input-group">
+
                             <input id="login" placeholder="email or NRP or NIP" type="text" class="form-control{{ $errors->has('nip_nrp') || $errors->has('email') ? ' is-invalid' : '' }}" name="login" value="{{ old('nip_nrp') ?: old('email') }}" required autofocus>
                             @if ($errors->has('nip_nrp') || $errors->has('email'))
                                 <span class="invalid-feedback">

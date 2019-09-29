@@ -16,7 +16,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+
+        'nip_nrp','nama_pegawai','gelar_depan','gelar_belakang','no_kta_pegawai','jenis_pegawai',
+        'email','password','nidn','alamat','tempat_lahir','tanggal_lahir','jk','agama','no_kep_jabatan','nik','status_menikah','no_kk',
+        'hobi','no_tlp','no_hp','tgl_masuk','tinggi_badan','berat_badan','warna_rambut','bentuk_muka','warna_kulit','ciri_khas',
+        'cacat_tubuh','id_unit_kerja','is_status','foto'
     ];
 
     /**
@@ -36,4 +40,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function unit_kerja(){
+        return $this->belongsTo('App\Unit_kerja','id_unit_kerja');
+     }
 }

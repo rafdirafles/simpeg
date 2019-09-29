@@ -14,15 +14,16 @@ class CreateRiwayatUnitKerjasTable extends Migration
     public function up()
     {
         Schema::create('riwayat_unit_kerjas', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_pegawai');
-            $table->foreign('id_pegawai')->references('id_pegawai')->on('pegawais')->onDelete('cascade');
-            $table->string('jenis_mutasi');
-            $table->unsignedBigInteger('unit_kerja');
+            $table->increments('id');
+            $table->string('nip_nrp',20)->index();
+            $table->foreign('nip_nrp')->references('nip_nrp')->on('users')->onDelete('cascade');
+            $table->enum('jenis_mutasi',['Keluar','Masuk','Internal']);
+            $table->unsignedinteger('unit_kerja');
             $table->foreign('unit_kerja')->references('id')->on('unit_kerjas')->onDelete('cascade');
-            $table->string('no_sk');
+            $table->text('no_sk');
+            $table->string('pejabat',50);
             $table->date('tgl_sk');
-            $table->string('keterangan');
+            $table->string('keterangan',255);
             $table->date('tgl_masuk');
             $table->date('tgl_keluar');
             $table->timestamps();

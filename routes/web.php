@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('/master','masterController');
+Route::resource('/profile','ProfileController');
+// setting controller
+Route::resource('/setting/divisi','Setting\DivisiController');
+Route::resource('/setting/unit_kerja','Setting\UnitKerjaController');
+// end setting
+Route::get('/setting/getDivisi','Setting\DivisiController@getDivisi')->name('getDivisi');

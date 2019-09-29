@@ -14,7 +14,16 @@ class CreateRiwayatKepangkatansTable extends Migration
     public function up()
     {
         Schema::create('riwayat_kepangkatans', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->Increments('id');
+            $table->string('nip_nrp',20)->index();
+            $table->foreign('nip_nrp')->references('nip_nrp')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('id_pangkat');
+            $table->foreign('id_pangkat')->references('id')->on('pangkats')->onDelete('cascade');
+            $table->date('tmt');
+            $table->string('nomor_sk',50);
+            $table->string('pejabat',50);
+            $table->date('tanggal_sk');
+            $table->string('dasar_peraturan',150);
             $table->timestamps();
         });
     }

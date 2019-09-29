@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDivisisTable extends Migration
+class CreateUnitKerjasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateDivisisTable extends Migration
      */
     public function up()
     {
-        Schema::create('divisis', function (Blueprint $table) {
+        Schema::create('unit_kerjas', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedinteger('id_unit_kerja');
-            $table->foreign('id_unit_kerja')->references('id')->on('unit_kerjas')->onDelete('cascade');
-            $table->string('nama_devisi',50);
+            $table->string('nama_unit_kerja');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateDivisisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('divisis');
+        Schema::dropIfExists('unit_kerjas');
     }
 }

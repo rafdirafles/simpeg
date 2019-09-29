@@ -14,16 +14,16 @@ class CreatePendidikanUmumsTable extends Migration
     public function up()
     {
         Schema::create('pendidikan_umums', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_pegawai');
-            $table->foreign('id_pegawai')->references('id_pegawai')->on('pegawais')->onDelete('cascade');
-            $table->string('jenjang_pendidikan');
-            $table->string('nama_sekolah');
-            $table->string('jurusan');
-            $table->string('kota');
+            $table->Increments('id');
+            $table->string('nip_nrp',20)->index();
+            $table->foreign('nip_nrp')->references('nip_nrp')->on('users')->onDelete('cascade');
+            $table->enum('jenjang_pendidikan',['SD','SLTP','SLTA','S1']);
+            $table->string('nama_sekolah',50);
+            $table->string('jurusan',50);
+            $table->string('kota',50);
             $table->integer('tahun_lulus');
-            $table->string('no_ijazah');
-            $table->string('file');
+            $table->string('no_ijazah',30);
+            $table->string('file',100);
 
 
 

@@ -14,15 +14,15 @@ class CreatePendidikanPolrisTable extends Migration
     public function up()
     {
         Schema::create('pendidikan_polris', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_pegawai');
-            $table->foreign('id_pegawai')->references('id_pegawai')->on('pegawais')->onDelete('cascade');
-            $table->string('nama_pendidikan');
+            $table->increments('id');
+            $table->string('nip_nrp',20)->index();
+            $table->foreign('nip_nrp')->references('nip_nrp')->on('users')->onDelete('cascade');
+            $table->string('nama_pendidikan',50);
             $table->integer('tahun');
-            $table->string('lulus_tidak');
+            $table->enum('lulus_tidak',['Lulus',['Tidak']]);
             $table->integer('lama_bulan');
             $table->integer('rangking');
-            $table->string('file');
+            $table->string('file',100);
             $table->timestamps();
         });
     }

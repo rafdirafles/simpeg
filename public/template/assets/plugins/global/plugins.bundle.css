@@ -14068,7 +14068,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-end, body.swal2-no-backdrop .sw
   content: "\f1b7"; }
 
 .flaticon-more-1:before {
-  content: "\f1b8"; }
+  content: "\f1b8"; 
+color: red;}
 
 .flaticon-up-arrow-1:before {
   content: "\f1b9"; }
@@ -14497,7 +14498,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-end, body.swal2-no-backdrop .sw
   content: "\f14e"; }
 
 .flaticon2-calendar-3:before {
-  content: "\f14f"; }
+  content: "\f14f";
+  color: black }
 
 .flaticon2-speaker:before {
   content: "\f150"; }
