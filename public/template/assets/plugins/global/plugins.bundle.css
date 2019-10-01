@@ -12025,7 +12025,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-end, body.swal2-no-backdrop .sw
   content: "\f1a6"; }
 
 .la-copy:before {
-  content: "\f1a7"; }
+  content: "\f1a7";
+color: black; }
 
 .la-copyright:before {
   content: "\f1a8"; }
@@ -12091,7 +12092,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-end, body.swal2-no-backdrop .sw
   content: "\f1bc"; }
 
 .la-download:before {
-  content: "\f1bd"; }
+  content: "\f1bd";
+  color: black; }
 
 .la-dribbble:before {
   content: "\f1be"; }
@@ -12103,6 +12105,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-end, body.swal2-no-backdrop .sw
   content: "\f1c0"; }
 
 .la-edit:before {
+  color: #000;
   content: "\f1c1"; }
 
 .la-eject:before {
@@ -12205,7 +12208,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-end, body.swal2-no-backdrop .sw
   content: "\f1e2"; }
 
 .la-file-excel-o:before {
-  content: "\f1e3"; }
+  content: "\f1e3"; 
+  color: black;}
 
 .la-file-image-o:before {
   content: "\f1e4"; }
@@ -12217,7 +12221,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-end, body.swal2-no-backdrop .sw
   content: "\f1e6"; }
 
 .la-file-pdf-o:before {
-  content: "\f1e7"; }
+  content: "\f1e7"; 
+  color: black;}
 
 .la-file-photo-o:before {
   content: "\f1e8"; }
@@ -12235,7 +12240,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-end, body.swal2-no-backdrop .sw
   content: "\f1ec"; }
 
 .la-file-text-o:before {
-  content: "\f1ed"; }
+  content: "\f1ed";
+  color: black; }
 
 .la-file-video-o:before {
   content: "\f1ee"; }
@@ -12568,7 +12574,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-end, body.swal2-no-backdrop .sw
   content: "\f25b"; }
 
 .la-leaf:before {
-  content: "\f25c"; }
+  content: "\f25c";
+color: #000; }
 
 .la-leanpub:before {
   content: "\f25d"; }
@@ -12889,7 +12896,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-end, body.swal2-no-backdrop .sw
   content: "\f2c6"; }
 
 .la-print:before {
-  content: "\f2c7"; }
+  content: "\f2c7"; 
+  color: black;}
 
 .la-puzzle-piece:before {
   content: "\f2c8"; }
@@ -14345,6 +14353,7 @@ color: red;}
   content: "\f11b"; }
 
 .flaticon2-line-chart:before {
+  color: black;
   content: "\f11c"; }
 
 .flaticon2-percentage:before {

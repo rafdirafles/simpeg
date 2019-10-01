@@ -22,8 +22,8 @@ class CreateDataKeluargasTable extends Migration
             $table->enum('hubungan_keluarga',['Ayah','Ibu','Anak kandung','Anak tiri','Saudara kandung','Saudara tiri']);
             $table->string('tempat_lahir',50);
             $table->date('tanggal_lahir');
-            $table->enum('status_hidu',['Hidup','Meninggal']);
-            $table->string('pekrjaan',50);
+            $table->enum('status_hidup',['Hidup','Meninggal']);
+            $table->string('pekerjaan',50);
             $table->string('keterangan',100);
             $table->timestamps();
         });

@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Pendidikan_kejuruan;
+use App\Pendidikan_umum;
 use App\user;
-use Illuminate\Http\Request;
 use App\Unit_kerja;
+use App\Pendidikan_non_formal;
+use Illuminate\Http\Request;
+
 class masterController extends Controller
 {
     /**
@@ -114,6 +119,7 @@ class masterController extends Controller
 
 
         ]);
+        return back()->with('success','data berhasil ditambahkan');
         // return $request->all();
     }
 
@@ -126,6 +132,12 @@ class masterController extends Controller
     public function show($id)
     {
         //
+        $datas=user::findOrFail($id);
+        $p_umum=Pendidikan_umum::where('nip_nrp',$id)->get();
+        $p_umum->groupBy('nip_nrp');
+        $p_kejuruan=Pendidikan_kejuruan::where('nip_nrp',$id)->get();
+        $p_kejuruan->groupBy('nip_nrp');
+        return view('Master.show',compact('datas','p_umum','p_kejuruan'));
     }
 
     /**
@@ -157,8 +169,11 @@ class masterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $data=User::findOrFail($request->id);
+        $data->delete();
+        return back()->with("success","data berhasil di Hapus");
     }
 }

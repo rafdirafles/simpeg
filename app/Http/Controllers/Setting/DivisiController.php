@@ -105,8 +105,6 @@ class DivisiController extends Controller
         $data=Divisi::findOrFail($request->id);
         $data->delete();
         return redirect()->route('divisi.index')->with("success","data berhasil di Hapus");
-
-        //
     }
     public function getDivisi(){
         $data=Unit_kerja::all();

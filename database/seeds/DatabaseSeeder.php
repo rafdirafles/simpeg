@@ -1,5 +1,6 @@
 <?php
 
+use App\Unit_kerja;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,6 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        // $this->call(DatabaseSeeder::class);
+        $this->call(Unit_kerja::class);
+        $this->call(DatabaseSeeder::class);
     }
 }

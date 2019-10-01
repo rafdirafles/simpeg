@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    protected $primaryKey ='nip_nrp';
 
     /**
      * The attributes that are mass assignable.
@@ -42,5 +43,9 @@ class User extends Authenticatable
     ];
     public function unit_kerja(){
         return $this->belongsTo('App\Unit_kerja','id_unit_kerja');
-     }
+    }
+
+    public function Data_keluarga(){
+        return $this->hasMany('App\Data_keluarga','nip_nrp');
+    }
 }

@@ -248,7 +248,8 @@
                 {{method_field('delete')}}
                 {{csrf_field()}}
             <div class="modal-body">
-                <p class="text-center">
+                <center><img src="{{asset('/img/police_stop.gif')}}" alt=""></center>
+                <p class="text-center" style="color:red ">
                     Are you sure you want to delete this?
                 </p>
                     <input type="hidden" name="id" id="cat_id" value="">
@@ -343,7 +344,8 @@
                 {{method_field('delete')}}
                 {{csrf_field()}}
             <div class="modal-body">
-                <p class="text-center">
+                <center><img src="{{asset('/img/police_stop.gif')}}" alt=""></center>
+                <p class="text-center" style="color:red ">
                     Are you sure you want to delete this?
                 </p>
                     <input type="hidden" name="id" id="cat_id" value="">

@@ -24,5 +24,14 @@ Route::resource('/profile','ProfileController');
 // setting controller
 Route::resource('/setting/divisi','Setting\DivisiController');
 Route::resource('/setting/unit_kerja','Setting\UnitKerjaController');
+Route::resource('/setting/cuti','Setting\CutiController');
 // end setting
+// keluarga
+Route::resource('/keluarga','KeluargaController');
+// cuti
+Route::resource('/cuti','CutiController');
+//pendidikan umum
+Route::resource('/pendidikan_umum','PendidikanUmumController');
+// pendidikan kejuruan
+Route::resource('/pendidikan_kejuruan','PendidikankejuruanController');
 Route::get('/setting/getDivisi','Setting\DivisiController@getDivisi')->name('getDivisi');
