@@ -41,7 +41,7 @@
                                             <td>{{$umum->no_ijazah}}</td>
                                             <td>{{$umum->file}}</td>
                                             <td>
-                                                <a href="#" class="badge badge-success" data-jenjangpendidikan="{{$umum->jenjang_pendidikan}}" data-tahunlulus="{{$umum->nama_sekolah}}" data-jurusan="{{$umum->jurusan}}" data-kota="{{$umum->kota}}" data-tahunlulus="{{$umum->tahun_lulus}}" data-noijazah="{{$umum->no_ijazah}}" data-file="{{$umum->file}}" data-nipnrp="{{$umum->nip_nrp}}" data-id="{{$umum->id}}"  data-toggle="modal" data-target="#edit_pumum"><span class="fas fa-fw fa-edit"></span></a>
+                                                <a href="#" class="badge badge-success" data-jenjangpendidikan="{{$umum->jenjang_pendidikan}}" data-tahunlulus="{{$umum->tahun_lulus}}" data-jurusan="{{$umum->jurusan}}" data-kota="{{$umum->kota}}" data-tahunlulus="{{$umum->tahun_lulus}}" data-noijazah="{{$umum->no_ijazah}}" data-file="{{$umum->file}}" data-nipnrp="{{$umum->nip_nrp}}" data-id="{{$umum->id}}"  data-toggle="modal" data-target="#edit_pumum"><span class="fas fa-fw fa-edit"></span></a>
 
                                                 <button class="flaticon-delete" data-deletepumum={{$umum->id}} data-toggle="modal" data-target="#delete_pumum">Delete</button>
                                             </td>
@@ -94,8 +94,8 @@
                         @csrf
                         <input type="hidden" value="{{$datas->nip_nrp}}" name="nip_nrp">
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Jenjang Pendidikan</label>
-                            <select name="jenjang_pendidikan" id="" class="form-control">
+                            <label for="message-text" class="form-control-label">Jenjang Pendidikan *</label>
+                            <select name="jenjang_pendidikan" id="" class="form-control" required>
                                 <option value="">Pilih jenjang pendidikan</option>
                                 <option value="SD">SD</option>
                                 <option value="SLTA">SLTP</option>
@@ -106,24 +106,24 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Nama Sekolah</label>
-                            <input class="form-control" id="message-text" name="nama_sekolah" type="text">
+                            <label for="message-text" class="form-control-label">Nama Sekolah *</label>
+                            <input class="form-control" id="message-text" name="nama_sekolah" type="text" required>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Jurusan</label>
+                            <label for="message-text" class="form-control-label">Jurusan </label>
                             <input class="form-control" id="message-text" name="jurusan" type="text">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Kota</label>
-                            <input class="form-control" id="message-text" name="kota" type="text">
+                            <label for="message-text" class="form-control-label">Kota *</label>
+                            <input class="form-control" id="message-text" name="kota" type="text" required>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Tahun Lulus</label>
-                            <input type="number" class="form-control" name="tahun_lulus" id="message-text" placeholder="exp:2019">
+                            <label for="message-text" class="form-control-label">Tahun Lulus *</label>
+                            <input type="number" class="form-control" name="tahun_lulus" id="message-text" required placeholder="exp:2019">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Nomer Ijazah </label>
-                            <input type="text" class="form-control" id="message-text" name="no_ijazah" >
+                            <label for="message-text" class="form-control-label">Nomer Ijazah * </label>
+                            <input type="text" class="form-control" id="message-text" name="no_ijazah" required >
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="form-control-label">file </label>
@@ -155,8 +155,8 @@
                     <input type="hidden" value="" name="nip_nrp" id="nipnrp">
                     <input type="hidden" value="" name="id" id="id">
                     <div class="form-group">
-                        <label for="message-text" class="form-control-label">Jenjang Pendidikan</label>
-                        <select name="jenjang_pendidikan" id="jenjangpendidikan" class="form-control">
+                        <label for="message-text" class="form-control-label">Jenjang Pendidikan *</label>
+                        <select name="jenjang_pendidikan" id="jenjangpendidikan" class="form-control" required>
                             <option value="">Pilih jenjang pendidikan</option>
                             <option value="SD">SD</option>
                             <option value="SLTA">SLTP</option>
@@ -167,24 +167,24 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="form-control-label">Nama Sekolah</label>
-                        <input class="form-control" id="tahunlulus" name="nama_sekolah" type="text">
+                        <label for="message-text" class="form-control-label">Nama Sekolah *</label>
+                        <input class="form-control" id="tahunlulus" name="nama_sekolah" type="text" required>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="form-control-label">Jurusan</label>
                         <input class="form-control" id="jurusan" name="jurusan" type="text">
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="form-control-label">Kota</label>
-                        <input class="form-control" id="kota" name="kota" type="text">
+                        <label for="message-text" class="form-control-label">Kota *</label>
+                        <input class="form-control" id="kota" name="kota" type="text" required>
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="form-control-label">Tahun Lulus</label>
-                        <input type="number" class="form-control" name="tahun_lulus" id="tahunlulus" placeholder="exp:2019">
+                        <label for="message-text" class="form-control-label">Tahun Lulus *</label>
+                        <input type="number" class="form-control" name="tahun_lulus" id="tahunlulus" placeholder="exp:2019" required>
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="form-control-label">Nomer Ijazah </label>
-                        <input type="text" class="form-control" id="noijazah" name="no_ijazah" >
+                        <label for="message-text" class="form-control-label">Nomer Ijazah *</label>
+                        <input type="text" class="form-control" id="noijazah" name="no_ijazah" required>
                     </div>
                     <div class="form-group">
                         <img src="" alt="kkk" id="file" width="40%"><br>
@@ -233,8 +233,8 @@
             <td>{{$kejuruan->keterangan}}</td>
             <td>{{$kejuruan->file}}</td>
                     <td>
-                        <button class="flaticon-edit" data-namapendidikan="{{$kejuruan->nama_pendidikan}}" data-kota="{{$kejuruan->kota}}" data-tahunlulus="{{$kejuruan->tahun_lulus}}" data-lamabulan="{{$kejuruan->lama_bulan}}" data-ranking="{{$kejuruan->rangking}}" data-lulustidak="{{$kejuruan->is_lulus_tidak}}" data-keterangan="{{$kejuruan->keterangan}}" data-file="{{$kejuruan->file}}" data-umumid="{{$kejuruan->id}}" data-toggle="modal" data-target="#edit_pkejuruan">Edit</button>
-                        <button class="flaticon-delete" data-catid={{$kejuruan->id}} data-toggle="modal" data-target="#delete_pkejuruan">Delete</button>
+                        <button class="flaticon-edit" data-namapendidikan="{{$kejuruan->nama_pendidikan}}" data-kota="{{$kejuruan->kota}}" data-tahunlulus="{{$kejuruan->tahun_lulus}}" data-lamabulan="{{$kejuruan->lama_bulan}}" data-r="{{$kejuruan->rangking}}" data-lulustidak="{{$kejuruan->is_lulus_tidak}}" data-keterangan="{{$kejuruan->keterangan}}" data-file="{{$kejuruan->file}}" data-umumid="{{$kejuruan->id}}" data-nipnrp="{{$kejuruan->nip_nrp}}" data-toggle="modal" data-target="#edit_pkejuruan">Edit</button>
+                        <button class="flaticon-delete" data-id={{$kejuruan->id}} data-toggle="modal" data-target="#delete_pkejuruan">Delete</button>
                     </td>
                 </tr>
             @endforeach
@@ -257,13 +257,42 @@
                 <form action="{{route('pendidikan_kejuruan.update','test')}}" name="edit_form" method="post" enctype="multipart/form-data">
                     {{method_field('patch')}}
                     {{csrf_field()}}
+                    <input type="hidden" value="" name="id" id="id">
                     <input type="hidden" value="" name="nip_nrp" id="nipnrp">
                     <div class="form-group">
-                        <label for="message-text" class="form-control-label">Nama Sekolah</label>
-                        <input class="form-control" id="tahunlulus" name="nama_sekolah" type="text">
+                        <label for="message-text" class="form-control-label">Nama Pendidikan *</label>
+                        <input class="form-control" id="namapendidikan" name="nama_pendidikan" type="text" required>
                     </div>
                     <div class="form-group">
-                        <img src="" alt="kkk" id="file" width="40%"><br>
+                        <label for="message-text" class="form-control-label">Kota *</label>
+                        <input class="form-control" id="kota" name="kota" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Tahun Lulus *</label>
+                        <input class="form-control" id="tahunlulus" name="tahun_lulus" type="number">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Lama Studi *</label>
+                        <input class="form-control" id="lamabulan" name="lama_bulan" type="number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Ranking *</label>
+                        <input class="form-control" id="rangking" name="rangking" type="number">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Lulus/Tidak *</label>
+                        <select  class="form-control" name="is_lulus_tidak" id="lulustidak" required>
+                            <option value="">select</option>
+                            <option value="Lulus">Lulus</option>
+                            <option value="Tidak">Tidak</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Keterangan</label>
+                        <input class="form-control" id="keterangan" name="keterangan" type="text">
+                    </div>
+                    <div class="form-group">
+                        <img src="" alt="img/file" id="file" width="40%"><br>
                         <label for="message-text" class="form-control-label">file </label>
                         <input class="form-control" type="file" name="file">
                     </div>
@@ -293,7 +322,7 @@
                     <p class="text-center" style="color:red ">
                         Are you sure you want to delete this?
                     </p>
-                        <input type="hidden" name="id" id="delete_pkejuruan" value="">
+                        <input type="hidden" name="id" id="id" value="">
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">No, Cancel</button>
@@ -327,7 +356,7 @@
                                   </div>
                                   <div class="form-group">
                                       <label for="message-text" class="form-control-label">Tahun Lulus *</label>
-                                      <input type="number" class="form-control" name="tahun_lulus"id="message-text" required>
+                                      <input type="number" class="form-control" name="tahun_lulus" id="message-text" required>
                                   </div>
                                   <div class="form-group">
                                       <label for="message-text" class="form-control-label">Lama Studi *</label>
@@ -338,7 +367,7 @@
                                       <input class="form-control" id="message-text" name="ranking"type="number"></input>
                                   </div>
                                   <div class="form-group">
-                                      <label for="message-text" class="form-control-label">Lulus / Tidak</label>
+                                      <label for="message-text" class="form-control-label">Lulus / Tidak *</label>
                                       <select required class="form-control kt-select2" id="kt_select2_1" name="is_lulus_tidak">
                                               <option value="">select lulus</option>
                                               <option value="Lulus">Lulus</option>
@@ -400,6 +429,56 @@
                 modal.find('.modal-body #delete_pumum').val(id);
             })
         </script>
+{{-- edit kejuruan --}}
+<script>
+    $('#edit_pkejuruan').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var namapendidikan = button.data('namapendidikan')
+        var kota = button.data('kota')
+        var tahunlulus = button.data('tahunlulus')
+        var lamastudi = button.data('lamabulan')
+        var rangking = button.data('r')
+        var lulustidak = button.data('lulustidak')
+        var keterangan = button.data('keterangan')
+        var id = button.data('umumid')
+        var nipnrp = button.data('nipnrp')
+        var file = button.data('file')
+        var modal = $(this)
+        modal.find('.modal-body #kota').val(kota);
+        modal.find('.modal-body #namapendidikan').val(namapendidikan);
+        modal.find('.modal-body #rangking').val(rangking);
+        modal.find('.modal-body #lamabulan').val(lamastudi);
+        modal.find('.modal-body #kota').val(kota);
+        modal.find('.modal-body #tahunlulus').val(tahunlulus);
+        modal.find('.modal-body #lulustidak').val(lulustidak);
+        modal.find('.modal-body #keterangan').val(keterangan);
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #nipnrp').val(nipnrp);
+        modal.find('img#file').attr('src', '<?php echo asset('img')?>/'+file);
+        console.log(rangking);
+    });
+    
+</script>
+<script>
+    $('#delete_pkejuruan').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var modal = $(this)
+        modal.find('.modal-body #id').val(id);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
     $('#pendidikanumum_delete').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
