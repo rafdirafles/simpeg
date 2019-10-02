@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data_keluarga;
 use App\Pendidikan_kejuruan;
 use App\Pendidikan_umum;
 use App\user;
@@ -135,9 +136,13 @@ class masterController extends Controller
         $datas=user::findOrFail($id);
         $p_umum=Pendidikan_umum::where('nip_nrp',$id)->get();
         $p_umum->groupBy('nip_nrp');
+        // 
         $p_kejuruan=Pendidikan_kejuruan::where('nip_nrp',$id)->get();
         $p_kejuruan->groupBy('nip_nrp');
-        return view('Master.show',compact('datas','p_umum','p_kejuruan'));
+        // 
+        $keluargas=Data_keluarga::where('nip_nrp',$id)->get();
+        $keluargas->groupBy('nip_nrp');
+        return view('Master.show',compact('datas','p_umum','p_kejuruan','keluargas'));
     }
 
     /**

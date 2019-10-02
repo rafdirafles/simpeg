@@ -103,7 +103,7 @@ class PendidikanUmumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         $this->validate($request,[
             'file' =>'file|max:2048',
@@ -115,7 +115,7 @@ class PendidikanUmumController extends Controller
             'nip_nrp'=>'required',
         ]);
         // foto
-        $data=Pendidikan_umum::findOrFail($request->id);
+        $data=Pendidikan_umum::findOrFail($id);
         if(empty($request->file('file'))){
             $nama_file=$data->file;
             $file = $request->file('file');
@@ -149,10 +149,10 @@ class PendidikanUmumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request,$id)
     {
         //
-        $data=Pendidikan_umum::findOrFail($request->id);
+        $data=Pendidikan_umum::findOrFail($id);
         if(!$data->file == '-'){
             $image_path = public_path().'/img/'.$data->file;
             unlink($image_path);

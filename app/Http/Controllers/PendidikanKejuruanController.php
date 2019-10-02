@@ -115,10 +115,10 @@ class PendidikanKejuruanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         //
-        $data=Pendidikan_kejuruan::findOrFail($request->id);
+        $data=Pendidikan_kejuruan::findOrFail($id);
         $this->validate($request,[
             'nip_nrp'=>'required',
             'nama_pendidikan'=>'required',
@@ -165,9 +165,9 @@ class PendidikanKejuruanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $data=Pendidikan_kejuruan::findOrFail($request->id);
+        $data=Pendidikan_kejuruan::findOrFail($id);
         if(!$data->file == '-'){
             $image_path = public_path().'/img/'.$data->file;
             unlink($image_path);
