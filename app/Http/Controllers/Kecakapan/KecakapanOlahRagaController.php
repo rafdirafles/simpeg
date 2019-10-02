@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Kecakapan;
 
-use App\user;
 use Illuminate\Http\Request;
-use App\Data_keluarga;
-class KeluargaController extends Controller
+use App\Http\Controllers\Controller;
+use App\Kecakapan_olahraga_dan_beladiri;
+
+class KecakapanOlahRagaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,6 @@ class KeluargaController extends Controller
     public function index()
     {
         //
-        $datas=user::all();
-        return view('Keluarga.index',compact('datas'));
-
     }
 
     /**
@@ -38,26 +36,20 @@ class KeluargaController extends Controller
      */
     public function store(Request $request)
     {
+        //
         $this->validate($request,[
             'nip_nrp'=>'required',
-            'nama'=>'required',
-            'jk'=>'required',
-            'hubungan_keluarga'=>'required',
-            'tempat_lahir'=>'required',
-            'tanggal_lahir'=>'required',
-            'status_hidup'=>'required',
-            'pekerjaan'=>'required',
-           
+            'nama_olahraga'=>'required'
         ]);
+        
         if(empty($request->keterangan)){
             $request['keterangan']='-';
         }
         else{
             $request['keterangan']=$request->input('keterangan');
         }
-        Data_keluarga::create($request->all());
-        return back()->with('success','Data berhasil di tambahkan');
-       
+        Kecakapan_olahraga_dan_beladiri::create($request->all());
+        return redirect()->route('master.index')->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -69,7 +61,6 @@ class KeluargaController extends Controller
     public function show($id)
     {
         //
-      
     }
 
     /**
@@ -93,19 +84,12 @@ class KeluargaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        
+        $data=Kecakapan_olahraga_dan_beladiri::findOrFail($id);
         $this->validate($request,[
             'nip_nrp'=>'required',
-            'nama'=>'required',
-            'jk'=>'required',
-            'hubungan_keluarga'=>'required',
-            'tempat_lahir'=>'required',
-            'tanggal_lahir'=>'required',
-            'status_hidup'=>'required',
-            'pekerjaan'=>'required',
-           
+            'nama_olahraga'=>'required'
         ]);
-        $data=Data_keluarga::findOrfail($id);
+        
         if(empty($request->keterangan)){
             $request['keterangan']=$data->keterangan;
         }
@@ -113,7 +97,7 @@ class KeluargaController extends Controller
             $request['keterangan']=$request->input('keterangan');
         }
         $data->update($request->all());
-        return back()->with('success','Data berhasil di edit');
+        return redirect()->route('master.index/'.$id)->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -125,8 +109,8 @@ class KeluargaController extends Controller
     public function destroy($id)
     {
         //
-        $data=Data_keluarga::findOrFail($id);
+        $data=Kecakapan_olahraga_dan_beladiri::findOrFail($id);
         $data->delete();
-        return back()->with('success','Data berhasil di delete');
+        return redirect()->route('master/',$id)->with('success','Data berhasil ditambahkan');
     }
 }

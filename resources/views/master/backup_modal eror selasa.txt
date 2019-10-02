@@ -339,7 +339,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('pendidikan_kejuruan.update','test')}}" name="edit_form" method="post" enctype="multipart/form-data">
+                    <form action="{{route('pendidikan_kejuruan.update','test')}}"  method="post" enctype="multipart/form-data">
                         {{method_field('patch')}}
                         {{csrf_field()}}
                         <input type="hidden" value="" name="nip_nrp" id="nipnrp">

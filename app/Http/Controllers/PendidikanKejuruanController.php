@@ -115,10 +115,10 @@ class PendidikanKejuruanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
         //
-        $data=Pendidikan_kejuruan::findOrFail($id);
+        $data=Pendidikan_kejuruan::findOrFail($request->id);
         $this->validate($request,[
             'nip_nrp'=>'required',
             'nama_pendidikan'=>'required',

@@ -141,6 +141,7 @@ class PendidikanUmumController extends Controller
             'file' =>$nama_file,
         ]);
         return back()->with('success','data pendidikan berhasil di edit');
+        // return $request->all();
     }
 
     /**

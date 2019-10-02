@@ -88,7 +88,7 @@
                     <label for="message-text" class="form-control-label">file </label>
                     <input class="form-control" id="message-text" type="file" name="file" value="{{$umum->file}}">
                 </div>
-                   
+
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -98,8 +98,8 @@
     </form>
     </div>
   </div>
-</div>              
-<?php endforeach;?>
+</div>
+@endforeach
 {{-- end edit --}}
 {{-- add --}}
 <div class="modal fade" id="add_kategori">
@@ -111,7 +111,10 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
-            <form action="{{route('pendidikan_umum.store')}}" method="post" enctype="multipart/form-data" name="registration">
+            <div class="modal-body">
+
+
+                <form action="{{route('pendidikan_umum.store')}}" method="post" enctype="multipart/form-data" name="registration">
                 @csrf
                 <input type="hidden" value="{{$datas->nip_nrp}}" name="nip_nrp">
                 <div class="form-group">
@@ -150,6 +153,7 @@
                     <label for="message-text" class="form-control-label">file </label>
                     <input class="form-control" id="message-text" type="file" name="file">
                 </div>
+            </div>
             <!-- Modal footer -->
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -173,7 +177,6 @@
         <h4 class="modal-title">Hapus Kategori</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-
       <!-- Modal body -->
 
 
@@ -193,12 +196,12 @@
     </form>
     </div>
   </div>
-</div>              
-<?php endforeach;?>
+</div>
+@endforeach
 @section('asset-buttton')
 
 @endsection
-  
-    
+
+
 
 
