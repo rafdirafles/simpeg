@@ -12,6 +12,7 @@ use App\user;
 use App\Unit_kerja;
 use App\Pendidikan_non_formal;
 use App\Pendidikan_polri;
+use App\Riwayat_gaji_berkala;
 use App\Tanda_jasa_Prestasi;
 use Illuminate\Http\Request;
 
@@ -162,8 +163,11 @@ class masterController extends Controller
         // 
         $p_polris=Pendidikan_polri::where('nip_nrp',$id)->get();
         $p_polris->groupBy('nip_nrp');
+        //
+        $r_gaji=Riwayat_gaji_berkala::where('nip_nrp',$id)->get();
+        $r_gaji->groupBy('nip_nrp');
         return view('Master.show',compact('datas','p_umum','p_kejuruan','keluargas','k_bahasa','k_olahraga','k_brevet',
-        'tanda_jasas','p_polris'));
+        'tanda_jasas','p_polris','r_gaji'));
     }
 
     /**

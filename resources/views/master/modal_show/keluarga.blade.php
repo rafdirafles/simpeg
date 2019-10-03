@@ -53,7 +53,7 @@
     <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-        <h4 class="modal-title">Edit Kategori</h4>
+        <h4 class="modal-title">EDIT KELUARGA</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- Modal body -->
@@ -130,7 +130,7 @@
         <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-            <h4 class="modal-title">Kejuruan</h4>
+            <h4 class="modal-title">KELUARGA</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- Modal body -->
@@ -206,7 +206,7 @@
     <div class="modal-content">
     <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">Hapus Data Keluarga</h4>
+        <h4 class="modal-title">HAPUS DATA KELUARGA</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <!-- Modal body -->

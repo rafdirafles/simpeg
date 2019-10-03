@@ -17,10 +17,10 @@
     @include('master.modal_show.tanda_jasa');
     <h3>pendidikan polri</h3>
     @include('master.modal_show.pendidikan_polri');
+    <h3>Riwayat Gaji</h3>
+    @include('master.modal_show.riwayat_gaji');
 @endsection
 
 @section('asset-buttom')
-    <script>
-        
-    </script>
+   
 @endsection

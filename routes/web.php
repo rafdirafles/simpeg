@@ -44,5 +44,12 @@ Route::resource('/kecakapan_olahraga','Kecakapan\KecakapanOlahRagaController');
 Route::resource('/kecakapan_brevet','Kecakapan\KecakapanBrevetController');
 // 
 Route::resource('/tanda_jasa','TandaJasaController');
-
+// 
+Route::resource('/riwayat_gaji','Riwayat\RiwayatGajiController');
+// 
+Route::resource('/riwayat_jabatan','Riwayat\RiwayatJabatanController');
+// 
+Route::resource('/riwayat_kepangkatan','Riwayat\RiwayatKepangkatanController');
+// 
+Route::resource('/riwayat_unit_kerja','Riwayat\RiwayatGajiController');
 Route::get('/setting/getDivisi','Setting\DivisiController@getDivisi')->name('getDivisi');
