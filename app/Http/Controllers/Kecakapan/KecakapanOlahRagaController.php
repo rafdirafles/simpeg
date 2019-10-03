@@ -97,7 +97,7 @@ class KecakapanOlahRagaController extends Controller
             $request['keterangan']=$request->input('keterangan');
         }
         $data->update($request->all());
-        return redirect()->route('master.index/'.$id)->with('success','Data berhasil ditambahkan');
+        return back()->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -111,6 +111,6 @@ class KecakapanOlahRagaController extends Controller
         //
         $data=Kecakapan_olahraga_dan_beladiri::findOrFail($id);
         $data->delete();
-        return redirect()->route('master/',$id)->with('success','Data berhasil ditambahkan');
+        return back()->with('success','Data berhasil ditambahkan');
     }
 }
