@@ -38,4 +38,6 @@ Route::resource('/pendidikan_kejuruan','PendidikankejuruanController');
 Route::resource('/kecakapan_bahasa','Kecakapan\KecakapanBahasaController');
 // kecakapan olahraga
 Route::resource('/kecakapan_olahraga','Kecakapan\KecakapanOlahRagaController');
+// 
+Route::resource('/kecakapan_brevet','Kecakapan\KecakapanBrevetController');
 Route::get('/setting/getDivisi','Setting\DivisiController@getDivisi')->name('getDivisi');

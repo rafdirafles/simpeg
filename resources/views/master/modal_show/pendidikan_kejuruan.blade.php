@@ -28,8 +28,8 @@
         <td>{{$kejuruan->keterangan}}</td>
         <td>{{$kejuruan->file}}</td>
           <td>
-                <button class="flaticon-edit" data-namapendidikan="{{$kejuruan->nama_pendidikan}}" data-kota="{{$kejuruan->kota}}" data-tahunlulus="{{$kejuruan->tahun_lulus}}" data-lamabulan="{{$kejuruan->lama_bulan}}" data-rangking="{{$kejuruan->rangking}}" data-lulustidak="{{$kejuruan->is_lulus_tidak}}" data-keterangan="{{$kejuruan->keterangan}}" data-file="{{$kejuruan->file}}" data-umumid="{{$kejuruan->id}}" data-nipnrp="{{$kejuruan->nip_nrp}}" data-toggle="modal" data-target="#edit_pkejuruan">Edit</button>
-              <a class="badge badge-danger" href="#" data-target="#modal-hapuskejuruan<?php echo $kejuruan->id?>" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
+                <a href="#" class="badge badge-success" data-namapendidikan="{{$kejuruan->nama_pendidikan}}" data-kota="{{$kejuruan->kota}}" data-tahunlulus="{{$kejuruan->tahun_lulus}}" data-lamabulan="{{$kejuruan->lama_bulan}}" data-rangking="{{$kejuruan->rangking}}" data-lulustidak="{{$kejuruan->is_lulus_tidak}}" data-keterangan="{{$kejuruan->keterangan}}" data-file="{{$kejuruan->file}}" data-umumid="{{$kejuruan->id}}" data-nipnrp="{{$kejuruan->nip_nrp}}" data-toggle="modal" data-target="#edit_pkejuruan"><span class="fas fa-fw fa-edit"></span></a>
+                <a class="badge badge-danger" href="#" data-target="#modal-hapuskejuruan<?php echo $kejuruan->id?>" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
           </td>
     </tr>
     @endforeach

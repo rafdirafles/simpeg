@@ -18,8 +18,8 @@
              <td>{{$bahasa->nama_bahasa}}</td>
              <td>{{$bahasa->kemampuan_bahasa}}</td>
             <td>
-                <a class="badge badge-success" href="#modal-edit<?php echo $bahasa->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span> Edit</a>
-                <a class="badge badge-danger" href="#modal-hapus<?php echo $bahasa->id?>"  data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
+                <a class="badge badge-success" href="#modal-edit-bahasa<?php echo $bahasa->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span> Edit</a>
+                <a class="badge badge-danger" href="#modal-hapus-bahasa<?php echo $bahasa->id?>"  data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
             </td>
           </tr>
           @endforeach
@@ -37,7 +37,7 @@
        <!------------------------end table------------------------------>
        <!------------------------edit------------------------------>
        <?php $no=0; foreach($k_bahasa as $x): $no++; ?>
-       <div class="modal fade" id="modal-edit<?= $x->id; ?>">
+       <div class="modal fade" id="modal-edit-bahasa<?= $x->id; ?>">
          <div class="modal-dialog">
            <div class="modal-content">
              <!-- Modal Header -->
@@ -133,7 +133,7 @@
        <!------------------------end add------------------------------>
        <!------------------------Hapus data------------------------------>
       @foreach ($k_bahasa as $bahasa)
-      <div class="modal fade" id="modal-hapus<?= $bahasa->id; ?>">
+      <div class="modal fade" id="modal-hapus-bahasa<?= $bahasa->id; ?>">
         <div class="modal-dialog">
           <div class="modal-content">
             <!-- Modal Header -->

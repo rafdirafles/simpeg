@@ -26,7 +26,7 @@
              <td>{{$umum->no_ijazah}}</td>
              <td>{{$umum->file}}</td>
             <td>
-                <a class="badge badge-success" href="#modal-edit<?php echo $umum->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span> Edit</a>
+                <a class="badge badge-success" href="#modal-edit-umum<?php echo $umum->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span> Edit</a>
                 <a class="badge badge-danger" href="#modal-hapus-umum<?php echo $umum->id?>"  data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
             </td>
           </tr>
@@ -45,7 +45,7 @@
        <!------------------------end table------------------------------>
        <!------------------------edit------------------------------>
        <?php $no=0; foreach($p_umum as $x): $no++; ?>
-       <div class="modal fade" id="modal-edit<?= $x->id; ?>">
+       <div class="modal fade" id="modal-edit-umum<?= $x->id; ?>">
          <div class="modal-dialog">
            <div class="modal-content">
              <!-- Modal Header -->
@@ -55,9 +55,10 @@
              </div>
              <!-- Modal body -->
              <div class="modal-body">
-             <form action="{{route('pendidikan_umum.update',$x->id)}}" name="edit_form" method="post" enctype="multipart/form-data">
+             <form action="{{route('pendidikan_umum.update',$x->id)}}" method="post" enctype="multipart/form-data">
                  {{method_field('patch')}}
                  {{csrf_field()}}
+                 <input type="hidden" readonly value="<?=$x->file;?>" name="file_lama" class="form-control" >
                  <input type="hidden" readonly value="<?=$x->nip_nrp;?>" name="nip_nrp" class="form-control" >
                  <div class="form-group">
                      <label for="message-text" class="form-control-label">Jenjang Pendidikan *</label>

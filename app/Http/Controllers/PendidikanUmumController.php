@@ -116,6 +116,7 @@ class PendidikanUmumController extends Controller
         ]);
         // foto
         $data=Pendidikan_umum::findOrFail($id);
+        $file = $request->file('file');
         if(empty($request->file('file'))){
             $nama_file=$data->file;
             $file = $request->file('file');
@@ -141,7 +142,7 @@ class PendidikanUmumController extends Controller
             'file' =>$nama_file,
         ]);
         return back()->with('success','data pendidikan berhasil di edit');
-        // return $request->all();
+        // return var_dump($request->file);
     }
 
     /**

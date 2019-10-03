@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Data_keluarga;
 use App\Kecakapan_bahasa;
+use App\Kecakapan_brevet;
 use App\Kecakapan_olahraga_dan_beladiri;
 use App\Pendidikan_kejuruan;
 use App\Pendidikan_umum;
@@ -150,7 +151,10 @@ class masterController extends Controller
         // 
         $k_olahraga=Kecakapan_olahraga_dan_beladiri::where('nip_nrp',$id)->get();
         $k_olahraga->groupBy('nip_nrp');
-        return view('Master.show',compact('datas','p_umum','p_kejuruan','keluargas','k_bahasa','k_olahraga'));
+        // 
+        $k_brevet=Kecakapan_brevet::where('nip_nrp',$id)->get();
+        $k_brevet->groupBy('nip_nrp');
+        return view('Master.show',compact('datas','p_umum','p_kejuruan','keluargas','k_bahasa','k_olahraga','k_brevet'));
     }
 
     /**

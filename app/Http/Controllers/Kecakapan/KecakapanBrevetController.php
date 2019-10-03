@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Kecakapan;
 
-use App\user;
 use Illuminate\Http\Request;
-use App\Data_keluarga;
-class KeluargaController extends Controller
+use App\Http\Controllers\Controller;
+use App\Kecakapan_brevet;
+
+class KecakapanBrevetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,6 @@ class KeluargaController extends Controller
     public function index()
     {
         //
-        $datas=user::all();
-        return view('Keluarga.index',compact('datas'));
-
     }
 
     /**
@@ -38,26 +36,17 @@ class KeluargaController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request,[
             'nip_nrp'=>'required',
-            'nama'=>'required',
-            'jk'=>'required',
-            'hubungan_keluarga'=>'required',
-            'tempat_lahir'=>'required',
-            'tanggal_lahir'=>'required',
-            'status_hidup'=>'required',
-            'pekerjaan'=>'required',
-           
+            'nama_brevet'=>'required',
+            'asal_perolehan'=>'required',
         ]);
-        if(empty($request->keterangan)){
-            $request['keterangan']='-';
-        }
-        else{
-            $request['keterangan']=$request->input('keterangan');
-        }
-        Data_keluarga::create($request->all());
-        return back()->with('success','Data berhasil di tambahkan');
+        Kecakapan_brevet::create($request->all());
+        return back()->with('success','Data berhasil ditambahkan');
+        // return $request->all();
     }
+
     /**
      * Display the specified resource.
      *
@@ -67,7 +56,6 @@ class KeluargaController extends Controller
     public function show($id)
     {
         //
-      
     }
 
     /**
@@ -91,27 +79,14 @@ class KeluargaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        
         $this->validate($request,[
             'nip_nrp'=>'required',
-            'nama'=>'required',
-            'jk'=>'required',
-            'hubungan_keluarga'=>'required',
-            'tempat_lahir'=>'required',
-            'tanggal_lahir'=>'required',
-            'status_hidup'=>'required',
-            'pekerjaan'=>'required',
-           
+            'nama_brevet'=>'required',
+            'asal_perolehan'=>'required',
         ]);
-        $data=Data_keluarga::findOrfail($id);
-        if(empty($request->keterangan)){
-            $request['keterangan']=$data->keterangan;
-        }
-        else{
-            $request['keterangan']=$request->input('keterangan');
-        }
+        $data=Kecakapan_brevet::findOrFail($id);
         $data->update($request->all());
-        return back()->with('success','Data berhasil di edit');
+        return back()->with('success','Data berhasil edit');
     }
 
     /**
@@ -123,8 +98,8 @@ class KeluargaController extends Controller
     public function destroy($id)
     {
         //
-        $data=Data_keluarga::findOrFail($id);
+        $data=Kecakapan_brevet::findOrFail($id);
         $data->delete();
-        return back()->with('success','Data berhasil di delete');
+        return back()->with('success','Data berhasil delete');
     }
 }

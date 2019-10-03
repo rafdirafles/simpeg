@@ -32,7 +32,7 @@
              <td>{{$keluarga->pekerjaan}}</td>
              <td>{{$keluarga->keterangan}}</td>
             <td>
-                <a class="badge badge-success" href="#modal-edit<?php echo $keluarga->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span> Edit</a>
+                <a class="badge badge-success" href="#modal-edit-keluarga<?php echo $keluarga->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span> Edit</a>
                 <a class="badge badge-danger" href="#modal-hapus-keluarga<?php echo $keluarga->id?>"  data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
             </td>
           </tr>
@@ -51,7 +51,7 @@
 <!------------------------end table------------------------------>
 <!------------------------edit------------------------------>
 <?php $no=0; foreach($keluargas as $x): $no++; ?>
-<div class="modal fade" id="modal-edit<?= $x->id; ?>">
+<div class="modal fade" id="modal-edit-keluarga<?= $x->id; ?>">
     <div class="modal-dialog">
     <div class="modal-content">
         <!-- Modal Header -->
@@ -64,7 +64,7 @@
         <form action="{{route('keluarga.update',$x->id)}}" name="edit_form" method="post" enctype="multipart/form-data">
             {{method_field('patch')}}
             {{csrf_field()}}
-            <input type="hidden" readonly value="<?=$x->nip_nrp;?>" name="nip_nrp" class="form-control" >
+        <input type="hidden" readonly value="{{$x->nip_nrp}}" name="nip_nrp" class="form-control" >
             <div class="form-group">
                     <label for="message-text" class="form-control-label">Nama *</label>
                 <input class="form-control" name="nama" value="{{$x->nama}}" type="text" required>
@@ -140,7 +140,7 @@
         <div class="modal-body">
     <form action="{{route('keluarga.store')}}" method="post" name="registration">
         @csrf
-        <input type="hidden" value="{{$x->nip_nrp}}" name="nip_nrp">
+        <input type="hidden" value="{{ $datas->nip_nrp}}" name="nip_nrp">
         <div class="form-group">
             <label for="message-text" class="form-control-label">Nama *</label>
             <input class="form-control" name="nama" type="text" required>
@@ -167,7 +167,7 @@
         </div>
         <div class="form-group">
             <label for="message-text" class="form-control-label">Tempat Lahir *</label>
-            <input type="date" class="form-control" name="tempat_lahir" required placeholder="exp:2019">
+            <input type="text" class="form-control" name="tempat_lahir" required >
         </div>
         <div class="form-group">
             <label for="message-text" class="form-control-label">Tanggal Lahir * </label>
