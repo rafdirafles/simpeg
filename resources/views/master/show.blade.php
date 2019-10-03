@@ -13,6 +13,8 @@
     @include('master.modal_show.kecakapan_olahraga');
     <h3>brevet</h3>
     @include('master.modal_show.kecakapan_brevet');
+    <h3>tanda jasa</h3>
+    @include('master.modal_show.tanda_jasa');
 @endsection
 
 @section('asset-buttom')

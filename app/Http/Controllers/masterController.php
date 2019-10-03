@@ -11,6 +11,7 @@ use App\Pendidikan_umum;
 use App\user;
 use App\Unit_kerja;
 use App\Pendidikan_non_formal;
+use App\Tanda_jasa_Prestasi;
 use Illuminate\Http\Request;
 
 class masterController extends Controller
@@ -154,7 +155,14 @@ class masterController extends Controller
         // 
         $k_brevet=Kecakapan_brevet::where('nip_nrp',$id)->get();
         $k_brevet->groupBy('nip_nrp');
-        return view('Master.show',compact('datas','p_umum','p_kejuruan','keluargas','k_bahasa','k_olahraga','k_brevet'));
+        // 
+        $tanda_jasas=Tanda_jasa_Prestasi::where('nip_nrp',$id)->get();
+        $tanda_jasas->groupBy('nip_nrp');
+        // 
+        $p_polris=Tanda_jasa_Prestasi::where('nip_nrp',$id)->get();
+        $p_polris->groupBy('nip_nrp');
+        return view('Master.show',compact('datas','p_umum','p_kejuruan','keluargas','k_bahasa','k_olahraga','k_brevet',
+        'tanda_jasas','p_polris'));
     }
 
     /**

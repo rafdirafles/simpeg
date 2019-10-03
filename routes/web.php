@@ -34,10 +34,15 @@ Route::resource('/cuti','CutiController');
 Route::resource('/pendidikan_umum','PendidikanUmumController');
 // pendidikan kejuruan
 Route::resource('/pendidikan_kejuruan','PendidikankejuruanController');
+//
+Route::resource('/pendidikan_polri','PendidikanPolriController'); 
 // kecakapan bahasa
 Route::resource('/kecakapan_bahasa','Kecakapan\KecakapanBahasaController');
 // kecakapan olahraga
 Route::resource('/kecakapan_olahraga','Kecakapan\KecakapanOlahRagaController');
 // 
 Route::resource('/kecakapan_brevet','Kecakapan\KecakapanBrevetController');
+// 
+Route::resource('/tanda_jasa','TandaJasaController');
+
 Route::get('/setting/getDivisi','Setting\DivisiController@getDivisi')->name('getDivisi');
