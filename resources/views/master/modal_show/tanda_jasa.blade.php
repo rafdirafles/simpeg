@@ -18,7 +18,7 @@
              <td>{{$tanda_jasa->tahun}}</td>
              <td>{{$tanda_jasa->keterangan}}</td>
             <td>
-                <a class="badge badge-success" href="#modal-edit-tanda_jasa<?php echo $tanda_jasa->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span> Edit</a>
+                <a class="badge badge-success" href="#modal-edit-tanda_jasa<?php echo $tanda_jasa->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
                 <a class="badge badge-danger" href="#modal-hapus-tanda_jasa<?php echo $tanda_jasa->id?>"  data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
             </td>
           </tr>

@@ -1,7 +1,4 @@
- @if ($keluargas)
-     
- 
- 
+
  <!------------------------Tabel------------------------------>
  <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_1">
         <thead>
@@ -32,7 +29,7 @@
              <td>{{$keluarga->pekerjaan}}</td>
              <td>{{$keluarga->keterangan}}</td>
             <td>
-                <a class="badge badge-success" href="#modal-edit-keluarga<?php echo $keluarga->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span> Edit</a>
+                <a class="badge badge-success" href="#modal-edit-keluarga<?php echo $keluarga->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
                 <a class="badge badge-danger" href="#modal-hapus-keluarga<?php echo $keluarga->id?>"  data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
             </td>
           </tr>
@@ -229,7 +226,6 @@
 </div>
 </div>    
 @endforeach 
-@endif
        <!------------------------end hapus------------------------------>
 @section('asset-buttom')
        <script>

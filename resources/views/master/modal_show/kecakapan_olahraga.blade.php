@@ -16,7 +16,7 @@
              <td>{{$olahraga->nama_olahraga}}</td>
              <td>{{$olahraga->keterangan}}</td>
             <td>
-                <a class="badge badge-success" href="#modal-edit-olahraga<?php echo $olahraga->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span> Edit</a>
+                <a class="badge badge-success" href="#modal-edit-olahraga<?php echo $olahraga->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
                 <a class="badge badge-danger" href="#modal-hapus-olahraga<?php echo $olahraga->id?>"  data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
             </td>
           </tr>

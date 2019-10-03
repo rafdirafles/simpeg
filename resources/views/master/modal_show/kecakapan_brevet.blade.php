@@ -16,7 +16,7 @@
              <td>{{$brevet->nama_brevet}}</td>
              <td>{{$brevet->asal_perolehan}}</td>
             <td>
-                <a class="badge badge-success" href="#modal-edit-brevet<?php echo $brevet->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span> Edit</a>
+                <a class="badge badge-success" href="#modal-edit-brevet<?php echo $brevet->id?>" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
                 <a class="badge badge-danger" href="#modal-hapus-brevet<?php echo $brevet->id?>"  data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
             </td>
           </tr>

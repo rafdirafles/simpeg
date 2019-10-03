@@ -42,7 +42,8 @@ class PendidikanPolriController extends Controller
             'tahun'=>'required',
             'lama_bulan'=>'required',
             'rangking'=>'required',
-            'file' =>'file|max:2048|mimes:pdf',
+            'lulus_tidak'=>'required',
+            'file' =>'file|max:2048|',
         ]);
         if(empty($request->file('file'))){
             $nama_file='-';
@@ -58,10 +59,12 @@ class PendidikanPolriController extends Controller
             'nama_pendidikan'=>$request->nama_pendidikan,
             'tahun'=>$request->tahun,
             'lama_bulan'=>$request->lama_bulan,
+            'lulus_tidak'=>$request->lulus_tidak,
             'rangking'=>$request->rangking,
             'file' =>$nama_file,
         ]);
         return back()->with('success','data pendidikan berhasil ditambahkan');
+        // return $request->all();
 
     }
 
@@ -105,6 +108,7 @@ class PendidikanPolriController extends Controller
             'tahun'=>'required',
             'lama_bulan'=>'required',
             'rangking'=>'required',
+            'lulus_tidak'=>'required',
             'file' =>'file|max:2048|mimes:pdf',
         ]);
         if(empty($request->file('file'))){
@@ -119,15 +123,16 @@ class PendidikanPolriController extends Controller
             $tujuan_upload = 'img';
             $file->move($tujuan_upload,$nama_file);
         }
-        Pendidikan_polri::create([
+        $data->update([
             'nip_nrp'=>$request->nip_nrp,
             'nama_pendidikan'=>$request->nama_pendidikan,
             'tahun'=>$request->tahun,
             'lama_bulan'=>$request->lama_bulan,
             'rangking'=>$request->rangking,
+            'lulus_tidak'=>$request->lulus_tidak,
             'file' =>$nama_file,
         ]);
-        return back()->with('success','data pendidikan berhasil ditambahkan');
+        return back()->with('success','data pendidikan berhasil diedit');
     }
 
     /**
@@ -139,5 +144,8 @@ class PendidikanPolriController extends Controller
     public function destroy($id)
     {
         //
+        $data=Pendidikan_polri::findOrFail($id);
+        $data->delete();
+        return back()->with('success','data pendidikan berhasil dihapus');
     }
 }
