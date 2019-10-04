@@ -48,12 +48,12 @@
     <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-        <h4 class="modal-title">EDIT RIWAYAT GAJI</h4>
+        <h4 class="modal-title">EDIT RIWAYAT JABATAN</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-        <form action="{{route('riwayat_gaji.update',$x->id)}}" name="edit_form" method="post" enctype="multipart/form-data">
+        <form action="{{route('riwayat_jabatan.update',$x->id)}}" name="edit_form" method="post" enctype="multipart/form-data">
             {{method_field('patch')}}
             {{csrf_field()}}
             <input type="hidden" readonly value="{{$x->nip_nrp}}" name="nip_nrp" class="form-control" >
@@ -96,22 +96,26 @@
 <!------------------------end edit------------------------------>
 
 <!------------------------add data------------------------------>
-<div class="modal fade" id="add_gaji">
+<div class="modal fade" id="add_jabatan">
     <div class="modal-dialog">
         <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-            <h4 class="modal-title">RIWAYAT GAJI</h4>
+            <h4 class="modal-title">RIWAYAT JABATAN</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-    <form action="{{route('riwayat_gaji.store')}}" method="post" name="registration">
+    <form action="{{route('riwayat_jabatan.store')}}" method="post" name="registration">
         @csrf
         <input type="hidden" value="{{ $datas->nip_nrp}}" name="nip_nrp">
         <div class="form-group">
-            <label for="message-text" class="form-control-label">Gaji *</label>
-            <input class="form-control" id="message-text" name="gaji" type="number" required>
+            <label for="message-text" class="form-control-label">Nama Pangkat *</label>
+            <select name="id_pangkat" id="" class="form-control">
+                @foreach ($pangkats as $pangkat)
+                    <option value="{{$pangkat->id}}">{{$pangkat->nama_pangkat}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             <label for="message-text" class="form-control-label">TMT *</label>
@@ -153,11 +157,11 @@
     <div class="modal-content">
     <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">HAPUS DATA RIWAYAT GAJI</h4>
+        <h4 class="modal-title">HAPUS DATA RIWAYAT JABATAN</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <!-- Modal body -->
-    <form action="{{route('riwayat_gaji.destroy',$gaji->id)}}" method="post">
+    <form action="{{route('riwayat_jabatan.destroy',$gaji->id)}}" method="post">
         {{method_field('delete')}}
         {{csrf_field()}}
         <div class="modal-body">

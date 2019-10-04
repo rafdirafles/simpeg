@@ -6,6 +6,7 @@ use App\Data_keluarga;
 use App\Kecakapan_bahasa;
 use App\Kecakapan_brevet;
 use App\Kecakapan_olahraga_dan_beladiri;
+use App\Pangkat;
 use App\Pendidikan_kejuruan;
 use App\Pendidikan_umum;
 use App\user;
@@ -170,8 +171,10 @@ class masterController extends Controller
         // 
         $r_jabatan=Riwayat_jabatan::where('nip_nrp',$id)->get();
         $r_jabatan->groupBy('nip_nrp');
+        // pangkat
+        $pangkats=Pangkat::all();
         return view('Master.show',compact('datas','p_umum','p_kejuruan','keluargas','k_bahasa','k_olahraga','k_brevet',
-        'tanda_jasas','p_polris','r_gaji','r_jabatan'));
+        'tanda_jasas','p_polris','r_gaji','r_jabatan','pangkats'));
     }
 
     /**

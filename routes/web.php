@@ -24,7 +24,10 @@ Route::resource('/profile','ProfileController');
 // setting controller
 Route::resource('/setting/divisi','Setting\DivisiController');
 Route::resource('/setting/unit_kerja','Setting\UnitKerjaController');
+// pangkat
 Route::resource('/setting/pangkat','Setting\PangkatController');
+// Route::post('pangkat/update', 'Setting\PangkatController@update')->name('pangkat.update');
+// /
 Route::resource('/setting/cuti','Setting\CutiController');
 // end setting
 // keluarga
@@ -36,21 +39,22 @@ Route::resource('/pendidikan_umum','PendidikanUmumController');
 // pendidikan kejuruan
 Route::resource('/pendidikan_kejuruan','PendidikankejuruanController');
 //
-Route::resource('/pendidikan_polri','PendidikanPolriController'); 
+Route::resource('/pendidikan_polri','PendidikanPolriController');
 // kecakapan bahasa
 Route::resource('/kecakapan_bahasa','Kecakapan\KecakapanBahasaController');
 // kecakapan olahraga
 Route::resource('/kecakapan_olahraga','Kecakapan\KecakapanOlahRagaController');
-// 
+//
 Route::resource('/kecakapan_brevet','Kecakapan\KecakapanBrevetController');
-// 
+//
 Route::resource('/tanda_jasa','TandaJasaController');
-// 
+//
 Route::resource('/riwayat_gaji','Riwayat\RiwayatGajiController');
-// 
+//
 Route::resource('/riwayat_jabatan','Riwayat\RiwayatJabatanController');
-// 
+//
 Route::resource('/riwayat_kepangkatan','Riwayat\RiwayatKepangkatanController');
-// 
+//
 Route::resource('/riwayat_unit_kerja','Riwayat\RiwayatGajiController');
+//
 Route::get('/setting/getDivisi','Setting\DivisiController@getDivisi')->name('getDivisi');

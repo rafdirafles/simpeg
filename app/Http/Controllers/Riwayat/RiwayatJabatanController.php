@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Riwayat;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Riwayat_jabatan;
@@ -36,7 +34,7 @@ class RiwayatJabatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // //
         $this->validate($request,[
             'nip_nrp'=>'required',
             'id_pangkat'=>'required',
@@ -48,6 +46,7 @@ class RiwayatJabatanController extends Controller
         ]);
         Riwayat_jabatan::create($request->all());
         return back()->with('success','Data Berhasil Ditambahkan');
+        // return $request->all();
     }
 
     /**

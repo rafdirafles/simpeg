@@ -13,4 +13,7 @@ class Riwayat_jabatan extends Model
     public function pangkat(){
         return $this->belongsTo('App\Pangkat','id_pangkat');
     }
+    public function jabatan(){
+        return $this->belongsTo('App\Pangkat','id_jabtan');
+    }
 }

@@ -16,9 +16,9 @@ class PangkatController extends Controller
     public function index()
     {
         //
-        $datas=Pangkat::all();
-        return view('Setting.Pangkat.index');
-        
+        $pangkat=Pangkat::all();
+        return view('Setting.Pangkat.index',compact('pangkat'));
+
     }
 
     /**
@@ -47,7 +47,7 @@ class PangkatController extends Controller
             ]);
             return response()->json($datas);
         }
-      
+
     }
 
     /**
@@ -70,9 +70,14 @@ class PangkatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
         //
+        // $data=Pangkat::fi();
+        // // return view('Setting.Pangkat.index',compact('datas'));
+        // return response()->json($data);
+        $x=$request->get($id);
+        return response()->json($x);
     }
 
     /**
@@ -82,9 +87,19 @@ class PangkatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
+
     {
         //
+        // $x=$request->get('id');
+        // $data=Pangkat::findOrFail($x);
+        // $data->update([
+        //     'nip_nrp'=>$request->nip_nrp,
+        //     'nama_pangkat'=>$request->nama_pangkat,
+        // ]);
+        // return response()->json($x);
+        $post =Pangkat::find($id)->update($request->all());
+        return response()->json($post);
     }
 
     /**
@@ -96,5 +111,7 @@ class PangkatController extends Controller
     public function destroy($id)
     {
         //
+        Pangkat::find($id)->delete();
+        return response()->json(['done']);
     }
 }
