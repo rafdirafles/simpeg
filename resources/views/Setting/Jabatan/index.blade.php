@@ -14,7 +14,7 @@
                     <h3 class="kt-subheader__title">TABEL PANGKAT</h3>
                     <span class="kt-subheader__separator kt-subheader__separator--v"></span>
                     <span class="kt-subheader__desc">MASTER DATA</span>
-                        <a href="#" class="btn btn-label-primary btn-bold btn-icon-h kt-margin-l-10" data-toggle="modal" data-target="#modal-add-pangkat"> Tambah Pangkat</a>
+                        <a href="#" class="btn btn-label-primary btn-bold btn-icon-h kt-margin-l-10" data-toggle="modal" data-target="#modal-add-jabatan"> Tambah Jabatan</a>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <button href="#" class="btn btn-brand btn-elevate btn-icon-sm" data-toggle="modal" data-target="#modal-add-pangkat"><i class="la la-plus"></i> Tambah Pangkat</button>
+                                <button href="#" class="btn btn-brand btn-elevate btn-icon-sm" data-toggle="modal" data-target="#modal-add-jabatan"><i class="la la-plus"></i> Tambah Jabatan</button>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                         @php
                         $no=1;
                         @endphp
-                    <tbody id="show_pangkat">
+                    <tbody id="show_jabatan">
                     </tbody>
                 </table>
             </div>
@@ -97,26 +97,26 @@
     </div>
 </div>
 <!-- MODAL ADD -->
-<div class="modal fade" id="modal-add-pangkat" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+<div class="modal fade" id="modal-add-jabatan" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                
-                <h3 class="modal-title" id="myModalLabel">Tambah Pangkat</h3>
+                <h3 class="modal-title" id="myModalLabel">Tambah Jabatan</h3>
             </div>
             <!-- form -->
             <form class="form-horizontal" data-toggle="validator">
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                 <div class="modal-body">
                     <div class="form-group">
-                            <label class="control-label" for="title">Nama Pangkat :</label>
-                            <input type="text" name="nama_pangkat" class="form-control" data-error="Please enter title." required />
+                            <label class="control-label" for="title">Nama Jabatan :</label>
+                            <input type="text" name="nama_jabatan" class="form-control" data-error="Please enter jabatan." required />
                             <p style="color:red"><div class="help-block with-errors"></div></p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-                    <button class="btn btn-info" id="btn_simpan_pangkat">Simpan</button>
+                    <button class="btn btn-info" id="btn_simpan_jabatan">Simpan</button>
                 </div>
             </form>
             <!-- form -->
@@ -134,14 +134,14 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
-                  <form data-toggle="validator" action="/pangkat/" method="put">
+                  <form data-toggle="validator" action="/jabatan/" method="put">
                       <div class="form-group">
                           <label class="control-label" for="title">Nama Pangkat *:</label>
-                          <input type="text" name="nama_pangkat" class="form-control" data-error="Please enter title." required />
+                          <input type="text" name="nama_jabatan" class="form-control" data-error="Please enter title." required />
                           <div class="help-block with-errors"></div>
                       </div>
                       <div class="form-group">
-                          <button type="submit" class="btn btn-success crud-submit-edit">Submit</button>
+                          <button type="submit" class="btn btn-success edit-jabatan">Submit</button>
                       </div>
                   </form>
             </div>
@@ -168,7 +168,7 @@
                 beforeSend: function(){
                     $('.ajax-loader').css("visibility", "visible");
                 },
-                url   : '/setting/pangkat/show',
+                url   : '/setting/jabatan/show',
                 async : true,
                 dataType : 'json',
                 success : function(data){
@@ -178,14 +178,14 @@
                     $.each( data, function( key, value ) {
                         rows = rows + '<tr>';
                         rows = rows + '<td>'+ no++ +'</td>';
-                        rows = rows + '<td>'+value.nama_pangkat+'</td>';
+                        rows = rows + '<td>'+value.nama_jabatan+'</td>';
                         rows = rows + '<td data-id="'+value.id+'">';
                         rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-item" class="badge badge-success edit-item"><span class="fas fa-fw fa-edit " ></a> ';
-                        rows = rows + '<a href="#" class="badge badge-danger remove-item"><span class="fas fa-fw fa-trash"></button>';
+                        rows = rows + '<a href="#" class="badge badge-danger delete-jabatan"><span class="fas fa-fw fa-trash"></button>';
                         rows = rows + '</td>';
                         rows = rows + '</tr>';
                     });
-                    $('#show_pangkat').html(rows);
+                    $('#show_jabatan').html(rows);
                 },
                 complete: function(){
                     $('.ajax-loader').css("visibility", "hidden");
@@ -193,21 +193,21 @@
             });
         }
         //Simpan Barang
-        $('#btn_simpan_pangkat').click(function(){
-            var nama_pangkat=$("input[name=nama_pangkat]").val();
+        $('#btn_simpan_jabatan').click(function(){
+            var nama_jabatan=$("input[name=nama_jabatan]").val();
             event.preventDefault();
                 $.ajax({
                     type : "POST",
                     beforeSend: function(){
                         $('.ajax-loader').css("visibility", "visible");
                     },
-                    url  : '{{route('pangkat.store')}}',
+                    url  : '{{route('jabatan.store')}}',
                     datatype:"html",
-                    data : {nama_pangkat:nama_pangkat,_token: '{{csrf_token()}}' },
+                    data : {nama_jabatan:nama_jabatan,_token: '{{csrf_token()}}' },
                     success: function(data){
-                        $("input[name=nama_pangkat]").val("");
+                        $("input[name=nama_jabatan]").val("");
                         tampil_data_barang();
-                        $('#modal-add-pangkat').modal('hide');
+                        $('#modal-add-jabatan').modal('hide');
                     },
                     error: function(xhr, ajaxOptions, thrownError){
                             alert("Mohon Data Masukkan Dengan Tepat");
@@ -220,24 +220,24 @@
                 })
         });
         /* Edit Post */
-        var url = 'pangkat';
+        var url = 'jabatan';
         $("body").on("click",".edit-item",function(){
             var id = $(this).parent("td").data('id');
-            var nama_pangkat = $(this).parent("td").prev("td").text();
-            // $("#edit-item").find("input[name='title']").val(title);
-            $("#edit-item").find("input[name='nama_pangkat']").val(nama_pangkat);
+            var nama_jabatan = $(this).parent("td").prev("td").text();
+           
+            $("#edit-item").find("input[name='nama_jabatan']").val(nama_jabatan);
             $("#edit-item").find("form").attr("action",url + '/' + id);
         });
         /* Updated  Post baru (Updated new Post) */
-        $(".crud-submit-edit").click(function(e){
+        $(".edit-jabatan").click(function(e){
             e.preventDefault();
             var form_action = $("#edit-item").find("form").attr("action");
-            var nama_pangkat = $("#edit-item").find("input[name='nama_pangkat']").val();
+            var nama_jabatan = $("#edit-item").find("input[name='nama_jabatan']").val();
             $.ajax({
                 dataType: 'json',
                 type:'PUT',
                 url: form_action,
-                data:{nama_pangkat:nama_pangkat,},
+                data:{nama_jabatan:nama_jabatan,},
             }).done(function(data){
                 tampil_data_barang();
                 $(".modal").modal('hide');
@@ -245,7 +245,7 @@
             })
         })
         /* Remove Post (Hapus) */
-        $("body").on("click",".remove-item",function(){
+        $("body").on("click",".delete-jabatan",function(){
             var id = $(this).parent("td").data('id');
             var c_obj = $(this).parents("tr");
             $.ajax({

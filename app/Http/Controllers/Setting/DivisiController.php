@@ -59,6 +59,9 @@ class DivisiController extends Controller
     public function show($id)
     {
         //
+        return Divisi::get()->load('unit_kerja');
+       
+
     }
 
     /**
@@ -82,16 +85,16 @@ class DivisiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
 
-        $data=Divisi::findOrFail($request->id);
+        $data=Divisi::findOrFail($id);
         $this->validate($request,[
             'id_unit_kerja'=>'required|integer',
             'nama_devisi'=>'required|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/',
         ]);
        $data->update($request->all());
-       return redirect()->route('divisi.index')->with("success","data berhasil di Edit");
+       return response()->json($data);
     }
 
     /**
@@ -100,11 +103,12 @@ class DivisiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request,$id)
     {
-        $data=Divisi::findOrFail($request->id);
+        $data=Divisi::findOrFail($id);
         $data->delete();
-        return redirect()->route('divisi.index')->with("success","data berhasil di Hapus");
+        return response()->json(['done']);
+        
     }
     public function getDivisi(){
         $data=Unit_kerja::all();

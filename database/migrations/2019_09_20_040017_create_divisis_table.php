@@ -16,7 +16,7 @@ class CreateDivisisTable extends Migration
         Schema::create('divisis', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedinteger('id_unit_kerja');
-            $table->foreign('id_unit_kerja')->references('id')->on('unit_kerjas')->onDelete('cascade');
+            $table->foreign('id_unit_kerja')->references('id')->on('unit_kerjas');
             $table->string('nama_devisi',50);
             $table->timestamps();
         });

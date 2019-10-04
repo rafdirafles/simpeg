@@ -141,7 +141,7 @@
                                                     <i class="kt-menu__ver-arrow la la-angle-right"></i>   -->
                                             </a>
                                         <li class="kt-menu__item  kt-menu__item--submenu"  data-ktmenu-submenu-toggle="hover" aria-haspopup="true">
-                                                <a  href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                                                <a  href="{{route('jabatan.index')}}" class="kt-menu__link ">
                                                     <span class="kt-menu__link-icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

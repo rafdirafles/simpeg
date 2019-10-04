@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Setting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Pangkat;
+use App\Jabatan;
 
-class PangkatController extends Controller
+class JabatanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,7 @@ class PangkatController extends Controller
     public function index()
     {
         //
-        $pangkat=Pangkat::all();
-        return view('Setting.Pangkat.index',compact('pangkat'));
-
+        return view('Setting.Jabatan.index');
     }
 
     /**
@@ -40,14 +38,8 @@ class PangkatController extends Controller
     public function store(Request $request)
     {
         //
-        if($request->ajax()){
-            $nama=$request->get('nama_pangkat');
-            $datas=Pangkat::create([
-                'nama_pangkat'=>$nama,
-            ]);
-            return response()->json($datas);
-        }
-
+        $data=Jabatan::create($request->all());
+        return response()->json($data);
     }
 
     /**
@@ -59,7 +51,7 @@ class PangkatController extends Controller
     public function show($id)
     {
         //
-        $data=Pangkat::all();
+        $data=Jabatan::all();
         // return view('Setting.Pangkat.index',compact('datas'));
         return response()->json($data);
     }
@@ -70,14 +62,9 @@ class PangkatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function edit($id)
     {
         //
-        // $data=Pangkat::fi();
-        // // return view('Setting.Pangkat.index',compact('datas'));
-        // return response()->json($data);
-        $x=$request->get($id);
-        return response()->json($x);
     }
 
     /**
@@ -87,11 +74,10 @@ class PangkatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
-
+    public function update(Request $request, $id)
     {
-       
-        $post =Pangkat::find($id)->update($request->all());
+        //
+        $post =Jabatan::find($id)->update($request->all());
         return response()->json($post);
     }
 
@@ -104,7 +90,7 @@ class PangkatController extends Controller
     public function destroy($id)
     {
         //
-        Pangkat::find($id)->delete();
+        Jabatan::find($id)->delete();
         return response()->json(['done']);
     }
 }

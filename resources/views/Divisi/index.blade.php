@@ -1,19 +1,10 @@
-
-
 @extends('layouts.admin.app')
-
 @section('asset-top')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
 @endsection
 @section('body')
 
-@if ($succes = Session::get('success'))
-    <div class="alert alert-success" role="alert">
-        <div class="alert-text">{{$succes}}</div>
-        <button type="button" class="close" data-dismiss="alert">×</button>
-    </div>
-@endif
 <div class="row">
     <div class="col-md-6">
         <div class="card" style="margin-left:10px">
@@ -21,7 +12,7 @@
                         <div class="alert alert-light alert-elevate" role="alert">
                     <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
                     <div class="alert-text">
-                       Crud divisi
+                        Crud divisi
                     </div>
                 </div>
 
@@ -85,14 +76,10 @@
                             <i class="la la-plus"></i>
                             New Record
                         </a> --}}
-                        <button type="button" class="btn btn-brand btn-elevate btn-icon-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                                <i class="la la-plus"></i>
-                                New Record
-                        </button>
+                        <a href="#" class="btn btn-label-primary btn-bold btn-icon-h kt-margin-l-10" data-toggle="modal" data-target="#modal-add-divisi"> New Record</a>
                     </div>
                 </div>		</div>
                     </div>
-
                     <div class="kt-portlet__body">
                         <!--begin: Datatable -->
                         <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_1">
@@ -104,23 +91,10 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @php
-                                    $no=1;
-                                @endphp
-                                @foreach ($datas as $data)
-                                    <tr>
-                                        <td>{{$no++}}</td>
-                                        <td>{{$data->unit_kerja->nama_unit_kerja}}</td>
-                                        <td>{{$data->nama_devisi}}</td>
-                                        <td>
-                                            <button class="flaticon-edit" data-mytitle="{{$data->nama_devisi}}" data-mydescription="{{$data->id_unit_kerja}}" data-catid={{$data->id}} data-toggle="modal" data-target="#edit">Edit</button>
-                                            {{-- <a href="{{route('divisi.edit',$data->id)}}" class="btn-primary btn-sm">edit</a> --}}
-                                            <button class="flaticon-delete" data-catid={{$data->id}} data-toggle="modal" data-target="#delete">Delete</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                            <!-- data form ajax -->
+                            <tbody id="show_divisi">
                             </tbody>
+                            <!--ende -->
 
                         </table>
                         <!--end: Datatable -->
@@ -129,348 +103,415 @@
                 <!-- end:: Content -->
         </div>
     </div>
-
+    {{-- -------------------------------------------------table unit kerja------------------------------------------------------- --}}
     <div class="col-md-6">
-            <div class="card" style="margin-left:10px">
-                    <div class="kt-container  kt-grid__item kt-grid__item--fluid">
-                            <div class="alert alert-light alert-elevate" role="alert">
-                        <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-                        <div class="alert-text">
-                           Crud Unit Kerja
-                        </div>
+        <div class="card" style="margin-left:10px">
+                <div class="kt-container  kt-grid__item kt-grid__item--fluid">
+                        <div class="alert alert-light alert-elevate" role="alert">
+                    <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+                    <div class="alert-text">
+                        Crud Unit Kerja
+                    </div>
+                </div>
+
+                <div class="kt-portlet kt-portlet--mobile">
+                    <div class="kt-portlet__head kt-portlet__head--lg">
+                        <div class="kt-portlet__head-toolbar">
+                        <div class="kt-portlet__head-wrapper">
+                    <div class="kt-portlet__head-actions">
+
+                            <a href="#" class="btn btn-label-primary btn-bold btn-icon-h kt-margin-l-10" data-toggle="modal" data-target="#modal-add-unit_kerja"> New Record</a>
+                    </div>
+                </div>		</div>
                     </div>
 
-                    <div class="kt-portlet kt-portlet--mobile">
-                        <div class="kt-portlet__head kt-portlet__head--lg">
-                            <div class="kt-portlet__head-toolbar">
-                            <div class="kt-portlet__head-wrapper">
-                        <div class="kt-portlet__head-actions">
-
-                                <button type="button" class="btn btn-brand btn-elevate btn-icon-sm" data-toggle="modal" data-target="#add" data-whatever="@mdo">
-                                        <i class="la la-plus"></i>
-                                        New Record
-                                </button>
-                        </div>
-                    </div>		</div>
-                        </div>
-
-                        <div class="kt-portlet__body">
-                            <!--begin: Datatable -->
-                            <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_1">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Unit Kerja</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $no=1;
-                                    @endphp
-                                    @foreach ($unit as $data)
-                                        <tr>
-                                            <td>{{$no++}}</td>
-                                            <td>{{$data->nama_unit_kerja}}</td>
-                                            <td>
-                                                <button class="flaticon-edit" data-mytitle="{{$data->nama_unit_kerja}}" data-mydescription="" data-catid={{$data->id}} data-toggle="modal" data-target="#edit_unit_kerja">Edit</button>
-                                                <button class="flaticon-delete" data-catid={{$data->id}} data-toggle="modal" data-target="#delete_unit_kerja">Delete</button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-
-                            </table>
-                            <!--end: Datatable -->
-                        </div>
-                    </div>	</div>
-                    <!-- end:: Content -->
-            </div>
+                    <div class="kt-portlet__body">
+                        <!--begin: Datatable -->
+                        <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_1">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Unit Kerja</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="show_unit_kerja">
+                            </tbody >
+                        </table>
+                        <!--end: Datatable -->
+                    </div>
+                </div>	</div>
+                <!-- end:: Content -->
         </div>
-
+    </div>
 </div>
-
-
-{{-- modal add --}}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
+    
+<!------------------------------------------------------------------- MODAL divisi ------------------------------------------>
+<!-- MODAL ADD -->
+<div class="modal fade" id="modal-add-divisi" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+               
+                <h3 class="modal-title" id="myModalLabel">Tambah Divisi</h3>
             </div>
-            <div class="modal-body">
-              <form action="{{route('divisi.store')}}" method="post">
-                  @csrf
-                <div class="form-group">
-                  <label class="">Unit kerja</label>
-                  <select class="form-control @error('id_unit_kerja') is-invalid @enderror" value="{{ old('id_unit_kerja') }}" name="id_unit_kerja" id="sel1">
-                      <option>select unit kerja</option>
-                      @foreach ($unit as $data)
-                          <option value="{{$data->id}}">{{$data->nama_unit_kerja}}</option>
-                      @endforeach
-                  </select>
-                      @error('id_unit_kerja')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-                      @enderror
-                </div>
-                <div class="form-group">
-                  <label class="">Nama Divisi</label>
-                  <input type="tetx" name="nama_devisi" class="form-control @error('nama_devisi') is-invalid @enderror" value="{{ old('nama_devisi') }}" placeholder="Masukkan unit kerja exp:siak">
-                  @error('nama_devisi')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
+            <!-- form -->
+            <form class="form-horizontal" data-toggle="validator">
+                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label" for="title">Nama Unit Kerja :</label>
+                        <select name="id_unit_kerja" class="form-control"  data-error="Please enter unit kerja." required>
+                            <option value="">Pilih Unit Kerja</option>
+                            @foreach ($unit as $data)
+                                <option value="{{$data->id}}">{{$data->nama_unit_kerja}}</option>
+                            @endforeach
+                        </select>
+                        <p style="color:red"><div class="help-block with-errors"></div></p>
+                    </div>
+                    <div class="form-group">
+                            <label class="control-label" for="title">Divisi :</label>
+                            <input type="text" name="nama_devisi" class="form-control" data-error="Please enter title." required />
+                            <p style="color:red"><div class="help-block with-errors"></div></p>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Add</button>
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button class="btn btn-info" id="btn_simpan_divisi">Simpan</button>
                 </div>
-              </form>
-            </div>
-          </div>
+            </form>
+            <!-- form -->
         </div>
+    </div>
 </div>
-{{-- delete modal --}}
-<div class="modal modal-danger fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!--END MODAL ADD-->
+<!--edit MODAL -->
+<div class="modal fade" id="edit-item-devisi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title text-center" id="myModalLabel">Delete Confirmation</h4>
-        </div>
-        <form action="{{route('divisi.destroy','test')}}" method="post">
-                {{method_field('delete')}}
-                {{csrf_field()}}
-            <div class="modal-body">
-                <center><img src="{{asset('/img/police_stop.gif')}}" alt=""></center>
-                <p class="text-center" style="color:red ">
-                    Are you sure you want to delete this?
-                </p>
-                    <input type="hidden" name="id" id="cat_id" value="">
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">No, Cancel</button>
-            <button type="submit" class="btn btn-warning">Yes, Delete</button>
-            </div>
-        </form>
-    </div>
-    </div>
-</div>
-{{-- edit modal --}}
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Edit Category</h4>
-        </div>
-        <form action="{{route('divisi.update','test')}}" method="post">
-                {{method_field('patch')}}
-                {{csrf_field()}}
-            <div class="modal-body">
-                <input type="hidden" name="id" id="cat_id" value="">
-                <div class="form-group">
-                    <label for="title">Nama divisi</label>
-                    <input type="text" class="form-control @error('nama_devisi') is-invalid @enderror" value="{{ old('nama_devisi') }}" name="nama_devisi" id="title">
-                    @error('nama_devisi')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <label>Unit Kerja</label>
-                <select class="form-control unit_kerja" name="id_unit_kerja" required>
-                    <option value="">No Selected</option>
-                </select>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-            </div>
-        </form>
-    </div>
-    </div>
-</div>
-{{-- end modal divisi --}}
-
-{{-- begin modal unit kerja --}}
-{{-- add modal --}}
-<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
+        <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Add Unit Kerja</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit Data</h4>
             </div>
+            <!-- body modal -->
             <div class="modal-body">
-              <form action="{{route('unit_kerja.store')}}" method="post">
-                  @csrf
-
-                <div class="form-group">
-                  <label class="">Nama Unit Kerja</label>
-                  <input type="tetx" name="nama_unit_kerja" class="form-control @error('nama_unit_kerja') is-invalid @enderror" value="{{ old('nama_unit_kerja') }}" placeholder="Masukkan unit kerja exp:Bindik" required>
-                  @error('nama_unit_kerja')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
+                  <form data-toggle="validator" action="/divisi/" method="put">
+                    <div class="form-group">
+                            <label class="control-label" for="title">Nama Unit Kerja :</label>
+                            <select name="id_unit_kerja" id="id_unit_kerja" class="form-control"  data-error="Please enter unit kerja." required>
+                                <option value="">Pilih Unit Kerja</option>
+                                @foreach ($unit as $data)
+                                    <option value="{{$data->id}}">{{$data->nama_unit_kerja}}</option>
+                                @endforeach
+                            </select>
+                            <p style="color:red"><div class="help-block with-errors"></div></p>
+                    </div>
+                    <div class="form-group">
+                            <label class="control-label" for="title">Divisi :</label>
+                            <input type="text" name="nama_devisi" class="form-control" data-error="Please enter title." required />
+                            <p style="color:red"><div class="help-block with-errors"></div></p>
+                    </div>
+                    <div class="form-group">
+                            <button type="submit" class="btn btn-success edit-divisi">Submit</button>
+                    </div>
+                  </form>
+            </div>
+             <!-- body modal -->
+        </div>
+    </div>
+</div>
+<!--end MODAL-->
+<!------------------------------------------------------------------ end MODAL divisi ------------------------------------------>
+<!-- MODAL ADD unit kerja -->
+<div class="modal fade" id="modal-add-unit_kerja" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Tambah Unit Kerja</h3>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Add</button>
+                <!-- form -->
+                <form class="form-horizontal" data-toggle="validator">
+                    <input type="hidden" name="_token" value="{{ Session::token() }}">
+                    <div class="modal-body">
+                        <div class="form-group">
+                                <label class="control-label" for="title">Nama Unit Kerja :</label>
+                                <input type="text" name="nama_unit_kerja" class="form-control" data-error="Please enter title." required />
+                                <p style="color:red"><div class="help-block with-errors"></div></p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                        <button class="btn btn-info" id="btn_simpan_unit_kerja">Simpan</button>
+                    </div>
+                </form>
+                <!-- form -->
+            </div>
+        </div>
+    </div>
+    <!--END MODAL ADD-->
+    <!--edit MODAL -->
+    <div class="modal fade" id="edit-item-unit_kerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Edit Data</h4>
                 </div>
-              </form>
+                <!-- body modal -->
+                <div class="modal-body">
+                      <form data-toggle="validator" action="/unit_kerja/" method="put">
+                        <div class="form-group">
+                                <label class="control-label" for="title">Nama Unit Kerja:</label>
+                                <input type="text" name="nama_unit_kerja" class="form-control" data-error="Please enter nama unit kerja." required />
+                                <p style="color:red"><div class="help-block with-errors"></div></p>
+                        </div>
+                        <div class="form-group">
+                                <button type="submit" class="btn btn-success edit-unit_kerja">Submit</button>
+                        </div>
+                      </form>
+                </div>
+                 <!-- body modal -->
             </div>
-          </div>
         </div>
-</div>
-{{-- delete modal --}}
-<div class="modal modal-danger fade" id="delete_unit_kerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title text-center" id="myModalLabel">Delete Confirmation</h4>
-        </div>
-        <form action="{{route('unit_kerja.destroy','test')}}" method="post">
-                {{method_field('delete')}}
-                {{csrf_field()}}
-            <div class="modal-body">
-                <center><img src="{{asset('/img/police_stop.gif')}}" alt=""></center>
-                <p class="text-center" style="color:red ">
-                    Are you sure you want to delete this?
-                </p>
-                    <input type="hidden" name="id" id="cat_id" value="">
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">No, Cancel</button>
-            <button type="submit" class="btn btn-warning">Yes, Delete</button>
-            </div>
-        </form>
     </div>
-    </div>
-</div>
-{{-- edit modal --}}
-<div class="modal fade" id="edit_unit_kerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Edit Category</h4>
-        </div>
-        <form action="{{route('unit_kerja.update','test')}}" method="post">
-                {{method_field('patch')}}
-                {{csrf_field()}}
-            <div class="modal-body">
-                <input type="hidden" name="id" id="cat_id" value="">
-                <div class="form-group">
-                    <label for="title">Nama Unit Kerja</label>
-                    <input type="text" class="form-control @error('nama_unit_kerja') is-invalid @enderror" value="{{ old('nama_unit_kerja') }}" name="nama_unit_kerja" id="title">
-                    @error('nama_unit_kerja')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-            </div>
+    <!--end MODAL-->
+<!-----------------------------------------------------------------  MODAL unit kerja ------------------------------------------>
+<!------------------------------------------------------------------ end MODAL  ------------------------------------------>
 
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-            </div>
-        </form>
-    </div>
-    </div>
-</div>
 @endsection
+
 @section('asset-buttom')
-    <script>
-         $(document).ready(function () {
+<!------------------------------------------------------------------ divisi  ------------------------------------------>
+<script>
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        tampil_data_divisi();   //pemanggilan fungsi tampil barang.
+        //fungsi tampil barang
+        function tampil_data_divisi(){
+            $.ajax({
+                type  : 'GET',
+                beforeSend: function(){
+                    $('.ajax-loader').css("visibility", "visible");
+                },
+                url   : '/setting/divisi/show',
+                async : true,
+                dataType : 'json',
+                success : function(data){
+                    var i;
+                    var no=1;
+                    var rows = '';
+                    $.each( data, function( key, value ) {
+                        rows = rows + '<tr>';
+                        rows = rows + '<td>'+ no++ +'</td>';
+                        rows = rows + '<td>'+value.unit_kerja.nama_unit_kerja+'</td>';
+                        rows = rows + '<td>'+value.nama_devisi+'</td>';
+                        rows = rows + '<td data-id="'+value.id+'">';
+                        rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-item-devisi" class="badge badge-success edit-item-devisi"><span class="fas fa-fw fa-edit " ></a> ';
+                        rows = rows + '<a href="#" class="badge badge-danger delete-divisi"><span class="fas fa-fw fa-trash"></button>';
+                        rows = rows + '</td>';
+                        rows = rows + '</tr>';
+                    });
+                    $('#show_divisi').html(rows);
+                },
+                complete: function(){
+                    $('.ajax-loader').css("visibility", "hidden");
+                }
+            });
+        }
+        //Simpan Barang
+        $('#btn_simpan_divisi').click(function(){
+            var nama_devisi=$("input[name=nama_devisi]").val();
+            var id_unit_kerja=$("select[name=id_unit_kerja]").val();
+            event.preventDefault();
+                $.ajax({
+                    type : "POST",
+                    beforeSend: function(){
+                        $('.ajax-loader').css("visibility", "visible");
+                    },
+                    url  : '{{route('divisi.store')}}',
+                    datatype:"html",
+                    data : {id_unit_kerja:id_unit_kerja,nama_devisi:nama_devisi,_token: '{{csrf_token()}}' },
+                    success: function(data){
+                        $("input[name=nama_devisi]").val("");
+                        $("select[name=id_unit_kerja]").val("");
+                        tampil_data_divisi();
+                        $('#modal-add-divisi').modal('hide');
+                    },
+                    error: function(xhr, ajaxOptions, thrownError){
+                            alert("Mohon Data Masukkan Dengan Tepat");
+                        },
+                    complete: function(){
+                        $('.ajax-loader').css("visibility", "hidden");
+                    }
+                }).done(function(data){
+                    toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+                })
+        });
+        /* Edit Post */
+        var url = 'divisi';
+        $("body").on("click",".edit-item-devisi",function(){
+            var id = $(this).parent("td").data('id');
+            var unit_kerja= $(this).parent("td").prev("td").prev("td").text();
+            var divisi = $(this).parent("td").prev("td").text();
+            // $("#edit-item-devisi").find("input[name='title']").val(title);
+            var selected;
+            if(unit_kerja == "")
+            $("#edit-item-devisi").find("select[name=id_unit_kerja]").val(2);
+            // $("#id_unit_kerja").val(unit_kerja).change();
+            // $('#id_unit_kerja  option[value="val2"]').prop("selected", true);
+
+            $("#edit-item-devisi").find("input[name='nama_devisi']").val(divisi);
+            $("#edit-item-devisi").find("form").attr("action",url + '/' + id);
+            console.log(unit_kerja);
+           
+        });
+        /* Updated  Post baru (Updated new Post) */
+        $(".edit-divisi").click(function(e){
+            e.preventDefault();
+            var form_action = $("#edit-item-devisi").find("form").attr("action");
+            var nama_devisi = $("#edit-item-devisi").find("input[name='nama_devisi']").val();
+            var id_unit_kerja =  $("#edit-item-devisi").find("select[name=id_unit_kerja]").val();
+            $.ajax({
+                dataType: 'json',
+                type:'PUT',
+                url: form_action,
+                data:{id_unit_kerja:id_unit_kerja,nama_devisi:nama_devisi},
+            }).done(function(data){
+                tampil_data_divisi();
+                $(".modal").modal('hide');
+                toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+            })
+            // console.log(unit_kerja);
+        })
+        /* Remove Post (Hapus) */
+        $("body").on("click",".delete-divisi",function(){
+            var id = $(this).parent("td").data('id');
+            var c_obj = $(this).parents("tr");
+            $.ajax({
+                dataType: 'json',
+                type:'delete',
+                url: url + '/' + id,
+            }).done(function(data){
+                c_obj.remove();
+                toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                tampil_data_divisi();
+            });
+        });
+    });
+</script>
+<!----------------------------------------------------------------- end divisi  ------------------------------------------>
+<script>
+        $(document).ready(function(){
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-        })
-    </script>
-    <script>
-     $('#delete').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget)
-      var cat_id = button.data('catid')
-      var modal = $(this)
-      modal.find('.modal-body #cat_id').val(cat_id);
-      console.log('cat_id')
-     })
-    </script>
-    <script>
-    $('#edit').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var title = button.data('mytitle')
-        var description = button.data('mydescription')
-        var cat_id = button.data('catid')
-        var modal = $(this)
-        modal.find('.modal-body #title').val(title);
-        modal.find('.modal-body #selection').val(description);
-        modal.find('.modal-body #cat_id').val(cat_id);
-        $.ajax({
-            url : "{{route('getDivisi')}}",
-            method : "get",
-            async : true,
-            dataType : 'json',
-            success : function(data){
-                $('select[name="id_unit_kerja"]').empty();
-                $.each(data, function(key, value) {
-                    if(description==value.id){
-                        $('select[name="id_unit_kerja"]').append('<option value="'+ value.id +'" selected>'+ value.nama_unit_kerja +'</option>');
-                    }else{
-                        $('select[name="id_unit_kerja"]').append('<option value="'+ value.id +'">'+ value.nama_unit_kerja +'</option>');
+            tampil_data_unit_kerja();   //pemanggilan fungsi tampil barang.
+            //fungsi tampil barang
+            function tampil_data_unit_kerja(){
+                $.ajax({
+                    type  : 'GET',
+                    beforeSend: function(){
+                        $('.ajax-loader').css("visibility", "visible");
+                    },
+                    url   : '/setting/unit_kerja/show',
+                    async : true,
+                    dataType : 'json',
+                    success : function(data){
+                        var i;
+                        var no=1;
+                        var rows = '';
+                        $.each( data, function( key, value ) {
+                            rows = rows + '<tr>';
+                            rows = rows + '<td>'+ no++ +'</td>';
+                            rows = rows + '<td>'+value.nama_unit_kerja+'</td>';
+                            rows = rows + '<td data-id="'+value.id+'">';
+                            rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-item-unit_kerja" class="badge badge-success edit-item-unit_kerja"><span class="fas fa-fw fa-edit " ></a> ';
+                            rows = rows + '<a href="#" class="badge badge-danger delete-unit_kerja"><span class="fas fa-fw fa-trash"></button>';
+                            rows = rows + '</td>';
+                            rows = rows + '</tr>';
+                        });
+                        $('#show_unit_kerja').html(rows);
+                    },
+                    complete: function(){
+                        $('.ajax-loader').css("visibility", "hidden");
                     }
                 });
-
             }
-        });
-    })
-    </script>
-    @error('nama_devisi')
-     <script>
-     $(document).ready(function(){
-         $('#edit').modal({show: true});
-     })
-
-     $(document).ready(function () {
-            var lama="<?php echo old('nama_devisi')?>"
-            $("#title").val(lama);
-        })
-     </script>
-
-    @enderror
-
-    {{-- begin modal unit kerja --}}
-    <script>
-            $('#edit_unit_kerja').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget)
-                var title = button.data('mytitle')
-                var cat_id = button.data('catid')
-                var modal = $(this)
-                modal.find('.modal-body #title').val(title);
-                modal.find('.modal-body #cat_id').val(cat_id);
+            //Simpan Barang
+            $('#btn_simpan_unit_kerja').click(function(){
+                var nama_unit_kerja=$("input[name=nama_unit_kerja]").val();
+                event.preventDefault();
+                    $.ajax({
+                        type : "POST",
+                        beforeSend: function(){
+                            $('.ajax-loader').css("visibility", "visible");
+                        },
+                        url  : '{{route('unit_kerja.store')}}',
+                        datatype:"html",
+                        data : {nama_unit_kerja:nama_unit_kerja,_token: '{{csrf_token()}}' },
+                        success: function(data){
+                            $("input[name=nama_unit_kerja]").val("");
+                            tampil_data_unit_kerja();
+                            $('#modal-add-unit_kerja').modal('hide');
+                        },
+                        error: function(xhr, ajaxOptions, thrownError){
+                                alert("Mohon Data Masukkan Dengan Tepat");
+                            },
+                        complete: function(){
+                            $('.ajax-loader').css("visibility", "hidden");
+                        }
+                    }).done(function(data){
+                        toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+                    })
+            });
+            /* Edit Post */
+            var url = 'unit_kerja';
+            $("body").on("click",".edit-item-unit_kerja",function(){
+                var id = $(this).parent("td").data('id');
+                var unit_kerja = $(this).parent("td").prev("td").text();
+                $("#edit-item-unit_kerja").find("input[name='nama_unit_kerja']").val(unit_kerja);
+                $("#edit-item-unit_kerja").find("form").attr("action",url + '/' + id);
+              
+               
+            });
+            /* Updated  Post baru (Updated new Post) */
+            $(".edit-unit_kerja").click(function(e){
+                e.preventDefault();
+                var form_action = $("#edit-item-unit_kerja").find("form").attr("action");
+                var unit_kerja = $("#edit-item-unit_kerja").find("input[name='nama_unit_kerja']").val();
+                $.ajax({
+                    dataType: 'json',
+                    type:'PUT',
+                    url: form_action,
+                    data:{nama_unit_kerja:unit_kerja,},
+                }).done(function(data){
+                   tampil_data_unit_kerja();
+                    $(".modal").modal('hide');
+                    toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+                })
+                // console.log(unit_kerja);
             })
+            /* Remove Post (Hapus) */
+            $("body").on("click",".delete-unit_kerja",function(){
+                var id = $(this).parent("td").data('id');
+                var c_obj = $(this).parents("tr");
+                $.ajax({
+                    dataType: 'json',
+                    type:'delete',
+                    url: url + '/' + id,
+                }).done(function(data){
+                    c_obj.remove();
+                    toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                   tampil_data_unit_kerja();
+                });
+            });
+        });
     </script>
-    <script>
-        $('#delete_unit_kerja').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var cat_id = button.data('catid')
-        var modal = $(this)
-        modal.find('.modal-body #cat_id').val(cat_id);
-        console.log('cat_id')
-     })
-    </script>
+<!------------------------------------------------------------------ unit kerja  ------------------------------------------>
 @endsection

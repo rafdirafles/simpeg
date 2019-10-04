@@ -21,15 +21,17 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/master','masterController');
 Route::resource('/profile','ProfileController');
-// setting controller
+// //setting controller // //
 Route::resource('/setting/divisi','Setting\DivisiController');
 Route::resource('/setting/unit_kerja','Setting\UnitKerjaController');
 // pangkat
 Route::resource('/setting/pangkat','Setting\PangkatController');
 // Route::post('pangkat/update', 'Setting\PangkatController@update')->name('pangkat.update');
-// /
+// 
 Route::resource('/setting/cuti','Setting\CutiController');
-// end setting
+// 
+Route::resource('/setting/jabatan','Setting\JabatanController');
+// // end setting // //
 // keluarga
 Route::resource('/keluarga','KeluargaController');
 // cuti

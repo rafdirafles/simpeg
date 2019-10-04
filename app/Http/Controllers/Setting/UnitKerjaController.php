@@ -35,8 +35,8 @@ class UnitKerjaController extends Controller
      */
     public function store(Request $request)
     {
-        Unit_kerja::create($request->all());
-        return redirect()->route('divisi.index')->with("success","data berhasil di tambahkan");
+        $data=Unit_kerja::create($request->all());
+        return response()->json($data);
         // return $request->all();
     }
 
@@ -49,6 +49,8 @@ class UnitKerjaController extends Controller
     public function show($id)
     {
         //
+        $data=Unit_kerja::all();
+        return response()->json($data);
     }
 
     /**
@@ -69,17 +71,18 @@ class UnitKerjaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         //
-        $data=Unit_kerja::findOrFail($request->id);
+        $data=Unit_kerja::findOrFail($id);
         $this->validate($request,[
             'nama_unit_kerja'=>'required|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/',
         ]);
        $data->update([
-           'nama_unit_kerja'=>$request->nama_unit_kerja,
+           'nama_unit_kerja'=>$request->input('nama_unit_kerja'),
        ]);
-       return redirect()->route('divisi.index')->with("success","data berhasil di edit");
+       return response()->json($data);
+        
 
     }
 
@@ -89,11 +92,11 @@ class UnitKerjaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request,$id)
     {
         //
-        $data=Unit_kerja::findOrFail($request->id);
+        $data=Unit_kerja::findOrFail($id);
         $data->delete();
-        return back()->with("success",'"data berhasil di delete');
+        return response()->json(['done']);
     }
 }
