@@ -24,6 +24,7 @@ Route::resource('/profile','ProfileController');
 // setting controller
 Route::resource('/setting/divisi','Setting\DivisiController');
 Route::resource('/setting/unit_kerja','Setting\UnitKerjaController');
+Route::resource('/setting/pangkat','Setting\PangkatController');
 Route::resource('/setting/cuti','Setting\CutiController');
 // end setting
 // keluarga

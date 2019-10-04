@@ -2,6 +2,7 @@
 <html lang="en" >
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta charset="utf-8"/>
         <title>Simpeg | Dashboard</title>
         <meta name="description" content="Latest updates and statistic charts">

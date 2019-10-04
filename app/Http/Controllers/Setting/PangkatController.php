@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Riwayat;
+namespace App\Http\Controllers\Setting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Riwayat_jabatan;
+use App\Pangkat;
 
-class RiwayatJabatanController extends Controller
+class PangkatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +16,9 @@ class RiwayatJabatanController extends Controller
     public function index()
     {
         //
+        $datas=Pangkat::all();
+        return view('Setting.Pangkat.index');
+        
     }
 
     /**
@@ -37,17 +40,14 @@ class RiwayatJabatanController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request,[
-            'nip_nrp'=>'required',
-            'id_pangkat'=>'required',
-            'tmt'=>'required',
-            'nomor_sk'=>'required',
-            'pejabat'=>'required',
-            'tanggal_sk'=>'required',
-            'dasar_peraturan'=>'required',
-        ]);
-        Riwayat_jabatan::create($request->all());
-        return back()->with('success','Data Berhasil Ditambahkan');
+        if($request->ajax()){
+            $nama=$request->get('nama_pangkat');
+            $datas=Pangkat::create([
+                'nama_pangkat'=>$nama,
+            ]);
+            return response()->json($datas);
+        }
+      
     }
 
     /**
@@ -59,6 +59,9 @@ class RiwayatJabatanController extends Controller
     public function show($id)
     {
         //
+        $data=Pangkat::all();
+        // return view('Setting.Pangkat.index',compact('datas'));
+        return response()->json($data);
     }
 
     /**
@@ -82,18 +85,6 @@ class RiwayatJabatanController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data=Riwayat_jabatan::findOrFail($id);
-        $this->validate($request,[
-            'nip_nrp'=>'required',
-            'id_pangkat'=>'required',
-            'tmt'=>'required',
-            'nomor_sk'=>'required',
-            'pejabat'=>'required',
-            'tanggal_sk'=>'required',
-            'dasar_peraturan'=>'required',
-        ]);
-        $data->update($request->all());
-        return back()->with('success','Data Berhasil Diedit');
     }
 
     /**
@@ -105,8 +96,5 @@ class RiwayatJabatanController extends Controller
     public function destroy($id)
     {
         //
-        $data=Riwayat_jabatan::findOrFail($id);
-        $data->delete();
-        return back()->with('success','Data Berhasil Didelete');
     }
 }

@@ -19,6 +19,8 @@
     @include('master.modal_show.pendidikan_polri');
     <h3>Riwayat Gaji</h3>
     @include('master.modal_show.riwayat_gaji');
+    <h3>Riwayat jabatan</h3>
+    @include('master.modal_show.riwayat_jabatan');
 @endsection
 
 @section('asset-buttom')
