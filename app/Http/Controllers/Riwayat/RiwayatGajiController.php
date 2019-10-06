@@ -16,6 +16,8 @@ class RiwayatGajiController extends Controller
     public function index()
     {
         //
+        $data =Riwayat_gaji_berkala::all();
+        return Response()->json($data);
     }
 
     /**

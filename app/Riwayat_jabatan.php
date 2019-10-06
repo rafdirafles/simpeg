@@ -8,12 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Riwayat_jabatan extends Model
 {
     //
-    protected $fillable=['nip_nrp','id_jabaran','nomor_sk','pejabat','tgl_sk','tgl_mulai_terhitung','keterangan'];
+    protected $fillable=['nip_nrp','id_jabatan','nomor_sk','pejabat','tgl_sk','tgl_mulai_terhitung','keterangan'];
 
-    public function pangkat(){
-        return $this->belongsTo('App\Pangkat','id_pangkat');
-    }
+   
     public function jabatan(){
-        return $this->belongsTo('App\Pangkat','id_jabtan');
+        return $this->belongsTo('App\Jabatan','id_jabatan');
     }
 }

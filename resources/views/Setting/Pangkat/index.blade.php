@@ -35,49 +35,13 @@
                     <div class="kt-portlet__head-toolbar">
                         <div class="kt-portlet__head-wrapper">
                             <div class="kt-portlet__head-actions">
-                                <div class="dropdown dropdown-inline">
-                                    <button type="button" class="btn btn-default btn-icon-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="la la-download"></i> Export
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <ul class="kt-nav">
-                                            <li class="kt-nav__section kt-nav__section--first">
-                                                <span class="kt-nav__section-text">Choose an option</span>
-                                            </li>
-                                            <li class="kt-nav__item">
-                                                <a href="#" class="kt-nav__link">
-                                                    <i class="kt-nav__link-icon la la-print"></i><span class="kt-nav__link-text">Print</span>
-                                                </a>
-                                            </li>
-                                            <li class="kt-nav__item">
-                                                <a href="#" class="kt-nav__link">
-                                                    <i class="kt-nav__link-icon la la-copy"></i><span class="kt-nav__link-text">Copy</span>
-                                                </a>
-                                            </li>
-                                            <li class="kt-nav__item">
-                                                <a href="#" class="kt-nav__link">
-                                                    <i class="kt-nav__link-icon la la-file-excel-o"></i><span class="kt-nav__link-text">Excel</span>
-                                                </a>
-                                            </li>
-                                            <li class="kt-nav__item">
-                                                <a href="#" class="kt-nav__link">
-                                                    <i class="kt-nav__link-icon la la-file-text-o"></i><span class="kt-nav__link-text">CSV</span>
-                                                </a>
-                                            </li>
-                                            <li class="kt-nav__item">
-                                                <a href="#" class="kt-nav__link">
-                                                    <i class="kt-nav__link-icon la la-file-pdf-o"></i><span class="kt-nav__link-text">PDF</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
                                 <button href="#" class="btn btn-brand btn-elevate btn-icon-sm" data-toggle="modal" data-target="#modal-add-pangkat"><i class="la la-plus"></i> Tambah Pangkat</button>
                             </div>
                         </div>
                     </div>
                 </div>
             <div class="kt-portlet__body">
+                
                 <table class="table table-striped- table-bordered table-hover table-checkable " id="datatable">
                     <thead>
                         <tr>
@@ -101,7 +65,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
                 <h3 class="modal-title" id="myModalLabel">Tambah Pangkat</h3>
             </div>
             <!-- form -->
@@ -115,16 +78,16 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-                    <button class="btn btn-info" id="btn_simpan_pangkat">Simpan</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" id="btn_simpan_pangkat">Kirim</button>
                 </div>
             </form>
             <!-- form -->
         </div>
     </div>
 </div>
-<!--END MODAL ADD-->
-<!--edit MODAL -->
+<!------------------------end data------------------------------>
+<!------------------------edit data------------------------------>
 <div class="modal fade" id="edit-item" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -134,24 +97,58 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
-                  <form data-toggle="validator" action="/pangkat/" method="put">
-                      <div class="form-group">
-                          <label class="control-label" for="title">Nama Pangkat *:</label>
-                          <input type="text" name="nama_pangkat" class="form-control" data-error="Please enter title." required />
-                          <div class="help-block with-errors"></div>
-                      </div>
-                      <div class="form-group">
-                          <button type="submit" class="btn btn-success crud-submit-edit">Submit</button>
-                      </div>
+                  <form data-toggle="validator">
+                    <div class="modal-body">
+                        <input type="hidden" name="_token" value="{{ Session::token() }}">
+                        <input type="hidden" name="id" class="form-control" />
+                        <div class="form-group">
+                            <label class="control-label" for="title">Nama Pangkat *:</label>
+                            <input type="text" name="nama_pangkat" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        {{-- <div class="form-group">
+                            <button type="submit" class="btn btn-primary crud-submit-edit">Edit</button>
+                        </div> --}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button class="btn btn-primary crud-submit-edit">Edit</button>
+                    </div>
                   </form>
             </div>
              <!-- body modal -->
         </div>
     </div>
 </div>
-<!--end MODAL-->
-@endsection
+<!------------------------ end data------------------------------>
 
+ <!------------------------Hapus data------------------------------>
+ <div class="modal fade" id="hapus-pangkat">
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <!-- Modal Header -->
+       <div class="modal-header">
+         <h4 class="modal-title">Hapus Data</h4>
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+       </div>
+       <!-- Modal body -->
+     <form method="post">
+         {{csrf_field()}}
+         <input type="hidden" name="id_hapus">
+         <div class="modal-body">
+             <p>Apakah Anda Yakin Menghapus Data </strong>
+         </div>
+         <!-- Modal footer -->
+         <div class="modal-footer">
+             <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+             <button class="btn btn-primary" id="btn_hapus_pangkat">Hapus</button>
+         </div>
+     </form>
+     </div>
+   </div>
+ </div>              
+<!------------------------end hapus------------------------------>
+@endsection
 @section('asset-buttom')
 <script>
     $(document).ready(function(){
@@ -181,7 +178,7 @@
                         rows = rows + '<td>'+value.nama_pangkat+'</td>';
                         rows = rows + '<td data-id="'+value.id+'">';
                         rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-item" class="badge badge-success edit-item"><span class="fas fa-fw fa-edit " ></a> ';
-                        rows = rows + '<a href="#" class="badge badge-danger remove-item"><span class="fas fa-fw fa-trash"></button>';
+                        rows = rows + '<a href="#" class="badge badge-danger delete-item"  data-toggle="modal" data-target="#hapus-pangkat"><span class="fas fa-fw fa-trash"></button>';
                         rows = rows + '</td>';
                         rows = rows + '</tr>';
                     });
@@ -219,39 +216,52 @@
                     toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
                 })
         });
-        /* Edit Post */
+        /* ketika tekan Edit Post */
         var url = 'pangkat';
         $("body").on("click",".edit-item",function(){
             var id = $(this).parent("td").data('id');
             var nama_pangkat = $(this).parent("td").prev("td").text();
             // $("#edit-item").find("input[name='title']").val(title);
             $("#edit-item").find("input[name='nama_pangkat']").val(nama_pangkat);
-            $("#edit-item").find("form").attr("action",url + '/' + id);
+            $("#edit-item").find("input[name='id']").val(id);
+           
         });
-        /* Updated  Post baru (Updated new Post) */
+        /* Kirim Updated  Post baru (Updated new Post) */
         $(".crud-submit-edit").click(function(e){
-            e.preventDefault();
-            var form_action = $("#edit-item").find("form").attr("action");
+
+            event.preventDefault();
             var nama_pangkat = $("#edit-item").find("input[name='nama_pangkat']").val();
+            var id = $("#edit-item").find("input[name='id']").val();
             $.ajax({
                 dataType: 'json',
-                type:'PUT',
-                url: form_action,
-                data:{nama_pangkat:nama_pangkat,},
+                type:'POST',
+                url: '{{route('pangkat.update')}}',
+                data:{nama_pangkat:nama_pangkat,id:id,_token: '{{csrf_token()}}'},
             }).done(function(data){
                 tampil_data_barang();
                 $(".modal").modal('hide');
                 toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
             })
         })
-        /* Remove Post (Hapus) */
-        $("body").on("click",".remove-item",function(){
+        // ketika delete button
+        $("body").on("click",".delete-item",function(){
             var id = $(this).parent("td").data('id');
+            $("#hapus-pangkat").find("input[name='id_hapus']").val(id);
+           
+        });
+        /* Kirim Remove Post (Hapus) */
+        $("#btn_hapus_pangkat").click(function(e){
+        event.preventDefault();
+            var id = $("#hapus-pangkat").find("input[name='id_hapus']").val();
             var c_obj = $(this).parents("tr");
             $.ajax({
                 dataType: 'json',
-                type:'delete',
-                url: url + '/' + id,
+                type:'post',
+                data:{id:id},
+                url: '{{route('pangkat.delete')}}',
+                success:function(data){
+                    $(".modal").modal('hide');
+                }
             }).done(function(data){
                 c_obj.remove();
                 toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
@@ -259,5 +269,12 @@
             });
         });
     });
+</script>
+<script>
+ $(document).ready(function() {
+        $('#datatable').DataTable({
+            responsive: true
+        });
+    } );
 </script>
 @endsection

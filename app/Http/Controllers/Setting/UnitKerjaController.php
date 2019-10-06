@@ -15,6 +15,7 @@ class UnitKerjaController extends Controller
     public function index()
     {
         //
+        return view('Setting.Unit_kerja.index');
     }
 
     /**
@@ -25,6 +26,7 @@ class UnitKerjaController extends Controller
     public function create()
     {
         //
+       
     }
 
     /**
@@ -71,9 +73,10 @@ class UnitKerjaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
         //
+        $id=$request->id;
         $data=Unit_kerja::findOrFail($id);
         $this->validate($request,[
             'nama_unit_kerja'=>'required|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/',
@@ -92,11 +95,11 @@ class UnitKerjaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request)
     {
         //
-        $data=Unit_kerja::findOrFail($id);
-        $data->delete();
-        return response()->json(['done']);
+        $id=$request->id;
+        $data=Unit_kerja::find($id)->delete();
+        return response()->json($data);
     }
 }

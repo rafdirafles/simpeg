@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Setting;
-use App\divisi;
+use App\Divisi;
 use App\Unit_kerja;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -59,7 +59,8 @@ class DivisiController extends Controller
     public function show($id)
     {
         //
-        return Divisi::get()->load('unit_kerja');
+        $product = Divisi::with('unit_kerja')->get();
+        return response()->json($product);
        
 
     }
@@ -85,9 +86,9 @@ class DivisiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
-
+        $id=$request->id;
         $data=Divisi::findOrFail($id);
         $this->validate($request,[
             'id_unit_kerja'=>'required|integer',
@@ -103,8 +104,9 @@ class DivisiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
-    {
+    public function destroy(Request $request)
+    {   
+        $id=$request->id;
         $data=Divisi::findOrFail($id);
         $data->delete();
         return response()->json(['done']);

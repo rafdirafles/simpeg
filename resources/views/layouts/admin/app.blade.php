@@ -206,7 +206,7 @@
                     <!--begin::Page Scripts(used by this page) -->
                             <script src="{{ asset('template/assets/js/pages/dashboard.js')}}" type="text/javascript"></script>
                         <!--end::Page Scripts -->
-
+                        <script src="{{ asset('template/assets/plugins/custom/datatables/datatables.bundle.js')}}" type="text/javascript"></script>
             @yield('asset-buttom')
             {{-- validator and toast --}}
             <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

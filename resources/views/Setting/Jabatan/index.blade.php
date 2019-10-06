@@ -109,14 +109,14 @@
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                 <div class="modal-body">
                     <div class="form-group">
-                            <label class="control-label" for="title">Nama Jabatan :</label>
+                            <label class="control-label" for="title">Nama Jabatan* :</label>
                             <input type="text" name="nama_jabatan" class="form-control" data-error="Please enter jabatan." required />
                             <p style="color:red"><div class="help-block with-errors"></div></p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-                    <button class="btn btn-info" id="btn_simpan_jabatan">Simpan</button>
+                    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button class="btn btn-primary" id="btn_simpan_jabatan">Kirim</button>
                 </div>
             </form>
             <!-- form -->
@@ -134,22 +134,52 @@
             </div>
             <!-- body modal -->
             <div class="modal-body">
-                  <form data-toggle="validator" action="/jabatan/" method="put">
-                      <div class="form-group">
-                          <label class="control-label" for="title">Nama Pangkat *:</label>
-                          <input type="text" name="nama_jabatan" class="form-control" data-error="Please enter title." required />
-                          <div class="help-block with-errors"></div>
-                      </div>
-                      <div class="form-group">
-                          <button type="submit" class="btn btn-success edit-jabatan">Submit</button>
-                      </div>
-                  </form>
+                <form data-toggle="validator"  method="post">
+                    <input type="hidden" name="id">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label" for="title">Nama Pangkat *:</label>
+                            <input type="text" name="nama_jabatan" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="modal-footer">
+                                <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
+                                <button class="btn btn-primary edit-jabatan">Edit</button>
+                        </div>
+                    </div>
+                </form>
             </div>
              <!-- body modal -->
         </div>
     </div>
 </div>
 <!--end MODAL-->
+<!------------------------Hapus data------------------------------>
+<div class="modal fade" id="hapus_jabatan">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Hapus Data</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+          <form method="post">
+              {{csrf_field()}}
+              <input type="hidden" name="id_hapus">
+              <div class="modal-body">
+                  <p>Apakah Anda Yakin Menghapus Data </strong>
+              </div>
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                  <button class="btn btn-primary" id="btn_hapus_jabatan">Hapus</button>
+              </div>
+          </form>
+          </div>
+        </div>
+      </div>              
+     <!------------------------end hapus------------------------------>
 @endsection
 
 @section('asset-buttom')
@@ -181,7 +211,7 @@
                         rows = rows + '<td>'+value.nama_jabatan+'</td>';
                         rows = rows + '<td data-id="'+value.id+'">';
                         rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-item" class="badge badge-success edit-item"><span class="fas fa-fw fa-edit " ></a> ';
-                        rows = rows + '<a href="#" class="badge badge-danger delete-jabatan"><span class="fas fa-fw fa-trash"></button>';
+                        rows = rows + '<a href="#" class="badge badge-danger hapus_jabatan" data-toggle="modal" data-target="#hapus_jabatan" ><span class="fas fa-fw fa-trash"></button>';
                         rows = rows + '</td>';
                         rows = rows + '</tr>';
                     });
@@ -220,38 +250,52 @@
                 })
         });
         /* Edit Post */
-        var url = 'jabatan';
+      
         $("body").on("click",".edit-item",function(){
             var id = $(this).parent("td").data('id');
             var nama_jabatan = $(this).parent("td").prev("td").text();
-           
             $("#edit-item").find("input[name='nama_jabatan']").val(nama_jabatan);
-            $("#edit-item").find("form").attr("action",url + '/' + id);
+            $("#edit-item").find("input[name='id']").val(id);
+           
         });
+        
         /* Updated  Post baru (Updated new Post) */
         $(".edit-jabatan").click(function(e){
             e.preventDefault();
-            var form_action = $("#edit-item").find("form").attr("action");
+           
             var nama_jabatan = $("#edit-item").find("input[name='nama_jabatan']").val();
+            var id = $("#edit-item").find("input[name='id']").val();
             $.ajax({
                 dataType: 'json',
-                type:'PUT',
-                url: form_action,
-                data:{nama_jabatan:nama_jabatan,},
+                type:'POST',
+                url:'{{route('jabatan.update')}}',
+                data:{id:id,nama_jabatan:nama_jabatan,_token: '{{csrf_token()}}'},
             }).done(function(data){
                 tampil_data_barang();
                 $(".modal").modal('hide');
                 toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
             })
         })
-        /* Remove Post (Hapus) */
-        $("body").on("click",".delete-jabatan",function(){
+        // delete klik
+       
+        $("body").on("click",".hapus_jabatan",function(){
             var id = $(this).parent("td").data('id');
+            $("#hapus_jabatan").find("input[name='id_hapus']").val(id);
+          
+        });
+        /* Remove Post (Hapus) */
+        $("#btn_hapus_jabatan").click(function(e){
+            e.preventDefault();
+            var id = $("#hapus_jabatan").find("input[name='id_hapus']").val();
             var c_obj = $(this).parents("tr");
             $.ajax({
                 dataType: 'json',
-                type:'delete',
-                url: url + '/' + id,
+                type:'post',
+                url: '{{route('jabatan.delete')}}',
+                data:{id:id,_token: '{{csrf_token()}}'},
+                success: function(data){
+                    $(".modal").modal('hide');
+                }
             }).done(function(data){
                 c_obj.remove();
                 toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});

@@ -87,11 +87,14 @@ class PangkatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request)
 
     {
-       
-        $post =Pangkat::find($id)->update($request->all());
+        $id=$request->id;
+        $post =Pangkat::find($id)->update([
+            'nama_pangkat'=>$request->nama_pangkat,
+        ]
+        );
         return response()->json($post);
     }
 
@@ -101,10 +104,12 @@ class PangkatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $id=$request->id;
         Pangkat::find($id)->delete();
         return response()->json(['done']);
+        // return response()->json($id);
     }
 }

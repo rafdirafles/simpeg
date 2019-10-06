@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Data_keluarga;
+use App\Jabatan;
 use App\Kecakapan_bahasa;
 use App\Kecakapan_brevet;
 use App\Kecakapan_olahraga_dan_beladiri;
 use App\Pangkat;
 use App\Pendidikan_kejuruan;
 use App\Pendidikan_umum;
-use App\user;
+use App\User;
 use App\Unit_kerja;
 use App\Pendidikan_non_formal;
 use App\Pendidikan_polri;
@@ -27,7 +28,7 @@ class masterController extends Controller
      */
     public function index()
     {
-        $datas=user::all();
+        $datas=User::all();
         return view('master.index',compact('datas'));
     }
 
@@ -169,12 +170,11 @@ class masterController extends Controller
         $r_gaji=Riwayat_gaji_berkala::where('nip_nrp',$id)->get();
         $r_gaji->groupBy('nip_nrp');
         // 
-        $r_jabatan=Riwayat_jabatan::where('nip_nrp',$id)->get();
-        $r_jabatan->groupBy('nip_nrp');
+        $jabatan=Jabatan::all();
         // pangkat
         $pangkats=Pangkat::all();
-        return view('Master.show',compact('datas','p_umum','p_kejuruan','keluargas','k_bahasa','k_olahraga','k_brevet',
-        'tanda_jasas','p_polris','r_gaji','r_jabatan','pangkats'));
+        return view('master.show',compact('datas','p_umum','p_kejuruan','keluargas','k_bahasa','k_olahraga','k_brevet',
+        'tanda_jasas','p_polris','r_gaji','jabatan','pangkats'));
     }
 
     /**

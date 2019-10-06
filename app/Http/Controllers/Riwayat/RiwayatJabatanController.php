@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Riwayat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Jabatan;
 use App\Riwayat_jabatan;
 
 class RiwayatJabatanController extends Controller
@@ -14,6 +15,9 @@ class RiwayatJabatanController extends Controller
     public function index()
     {
         //
+        $data =Riwayat_jabatan::with('jabatan')->get();
+        return Response()->json($data);
+
     }
 
     /**
@@ -35,18 +39,25 @@ class RiwayatJabatanController extends Controller
     public function store(Request $request)
     {
         // //
-        $this->validate($request,[
-            'nip_nrp'=>'required',
-            'id_pangkat'=>'required',
-            'tmt'=>'required',
-            'nomor_sk'=>'required',
-            'pejabat'=>'required',
-            'tanggal_sk'=>'required',
-            'dasar_peraturan'=>'required',
-        ]);
-        Riwayat_jabatan::create($request->all());
-        return back()->with('success','Data Berhasil Ditambahkan');
-        // return $request->all();
+        // $this->validate($request,[
+        //     'nip_nrp'=>'required',
+        //     'id_pangkat'=>'required',
+        //     'tmt'=>'required',
+        //     'nomor_sk'=>'required',
+        //     'pejabat'=>'required',
+        //     'tanggal_sk'=>'required',
+        //     'dasar_peraturan'=>'required',
+        // ]);
+        if(empty($request->keterangan)){
+            $request['keterangan']='-';
+        }
+        else{
+            $request['keterangan']=$request->input('keterangan');
+        }
+        $data=Riwayat_jabatan::create($request->all());
+        // $data=$request->id_jabatan;
+        // return back()->with('success','Data Berhasil Ditambahkan');
+        return Response()->json($data);
     }
 
     /**
@@ -58,6 +69,8 @@ class RiwayatJabatanController extends Controller
     public function show($id)
     {
         //
+       
+        
     }
 
     /**
@@ -78,34 +91,34 @@ class RiwayatJabatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updates(Request $request)
     {
         //
-        $data=Riwayat_jabatan::findOrFail($id);
-        $this->validate($request,[
-            'nip_nrp'=>'required',
-            'id_pangkat'=>'required',
-            'tmt'=>'required',
-            'nomor_sk'=>'required',
-            'pejabat'=>'required',
-            'tanggal_sk'=>'required',
-            'dasar_peraturan'=>'required',
+        $id=$request->id;
+        $data=Riwayat_jabatan::find($id);
+        $data->update([
+            'nip_nrp'=>$request->input('nip_nrp'),
+            'id_jabatan'=>$request->input('id_jabatan'),
+            'nomor_sk'=>$request->input('nomor_sk'),
+            'pejabat'=>$request->input('pejabat'),
+            'tgl_sk'=>$request->input('tgl_sk'),
+            'tgl_mulai_terhitung'=>$request->input('tgl_mulai_terhitung'),
+            'keterangan'=>$request->input('keterangan')
         ]);
-        $data->update($request->all());
-        return back()->with('success','Data Berhasil Diedit');
+        return Response()->json($id);
     }
-
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $id=$request->id;
         $data=Riwayat_jabatan::findOrFail($id);
         $data->delete();
-        return back()->with('success','Data Berhasil Didelete');
+        return Response()->json($data);
     }
 }

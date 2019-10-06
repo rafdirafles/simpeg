@@ -16,6 +16,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+// riwayat jabatan
+Route::resource('/riwayat_jabatan','Riwayat\RiwayatJabatanController');
+Route::post('/riwayat_jabatan/update','Riwayat\RiwayatJabatanController@updates')->name('riwayat_jabatan.update');
+Route::post('/riwayat_jabatan/delete','Riwayat\RiwayatJabatanController@destroy')->name('riwayat_jabatan.delete');
+// Route::post('/riwayat_jabatan','Riwayat\RiwayatJabatanController@store')->name('riwayat_jabatan.store');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -23,14 +28,23 @@ Route::resource('/master','masterController');
 Route::resource('/profile','ProfileController');
 // //setting controller // //
 Route::resource('/setting/divisi','Setting\DivisiController');
+Route::post('/setting/divisi/update','Setting\DivisiController@update')->name('divisi.update');
+Route::post('/setting/divisi/delete','Setting\DivisiController@destroy')->name('divisi.delete');
+// 
 Route::resource('/setting/unit_kerja','Setting\UnitKerjaController');
+Route::post('/setting/unit_kerja/update','Setting\UnitKerjaController@update')->name('unit_kerja.update');
+Route::post('/setting/unit_kerja/delete','Setting\UnitKerjaController@destroy')->name('unit_kerja.delete');
 // pangkat
 Route::resource('/setting/pangkat','Setting\PangkatController');
-// Route::post('pangkat/update', 'Setting\PangkatController@update')->name('pangkat.update');
+Route::post('pangkat/update', 'Setting\PangkatController@update')->name('pangkat.update');
+Route::post('pangkat/delete', 'Setting\PangkatController@destroy')->name('pangkat.delete');
+// setting jabatan
+Route::resource('/setting/jabatan','Setting\JabatanController');
+Route::post('/setting/update', 'Setting\jabatanController@update')->name('jabatan.update');
+Route::post('/setting/delete', 'Setting\jabatanController@destroy')->name('jabatan.delete');
 // 
 Route::resource('/setting/cuti','Setting\CutiController');
-// 
-Route::resource('/setting/jabatan','Setting\JabatanController');
+
 // // end setting // //
 // keluarga
 Route::resource('/keluarga','KeluargaController');
@@ -52,8 +66,7 @@ Route::resource('/kecakapan_brevet','Kecakapan\KecakapanBrevetController');
 Route::resource('/tanda_jasa','TandaJasaController');
 //
 Route::resource('/riwayat_gaji','Riwayat\RiwayatGajiController');
-//
-Route::resource('/riwayat_jabatan','Riwayat\RiwayatJabatanController');
+
 //
 Route::resource('/riwayat_kepangkatan','Riwayat\RiwayatKepangkatanController');
 //

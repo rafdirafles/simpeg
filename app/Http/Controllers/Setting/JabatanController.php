@@ -74,9 +74,10 @@ class JabatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $id=$request->id;
         $post =Jabatan::find($id)->update($request->all());
         return response()->json($post);
     }
@@ -87,9 +88,10 @@ class JabatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $id=$request->id;
         Jabatan::find($id)->delete();
         return response()->json(['done']);
     }
