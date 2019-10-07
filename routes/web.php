@@ -69,7 +69,9 @@ Route::resource('/riwayat_gaji','Riwayat\RiwayatGajiController');
 
 //
 Route::resource('/riwayat_kepangkatan','Riwayat\RiwayatKepangkatanController');
-//
+// gaji
 Route::resource('/riwayat_unit_kerja','Riwayat\RiwayatGajiController');
+Route::post('/riwayat_unit_kerja/update','Riwayat\RiwayatGajiController@update')->name('riwayat_gaji.update');
+Route::post('/riwayat_unit_kerja/delete','Riwayat\RiwayatGajiController@destroy')->name('riwayat_gaji.delete');
 //
 Route::get('/setting/getDivisi','Setting\DivisiController@getDivisi')->name('getDivisi');

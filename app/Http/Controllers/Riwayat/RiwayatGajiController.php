@@ -38,18 +38,10 @@ class RiwayatGajiController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $this->validate($request,[
-            'nip_nrp'=>'required',
-            'gaji'=>'required',
-            'tmt'=>'required',
-            'nomor_sk'=>'required',
-            'pejabat'=>'required',
-            'tanggal_sk'=>'required',
-            'dasar_peraturan'=>'required',
-        ]);
-        Riwayat_gaji_berkala::create($request->all());
-        return back()->with('success','data berhasil ditambahkan');
+        
+        $data=$request->nip_nrp;
+        $data=Riwayat_gaji_berkala::create($request->all());
+        return Response()->json($data);
        
     }
 
@@ -82,21 +74,23 @@ class RiwayatGajiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $id=$request->id;
         $data=Riwayat_gaji_berkala::findOrFail($id);
-        $this->validate($request,[
-            'nip_nrp'=>'required',
-            'gaji'=>'required',
-            'tmt'=>'required',
-            'nomor_sk'=>'required',
-            'pejabat'=>'required',
-            'tanggal_sk'=>'required',
-            'dasar_peraturan'=>'required',
-        ]);
+        // $this->validate($request,[
+        //     'nip_nrp'=>'required',
+        //     'gaji'=>'required',
+        //     'tmt'=>'required',
+        //     'nomor_sk'=>'required',
+        //     'pejabat'=>'required',
+        //     'tanggal_sk'=>'required',
+        //     'dasar_peraturan'=>'required',
+        // ]);
         $data->update($request->all());
-        return back()->with('success','data berhasil diedit');
+        // return back()->with('success','data berhasil diedit');
+        return Response()->json($data);
       
     }
 
@@ -106,11 +100,12 @@ class RiwayatGajiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $id=$request->id;
         $data=Riwayat_gaji_berkala::findOrFail($id);
         $data->delete();
-        return back()->with('success','data berhasil dihapus');
+        return Response()->json($data);
     }
 }
