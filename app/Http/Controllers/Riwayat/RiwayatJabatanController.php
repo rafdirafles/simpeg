@@ -52,11 +52,11 @@ class RiwayatJabatanController extends Controller
             $request['keterangan']='-';
         }
         else{
-            $request['keterangan']=$request->input('keterangan');
+           $data= $request['keterangan']=$request->keterangan;
         }
         $data=Riwayat_jabatan::create($request->all());
-        // $data=$request->id_jabatan;
-        // return back()->with('success','Data Berhasil Ditambahkan');
+        // // $data=$request->id_jabatan;
+        // // return back()->with('success','Data Berhasil Ditambahkan');
         return Response()->json($data);
     }
 

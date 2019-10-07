@@ -15,6 +15,8 @@ class TandaJasaController extends Controller
     public function index()
     {
         //
+        $data=Tanda_jasa_Prestasi::all();
+        return Response()->json($data);
     }
 
     /**
@@ -36,21 +38,20 @@ class TandaJasaController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request,[
-            'nip_nrp'=>'required',
-            'nama_prestasi'=>'required',
-            'tahun'=>'required',
-        ]);
+        // $this->validate($request,[
+        //     'nip_nrp'=>'required',
+        //     'nama_prestasi'=>'required',
+        //     'tahun'=>'required',
+        // ]);
         if(empty($request->keterangan)){
             $request['keterangan']='-';
         }
         else{
-            $request['keterangan']=$request->input('keterangan');
+            $request['keterangan']=$request->keterangan;
         }
-        Tanda_jasa_Prestasi::create($request->all());
-        return back()->with('success','Data berhasil ditambahkan');
-        // return $request->all();
-
+        $data=Tanda_jasa_Prestasi::create($request->all());
+        // return back()->with('success','Data berhasil ditambahkan');
+        return Response()->json($data);
     }
 
     /**
@@ -82,9 +83,10 @@ class TandaJasaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $id=$request->id;
         $data=Tanda_jasa_Prestasi::findOrFail($id);
         $this->validate($request,[
             'nip_nrp'=>'required',
@@ -98,7 +100,8 @@ class TandaJasaController extends Controller
             $request['keterangan']=$request->input('keterangan');
         }
         $data->update($request->all());
-        return back()->with('success','Data berhasil diedit');
+        // return back()->with('success','Data berhasil diedit');
+        return Response()->json($data);
     }
 
     /**
@@ -107,11 +110,12 @@ class TandaJasaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $id=$request->id;
         $data=Tanda_jasa_Prestasi::findOrFail($id);
         $data->delete();
-        return back()->with('success','Data berhasil dihapus');
+        return Response()->json($data);
     }
 }

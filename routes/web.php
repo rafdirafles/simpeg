@@ -62,8 +62,10 @@ Route::resource('/kecakapan_bahasa','Kecakapan\KecakapanBahasaController');
 Route::resource('/kecakapan_olahraga','Kecakapan\KecakapanOlahRagaController');
 //
 Route::resource('/kecakapan_brevet','Kecakapan\KecakapanBrevetController');
-//
+// tanda jasa
 Route::resource('/tanda_jasa','TandaJasaController');
+Route::post('/tanda_jasa/update','TandaJasaController@update')->name('tanda_jasa.update');
+Route::post('/tanda_jasa/delete','TandaJasaController@destroy')->name('tanda_jasa.delete');
 //
 Route::resource('/riwayat_gaji','Riwayat\RiwayatGajiController');
 
