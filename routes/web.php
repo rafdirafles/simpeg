@@ -69,8 +69,10 @@ Route::post('/tanda_jasa/delete','TandaJasaController@destroy')->name('tanda_jas
 //
 Route::resource('/riwayat_gaji','Riwayat\RiwayatGajiController');
 
-//
+// R pangkat
 Route::resource('/riwayat_kepangkatan','Riwayat\RiwayatKepangkatanController');
+Route::post('/riwayat_kepangkatan/update','Riwayat\RiwayatKepangkatanController@update')->name('riwayat_kepangkatan.update');
+Route::post('/riwayat_kepangkatan/delete','Riwayat\RiwayatKepangkatanController@destroy')->name('riwayat_kepangkatan.delete');
 // gaji
 Route::resource('/riwayat_unit_kerja','Riwayat\RiwayatGajiController');
 Route::post('/riwayat_unit_kerja/update','Riwayat\RiwayatGajiController@update')->name('riwayat_gaji.update');

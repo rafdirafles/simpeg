@@ -15,8 +15,7 @@ class TandaJasaController extends Controller
     public function index()
     {
         //
-        $data=Tanda_jasa_Prestasi::all();
-        return Response()->json($data);
+       
     }
 
     /**
@@ -63,6 +62,8 @@ class TandaJasaController extends Controller
     public function show($id)
     {
         //
+        $data=Tanda_jasa_Prestasi::where('nip_nrp',$id)->get();
+        return Response()->json($data);
     }
 
     /**

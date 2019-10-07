@@ -15,8 +15,7 @@ class RiwayatJabatanController extends Controller
     public function index()
     {
         //
-        $data =Riwayat_jabatan::with('jabatan')->get();
-        return Response()->json($data);
+       
 
     }
 
@@ -69,6 +68,8 @@ class RiwayatJabatanController extends Controller
     public function show($id)
     {
         //
+        $data =Riwayat_jabatan::where('nip_nrp',$id)->with('jabatan')->get();
+        return Response()->json($data);
        
         
     }

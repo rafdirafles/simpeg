@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Riwayat;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Riwayat_kepangkatan;
 
 class RiwayatKepangkatanController extends Controller
 {
@@ -15,6 +16,7 @@ class RiwayatKepangkatanController extends Controller
     public function index()
     {
         //
+        
     }
 
     /**
@@ -36,6 +38,8 @@ class RiwayatKepangkatanController extends Controller
     public function store(Request $request)
     {
         //
+        $data=Riwayat_kepangkatan::create($request->all());
+        return Response()->json($data);
     }
 
     /**
@@ -47,6 +51,8 @@ class RiwayatKepangkatanController extends Controller
     public function show($id)
     {
         //
+        $data=Riwayat_kepangkatan::where('nip_nrp',$id)->with('pangkat')->get();
+        return Response()->json($data);
     }
 
     /**
@@ -67,9 +73,13 @@ class RiwayatKepangkatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $id=$request->id;
+        $data=Riwayat_kepangkatan::findOrFail($id);
+        $data->update($request->all());
+        return Response()->json($data); 
     }
 
     /**
@@ -78,8 +88,13 @@ class RiwayatKepangkatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+
+        $id=$request->id;
+        $data=Riwayat_kepangkatan::findOrFail($id);
+        $data->delete();
+        return Response()->json($data); 
     }
 }

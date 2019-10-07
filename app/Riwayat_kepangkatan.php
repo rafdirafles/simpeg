@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Riwayat_kepangkatan extends Model
 {
     //
-    protected $fillable=['nip_nrp','id_pangkat','tmt','nomor_sk','pejabat','tanngal_sk','dasar_peraturan'];
+    protected $fillable=['nip_nrp','id_pangkat','tmt','nomor_sk','pejabat','tanggal_sk','dasar_peraturan'];
+
+    public function pangkat(){
+        return $this->belongsTo('App\Pangkat','id_pangkat');
+     }
 }

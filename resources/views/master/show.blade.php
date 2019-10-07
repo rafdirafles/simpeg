@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('asset-top')
-   
+
 @endsection
 @section('body')
 <!-- begin:: Content Head -->
@@ -921,13 +921,12 @@
                     <!-- row tabel PANGKAT -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <h5>Riwayat Kepangkatan</h5>
+                            <h5>Riwayat Kepangkatan </h5>
                             <table class="table table-striped- table-bordered table-hover table-checkable" id="datatable">
                                 <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Pangkat</th>
-                                    <th>Gol</th>
                                     <th>TMT</th>
                                     <th>Pejabat</th>
                                     <th>Nomor</th>
@@ -936,40 +935,13 @@
                                     <th width="10%">Aksi</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-center">
-                                            <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                            <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-center">
-                                            <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                            <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="9" class="text-right"><a href="" class="btn btn-primary btn-sm">(+)tambah</a></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                           
+                            <tbody class="show_r_kepangkatan">
+                            </tbody>
+                            <tr>
+                                <td colspan="9" class="text-right"><a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-add-r-kepangkatan">(+)tambah</a></td>
+                            </tr>
+                        </table>
                             <!--end: datatable -->
                         </div>
                     </div>
@@ -1201,7 +1173,7 @@
     </div>
 </div>
 <!-------end hapus------>
-<!-----------------------------------------------akhir modal riwayat gaji ----------------------------------------------------------->
+<!---------------------------------------------akhir modal riwayat gaji ----------------------------------------------------------->
 
 <!---------------------------------------------awal modal riwayat jabatan---------------------------------------------------------->
 <!--add MODAL -->
@@ -1255,7 +1227,7 @@
                             <input type="text" name="keterangan_r_jabatan" class="form-control"  />
                             {{-- <div class="help-block with-errors"></div> --}}
                         </div>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Tutup</button>
@@ -1383,7 +1355,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="form-control-label">Keterangan </label>
-                        <input class="form-control"name="keterangan" type="text" >
+                        <input class="form-control" name="keterangan" type="text" >
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -1413,7 +1385,7 @@
                         <input type="hidden" name="id" value="">
                         <div class="form-group">
                             <label for="message-text" class="form-control-label">Nama Prestasi *</label>
-                            <input type="text" class="form-control" name="nama_prestasi" id="message-text" required>
+                            <input type="text" class="form-control" name="nama_prestasi" required>
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="form-control-label">Tahun *</label>
@@ -1421,7 +1393,7 @@
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="form-control-label">Keterangan</label>
-                            <input class="form-control" id="message-text" name="keterangan" type="text">
+                            <input class="form-control" name="keterangan" type="text">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -1461,17 +1433,154 @@
 </div>
 <!-------end hapus------>
 <!--------------------------------------------------akhir modal tanda jasa------------------------------------------------------------>
+
+<!----------------------------------------------awal modal riwayat kepangkatan------------------------------------------------------------>
+<!--add MODAL -->
+<div class="modal fade " id="modal-add-r-kepangkatan" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jdlbrevet">Add Kepangkatan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- form -->
+        <form class="form-horizontal" data-toggle="validator" method="post" action="{{route('riwayat_kepangkatan.store')}}">
+            @csrf
+                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                <div class="modal-body">
+                    <input type="hidden" name="nip_nrp" value="{{$datas->nip_nrp}}" >
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Nama pangkat *</label>
+                        <select name="id_pangkat" id=""class="form-control">
+                            <option value="">Pilih Pangkat</option>
+                            @foreach ($pangkats as $pang)
+                                <option value="{{$pang->id}}">{{$pang->nama_pangkat}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">TMT *</label>
+                        <input class="form-control" type="date" name="tmt" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Nomor SK *</label>
+                        <input class="form-control"name="nomor_sk" type="text" >
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Pejabat *</label>
+                        <input class="form-control"name="pejabat" type="text" >
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Tanggal SK *</label>
+                        <input class="form-control"name="tanggal_sk" type="date" >
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Dasar Peraturan * </label>
+                        <input class="form-control"name="dasar_peraturan" type="text" >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button type="submit" class="btn btn-primary " id="btn-simpan-r-kepangkatan">Kirim</button>
+                </div>
+            </form>
+            <!-- form -->
+        </div>
+    </div>
+</div>
+<!--END MODAL ADD-->
+<!--edit MODAL -->
+<div class="modal fade" id="edit-r-kepangkatan" tabindex="-1" role="dialog" aria-labelledby="jdl-edit-jabatan" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Riwayat Kepangkatan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+                    <form data-toggle="validator" method="post">
+                        <input type="hidden" name="nip_nrp" value="" >
+                        <input type="hidden" name="id" value="">
+                        <input type="hidden" name="nip_nrp" value="{{$datas->nip_nrp}}" >
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Nama pangkat *</label>
+                            <select name="id_pangkat" id="id_pangkat_r_kepangkatan" class="form-control">
+                                <option value="">Pilih Pangkat</option>
+                                @foreach ($pangkats as $pang)
+                                    <option value="{{$pang->id}}">{{$pang->nama_pangkat}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">TMT *</label>
+                            <input class="form-control" type="date" name="tmt" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Nomor SK *</label>
+                            <input class="form-control"name="nomor_sk" type="text" >
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Pejabat *</label>
+                            <input class="form-control" name="pejabat" type="text" >
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Tanggal SK *</label>
+                            <input class="form-control"name="tanggal_sk" type="date" >
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Dasar Peraturan * </label>
+                            <input class="form-control"name="dasar_peraturan" type="text" >
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary btn-edit-r-kepangkatan">Edit</button>
+                        </div>
+                    </form>
+            </div>
+                <!-- body modal -->
+        </div>
+    </div>
+</div>
+<!--end edit MODAL-->
+<!------modal Hapus ---->
+<div class="modal fade" id="hapus-r-kepangkatan">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Hapus Data</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <form method="post">
+            {{csrf_field()}}
+            <input type="hidden" name="id_hapus">
+            <div class="modal-body">
+                <p>Apakah Anda Yakin Menghapus Data </strong>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="btn-hapus-r-kepangkatan">Hapus</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<!-------end hapus------>
+<!-------------------------------------------------akhir modal riwayat kepagkatan------------------------------------------------------------>
 @endsection
 
 
 @section('asset-buttom')
-{{-- <script>
- $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-    });
-</script> --}}
+<script>
+ var nrp='<?php echo $datas->nip_nrp?>';
+</script>
 <!----------------------------------------------------------------------riwayat gaji------------------------------------------------->
 <script>
     tampil_data_riwayat_gaji();   //pemanggilan fungsi gaji.
@@ -1482,7 +1591,7 @@
             beforeSend: function(){
                 $('.ajax-loader').css("visibility", "visible");
             },
-            url   : '{{route('riwayat_gaji.index')}}',
+            url   : '/riwayat_gaji/'+nrp,
             async : true,
             dataType : 'json',
             success : function(data){
@@ -1535,7 +1644,7 @@
                 datatype:"json",
                 data : {nip_nrp:nip_nrp,gaji:gaji,tmt:tmt,nomor_sk:nomor_sk,pejabat:pejabat,tanggal_sk:tanggal_sk,dasar_peraturan:dasar_peraturan,_token: '{{csrf_token()}}' },
                 success: function(data){
-                    
+
                     $("input[name=gaji]").val("");
                     $("input[name=tmt]").val("");
                     $("input[name=nomor_sk]").val("");
@@ -1633,6 +1742,7 @@
 
 </script>
 <!-------------------------------------------------------------------akhir riwayat gaji----------------------------------------------->
+
 <!--------------------------------------------------------------------riwayat jabatan------------------------------------------------->
 <script>
     tampil_data_riwayat_jabatan();   //pemanggilan fungsi tampil barang.
@@ -1643,7 +1753,7 @@
             beforeSend: function(){
                 $('.ajax-loader').css("visibility", "visible");
             },
-            url   : '{{route('riwayat_jabatan.index')}}',
+            url   : '/riwayat_jabatan/'+nrp,
             async : true,
             dataType : 'json',
             success : function(data){
@@ -1711,7 +1821,7 @@
                     $("#modal-add-r-jabatan").find("input[name='tgl_sk_r_jabatan']").val("");
                     $("#modal-add-r-jabatan").find("input[name='tgl_mulai_terhitung_r_jabatan']").val("");
                     $("#modal-add-r-jabatan").find("input[name='keterangan_r_jabatan']").val("");
-                   
+
                     $("#modal-add-r-jabatan").find("select[name=id_jabatan_r_jabatan]").val("");
                     tampil_data_riwayat_jabatan();
                     $('#modal-add-r-jabatan').modal('hide');
@@ -1836,7 +1946,7 @@
             beforeSend: function(){
                 $('.ajax-loader').css("visibility", "visible");
             },
-            url   : '{{route('tanda_jasa.index')}}',
+            url   : '/tanda_jasa/'+nrp,
             async : true,
             dataType : 'json',
             success : function(data){
@@ -1884,7 +1994,7 @@
                 datatype:"html",
                 data : {nip_nrp:nip_nrp,nama_prestasi:nama_prestasi,tahun:tahun,keterangan:keterangan},
                 success: function(data){
-                    
+
                     $("input[name=nama_prestasi]").val("");
                     $("input[name=tahun]").val("");
                     $("input[name=keterangan]").val("");
@@ -1938,7 +2048,7 @@
             $(".modal").modal('hide');
             toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
         })
-            
+
         })
             // klik delete
             $("body").on("click",".delete-tanda-jasa",function(){
@@ -1968,4 +2078,183 @@
   })//end ready
 </script>
 <!---------------------------------------------------------------------akhir tanda jasa---------------------------------------------->
+
+<!-----------------------------------------------------------------awal riwayat kepangkatan--------------------------------------------->
+<script>
+  
+    $(document).ready(function(){
+              $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+      tampil_data_r_kepangkatan();  //pemanggilan fungsi 
+    //fungsi tampil 
+      function tampil_data_r_kepangkatan(){
+          $.ajax({
+              type  : 'GET',
+              beforeSend: function(){
+                  $('.ajax-loader').css("visibility", "visible");
+              },
+              url   : '/riwayat_kepangkatan/'+nrp,
+              async : true,
+              dataType : 'json',
+              success : function(data){
+                  console.log(data);
+                  var i;
+                  var no=1;
+                  var rows ='';
+                  $.each( data, function( key, value ) {
+                      rows = rows + '<tr>';
+                      rows = rows + '<td>'+ no++ +'</td>';
+                      rows = rows +'<td style="display:none" >'+value.nip_nrp+'</td>';
+                      rows = rows + '<td style="display:none">'+value.id_pangkat+'</td>';
+                      rows = rows + '<td>'+value.pangkat.nama_pangkat+'</td>';
+                      rows = rows + '<td>'+value.tmt+'</td>';
+                      rows = rows + '<td>'+value.nomor_sk+'</td>';
+                      rows = rows + '<td>'+value.pejabat+'</td>';
+                      rows = rows + '<td>'+value.tanggal_sk+'</td>';
+                      rows = rows + '<td>'+value.dasar_peraturan+'</td>';
+                      rows = rows + '<td class="text-center" data-id="'+value.id+'">';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-r-kepangkatan" class="badge badge-success edit-item-r-kepangkatan"><span class="fas fa-fw fa-edit " ></a> ';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#hapus-r-kepangkatan" class="badge badge-danger delete-r-kepangkatan"><span class="fas fa-fw fa-trash"></button>';
+                      rows = rows + '</td>';
+                      rows = rows + '</tr>';
+                  });
+                  $('.show_r_kepangkatan').html(rows);
+              },
+              error: function(xhr, ajaxOptions, thrownError){
+                          alert("Mohon Data Masukkan Dengan Tepat");
+                      },
+              complete: function(){
+                  $('.ajax-loader').css("visibility", "hidden");
+              }
+          });
+      } //tutup akhir tampil
+      //Simpan
+    $('#btn-simpan-r-kepangkatan').click(function(e){
+        e.preventDefault();
+        var nip_nrp=$("#modal-add-r-kepangkatan").find("input[name=nip_nrp]").val();
+        var id_pangkat=$("#modal-add-r-kepangkatan").find("select[name=id_pangkat]").val();
+        var tmt=$("#modal-add-r-kepangkatan").find("input[name=tmt]").val();
+        var nomor_sk=$("#modal-add-r-kepangkatan").find("input[name=nomor_sk]").val();
+        var pejabat=$("#modal-add-r-kepangkatan").find("input[name=pejabat]").val();
+        var tanggal_sk=$("#modal-add-r-kepangkatan").find("input[name=tanggal_sk]").val();
+        var dasar_peraturan=$("#modal-add-r-kepangkatan").find("input[name=dasar_peraturan]").val();
+        event.preventDefault();
+            $.ajax({
+                type : "POST",
+                beforeSend: function(){
+                    $('.ajax-loader').css("visibility", "visible");
+                },
+                url  : '{{route('riwayat_kepangkatan.store')}}',
+                datatype:"html",
+                data : {nip_nrp:nip_nrp,id_pangkat:id_pangkat,tmt:tmt,nomor_sk:nomor_sk,pejabat:pejabat,tanggal_sk:tanggal_sk,dasar_peraturan:dasar_peraturan},
+                success: function(data){
+                $("#modal-add-r-kepangkatan").find("input[name=id_pangkat]").val("");
+                $("#modal-add-r-kepangkatan").find("input[name=tmt]").val("");
+                $("#modal-add-r-kepangkatan").find("input[name=nomor_sk]").val("");
+                $("#modal-add-r-kepangkatan").find("input[name=pejabat]").val("");
+                $("#modal-add-r-kepangkatan").find("input[name=tanggal_sk]").val("");
+                $("#modal-add-r-kepangkatan").find("input[name=dasar_peraturan]").val("");
+                tampil_data_r_kepangkatan();
+                $('.modal').modal('hide');
+                },
+                error: function(xhr, ajaxOptions, thrownError){
+                        alert("Mohon Data Masukkan Dengan Tepat");
+                    },
+                complete: function(){
+                    $('.ajax-loader').css("visibility", "hidden");
+                }
+            }).done(function(data){
+                toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+            })
+
+    });
+          // edit
+          /* Edit Post */
+          $("body").on("click",".edit-item-r-kepangkatan",function(){
+            var id = $(this).parent("td").data('id');
+            var nip_nrp = $(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var id_pangkat=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var nama_pangkat=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var tmt=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var nomor_sk=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").text();
+            var pejabat=$(this).parent("td").prev("td").prev("td").prev("td").text();
+            var tanggal_sk=$(this).parent("td").prev("td").prev("td").text();
+            var dasar_peraturan=$(this).parent("td").prev("td").text();
+            // set
+            $("#edit-r-kepangkatan").find("input[name='id']").val(id);
+            $("#edit-r-kepangkatan").find("input[name='nip_nrp']").val(nip_nrp);
+            $("#edit-r-kepangkatan").find("input[name='tmt']").val(tmt);
+            $("#edit-r-kepangkatan").find("input[name='nomor_sk']").val(nomor_sk);
+            $("#edit-r-kepangkatan").find("input[name='pejabat']").val(pejabat);
+            $("#edit-r-kepangkatan").find("input[name='tanggal_sk']").val(tanggal_sk);
+            $("#edit-r-kepangkatan").find("input[name='dasar_peraturan']").val(dasar_peraturan);
+            var i;
+            var x= document.getElementById("id_pangkat_r_kepangkatan");
+            for(i=0; i<x.options.length;i++){
+                if(x.options[i].value == id_pangkat){
+                    $("#edit-r-kepangkatan").find("select[name=id_pangkat]").val(id_pangkat);
+                }
+                else{
+                    $("#edit-r-kepangkatan").find("select[name=id_pangkat]").val();
+
+                }
+            }
+          });
+          /* Updated  Post baru (Updated new Post) */
+          $(".btn-edit-r-kepangkatan").click(function(e){
+              e.preventDefault();
+              var id = $("#edit-r-kepangkatan").find("input[name='id']").val();
+              var nip_nrp =  $("#edit-r-kepangkatan").find("input[name='nip_nrp']").val();
+              var id_pangkat =  $("#edit-r-kepangkatan").find("input[name='id_pangkat']").val();
+              var tmt =   $("#edit-r-kepangkatan").find("input[name='tmt']").val();
+              var pejabat =  $("#edit-r-kepangkatan").find("input[name='pejabat']").val();
+              var nomor_sk =  $("#edit-r-kepangkatan").find("input[name='nomor_sk']").val();
+              var tanggal_sk =  $("#edit-r-kepangkatan").find("input[name='tanggal_sk']").val();
+              var dasar_peraturan =  $("#edit-r-kepangkatan").find("input[name='dasar_peraturan']").val();
+              $.ajax({
+                  dataType: 'json',
+                  type:'post',
+                  url: '{{route('riwayat_kepangkatan.update')}}',
+                  data:{id:id,nip_nrp,id_pangkat:id_pangkat,tmt:tmt,pejabat:pejabat,nomor_sk:nomor_sk,tanggal_sk:tanggal_sk,dasar_peraturan:dasar_peraturan,_token: '{{csrf_token()}}'},
+                   success: function(data){
+                       console.log(data);
+                   }
+              }).done(function(data){
+              tampil_data_r_kepangkatan();
+              $(".modal").modal('hide');
+              toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+          })
+  
+          })
+        // klik delete
+        $("body").on("click",".delete-r-kepangkatan",function(){
+            var id = $(this).parent("td").data('id');
+            $("#hapus-r-kepangkatan").find("input[name='id_hapus']").val(id);
+           
+        });
+        /* Remove Post (Hapus) */
+        $("#btn-hapus-r-kepangkatan").click(function(e){
+        event.preventDefault();
+        var id = $("#hapus-r-kepangkatan").find("input[name='id_hapus']").val();
+        var c_obj = $(this).parents("tr");
+        $.ajax({
+            dataType: 'json',
+            type:'POST',
+            data:{id:id,_token: '{{csrf_token()}}'},
+            url: '{{route('riwayat_kepangkatan.delete')}}',
+
+        }).done(function(data){
+            c_obj.remove();
+            toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+            tampil_data_r_kepangkatan();
+            $(".modal").modal('hide');
+        });
+        });
+  
+})//end ready
+</script>
+<!----------------------------------------------------------------akhir riwayat kepangkatan-------------------------------------------->
 @endsection

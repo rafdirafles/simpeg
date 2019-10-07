@@ -16,8 +16,7 @@ class RiwayatGajiController extends Controller
     public function index()
     {
         //
-        $data =Riwayat_gaji_berkala::all();
-        return Response()->json($data);
+       
     }
 
     /**
@@ -54,6 +53,8 @@ class RiwayatGajiController extends Controller
     public function show($id)
     {
         //
+        $data =Riwayat_gaji_berkala::where('nip_nrp',$id)->get();
+        return Response()->json($data);
     }
 
     /**
