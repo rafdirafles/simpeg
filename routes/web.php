@@ -30,7 +30,7 @@ Route::resource('/profile','ProfileController');
 Route::resource('/setting/divisi','Setting\DivisiController');
 Route::post('/setting/divisi/update','Setting\DivisiController@update')->name('divisi.update');
 Route::post('/setting/divisi/delete','Setting\DivisiController@destroy')->name('divisi.delete');
-// 
+//
 Route::resource('/setting/unit_kerja','Setting\UnitKerjaController');
 Route::post('/setting/unit_kerja/update','Setting\UnitKerjaController@update')->name('unit_kerja.update');
 Route::post('/setting/unit_kerja/delete','Setting\UnitKerjaController@destroy')->name('unit_kerja.delete');
@@ -42,7 +42,7 @@ Route::post('pangkat/delete', 'Setting\PangkatController@destroy')->name('pangka
 Route::resource('/setting/jabatan','Setting\JabatanController');
 Route::post('/setting/update', 'Setting\jabatanController@update')->name('jabatan.update');
 Route::post('/setting/delete', 'Setting\jabatanController@destroy')->name('jabatan.delete');
-// 
+//
 Route::resource('/setting/cuti','Setting\CutiController');
 
 // // end setting // //
@@ -64,13 +64,15 @@ Route::post('/kecakapan_bahasa/update','Kecakapan\KecakapanBahasaController@upda
 Route::post('/kecakapan_bahasa/delete','Kecakapan\KecakapanBahasaController@destroy')->name('kecakapan_bahasa.delete');
 // kecakapan olahraga
 Route::resource('/kecakapan_olahraga','Kecakapan\KecakapanOlahRagaController');
+Route::post('/kecakapan_olahraga/update','Kecakapan\KecakapanOlahRagaController@update')->name('kecakapan_olahraga.update');
+Route::post('/kecakapan_olahraga/delete','Kecakapan\KecakapanOlahRagaController@destroy')->name('kecakapan_olahraga.delete');
 //
 Route::resource('/kecakapan_brevet','Kecakapan\KecakapanBrevetController');
 // tanda jasa
 Route::resource('/tanda_jasa','TandaJasaController');
 Route::post('/tanda_jasa/update','TandaJasaController@update')->name('tanda_jasa.update');
 Route::post('/tanda_jasa/delete','TandaJasaController@destroy')->name('tanda_jasa.delete');
-//
+// di bawah masih eror ada dupilcate
 Route::resource('/riwayat_gaji','Riwayat\RiwayatGajiController');
 
 // R pangkat

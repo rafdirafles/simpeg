@@ -733,29 +733,11 @@
                                                     <th width="10%">Aksi</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="text-center">
-                                                            <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                            <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="text-center">
-                                                            <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                            <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="6" class="text-right"><a href="" class="btn btn-primary btn-sm">(+)tambah</a></td>
-                                                </tr>
+                                                <tbody class="show_kecakapan_olahraga">
                                                 </tbody>
+                                                <tr>
+                                                    <td colspan="9" class="text-right"><a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-add-kecakapan-olahraga">(+)tambah</a></td>
+                                                </tr>
                                             </table>
                                             <!--end: datatable -->
                                         </div>
@@ -885,7 +867,7 @@
                                     <th width="10%">Aksi</th>
                                 </tr>
                                 </thead>
-                           
+
                             <tbody class="show_r_kepangkatan">
                             </tbody>
                             <tr>
@@ -1671,7 +1653,7 @@
                         </div>
                     </form>
             </div><!-- tutup body modal -->
-                
+
         </div>
     </div>
 </div>
@@ -1738,7 +1720,7 @@
                             <select class="form-control" required name="kemampuan_bahasa">
                                 <option value="">pilih</option>
                                 <option value="Aktif">Aktif</option>
-                                <option value="Pasif">Pasif</option>  
+                                <option value="Pasif">Pasif</option>
                             </select>
                     </div>
                 </div> <!-- tutup body modal-->
@@ -1784,7 +1766,7 @@
                                 <select class="form-control" required name="kemampuan_bahasa">
                                     <option value="">pilih</option>
                                     <option value="Aktif">Aktif</option>
-                                    <option value="Pasif">Pasif</option>  
+                                    <option value="Pasif">Pasif</option>
                                 </select>
                         </div>
                         <div class="modal-footer">
@@ -1793,7 +1775,7 @@
                         </div>
                     </form>
             </div><!-- body modal -->
-                
+
         </div>
     </div>
 </div>
@@ -1826,7 +1808,103 @@
 <!-------end hapus------>
 <!-------------------------------------------------akhir modal kecakapan bahasa---------------------------------------------------------->
 
+<!--------------------------------------------------awal modal kecakapan oalahraga------------------------------------------------------------>
+<!--add MODAL -->
+<div class="modal fade " id="modal-add-kecakapan-olahraga" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jdlbrevet">Add Data Keluarga</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- form -->
+        <form class="form-horizontal" data-toggle="validator" method="post" action="{{route('kecakapan_olahraga.store')}}">
+            @csrf
+                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                <div class="modal-body">
+                    <input type="hidden" name="nip_nrp" value="{{$datas->nip_nrp}}" >
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Nama Olahraga *</label>
+                        <input type="text" class="form-control" name="nama_olahraga" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Keterangan</label>
+                        <input class="form-control" name="keterangan" type="text">
+                    </div>
+                </div> <!-- tutup body modal -->
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button type="submit" class="btn btn-primary" id="btn-simpan-kecakapan-olahraga">Kirim</button>
+                </div>
+            </form>
+            <!-- form -->
+        </div>
+    </div>
+</div>
+<!--END MODAL ADD-->
+<!--edit MODAL -->
+<div class="modal fade" id="edit-kecakapan-olahraga" tabindex="-1" role="dialog" aria-labelledby="jdl-edit-jabatan" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Data Keluarag</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+                    <form data-toggle="validator" method="post">
+                        <input type="hidden" name="nip_nrp" value="" >
+                        <input type="hidden" name="id" value="">
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Nama Olahraga *</label>
+                            <input type="text" class="form-control" name="nama_olahraga" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Keterangan</label>
+                            <input class="form-control" name="keterangan" type="text">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary btn-edit-kecakapan-olahraga">Edit</button>
+                        </div>
+                    </form>
+            </div><!-- tutup body modal -->
 
+        </div>
+    </div>
+</div>
+<!--end edit MODAL-->
+<!------modal Hapus ---->
+<div class="modal fade" id="hapus-kecakapan-olahraga">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Hapus Data</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <form method="post">
+            {{csrf_field()}}
+            <input type="hidden" name="id_hapus">
+            <div class="modal-body">
+                <p>Apakah Anda Yakin Menghapus Data </strong>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="btn-hapus-kecakapan-olahraga">Hapus</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<!-------end hapus------>
+<!--------------------------------------------------akhir modal kecakapan olahraga------------------------------------------------------------>
 
 @endsection
 {{-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ --}}
@@ -2336,15 +2414,15 @@
 
 <!-----------------------------------------------------------------awal riwayat kepangkatan--------------------------------------------->
 <script>
-  
+
     $(document).ready(function(){
               $.ajaxSetup({
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   }
               });
-      tampil_data_r_kepangkatan();  //pemanggilan fungsi 
-    //fungsi tampil 
+      tampil_data_r_kepangkatan();  //pemanggilan fungsi
+    //fungsi tampil
       function tampil_data_r_kepangkatan(){
           $.ajax({
               type  : 'GET',
@@ -2482,13 +2560,13 @@
               $(".modal").modal('hide');
               toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
           })
-  
+
           })
         // klik delete
         $("body").on("click",".delete-r-kepangkatan",function(){
             var id = $(this).parent("td").data('id');
             $("#hapus-r-kepangkatan").find("input[name='id_hapus']").val(id);
-           
+
         });
         /* Remove Post (Hapus) */
         $("#btn-hapus-r-kepangkatan").click(function(e){
@@ -2508,7 +2586,7 @@
             $(".modal").modal('hide');
         });
         });
-  
+
     })//end ready
 </script>
 <!----------------------------------------------------------------akhir riwayat kepangkatan-------------------------------------------->
@@ -2522,7 +2600,7 @@
                   }
               });
       tampil_data_keluarga();  //pemanggilan fungsi.
-              //fungsi tampil 
+              //fungsi tampil
       function tampil_data_keluarga(){
           $.ajax({
               type  : 'GET',
@@ -2587,7 +2665,7 @@
                     datatype:"html",
                     data : {nip_nrp:nip_nrp,nama:nama,hubungan_keluarga:hubungan_keluarga,jk:jk,tempat_lahir:tempat_lahir,tanggal_lahir:tanggal_lahir,status_hidup:status_hidup,pekerjaan:pekerjaan,keterangan:keterangan},
                     success: function(data){
-                        
+
                     $("#modal-add-keluarga").find("input[name=nama]").val("");
                     $("#modal-add-keluarga").find("select[name=hubungan_keluarga]").val("");
                     $("#modal-add-keluarga").find("select[name=jk]").val("");
@@ -2622,11 +2700,11 @@
             var status_hidup = $(this).parent("td").prev("td").prev("td").prev("td").text();
             var pekerjaan = $(this).parent("td").prev("td").prev("td").text();
             var keterangan =  $(this).parent("td").prev("td").text();
-            // 
+            //
             $("#edit-keluarga").find("input[name=id]").val(id);
             $("#edit-keluarga").find("input[name=nip_nrp]").val(nip_nrp);
             $("#edit-keluarga").find("input[name=nama]").val(nama);
-            // 
+            //
             if(jk== "L" ){
                 $("#edit-keluarga").find("select[name=jk]").val('L');
             }
@@ -2636,14 +2714,14 @@
             else{
                 $("#edit-keluarga").find("select[name=jk]").val();
             }
-            // 
+            //
             if(status_hidup== "Hidup" ){
                 $("#edit-keluarga").find("select[name=status_hidup]").val('Hidup');
             }
             if(hubungan_keluarga== "Meninggal" ){
                 $("#edit-keluarga").find("select[name=hubungan_keluarga]").val('Meninggal');
             }
-            // 
+            //
             if(hubungan_keluarga== "Ibu" ){
                 $("#edit-keluarga").find("select[name=hubungan_keluarga]").val('Ibu');
             }
@@ -2700,7 +2778,7 @@
             $("body").on("click",".delete-keluarga",function(){
                 var id = $(this).parent("td").data('id');
                 $("#hapus-keluarga").find("input[name='id_hapus']").val(id);
-                
+
             });
             /* Remove Post (Hapus) */
             $("#btn-hapus-keluarga").click(function(e){
@@ -2720,22 +2798,22 @@
                     $(".modal").modal('hide');
             });
             });
-  
+
     })//end ready
 </script>
 <!---------------------------------------------------------------------akhir keluarga----------------------------------------------->
 
 <!-----------------------------------------------------------------awal kecakapan bahasa--------------------------------------------->
 <script>
-  
+
     $(document).ready(function(){
               $.ajaxSetup({
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   }
               });
-      tampil_data_kecakapan_bahasa();  //pemanggilan fungsi 
-    //fungsi tampil 
+      tampil_data_kecakapan_bahasa();  //pemanggilan fungsi
+    //fungsi tampil
       function tampil_data_kecakapan_bahasa(){
           $.ajax({
               type  : 'GET',
@@ -2853,13 +2931,13 @@
                     $(".modal").modal('hide');
                     toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
                 })
-  
+
           })
         // klik delete
         $("body").on("click",".delete-kecakapan-bahasa",function(){
             var id = $(this).parent("td").data('id');
             $("#hapus-kecakapan-bahasa").find("input[name='id_hapus']").val(id);
-           
+
         });
         /* Remove Post (Hapus) */
         $("#btn-hapus-kecakapan-bahasa").click(function(e){
@@ -2879,7 +2957,153 @@
             $(".modal").modal('hide');
         });
         });
-  
+
+    })//end ready
+</script>
+<!----------------------------------------------------------------akhir kecakapan bahasa-------------------------------------------->
+
+<!-----------------------------------------------------------------awal kecakapan bahasa--------------------------------------------->
+<script>
+
+    $(document).ready(function(){
+              $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+      tampil_data_kecakapan_olahraga();  //pemanggilan fungsi
+    //fungsi tampil
+      function tampil_data_kecakapan_olahraga(){
+          $.ajax({
+              type  : 'GET',
+              beforeSend: function(){
+                  $('.ajax-loader').css("visibility", "visible");
+              },
+              url   : '/kecakapan_olahraga/'+nrp,
+              async : true,
+              dataType : 'json',
+              success : function(data){
+                  console.log(data);
+                  var i;
+                  var no=1;
+                  var rows ='';
+                  $.each( data, function( key, value ) {
+                      rows = rows + '<tr>';
+                      rows = rows + '<td>'+ no++ +'</td>';
+                      rows = rows +'<td style="display:none" >'+value.nip_nrp+'</td>';
+                      rows = rows + '<td>'+value.nama_olahraga+'</td>';
+                      rows = rows + '<td>'+value.keterangan+'</td>';
+                      rows = rows + '<td class="text-center" data-id="'+value.id+'">';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-kecakapan-olahraga" class="badge badge-success edit-item-kecakapan-olahraga"><span class="fas fa-fw fa-edit " ></a> ';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#hapus-kecakapan-olahraga" class="badge badge-danger delete-kecakapan-olahraga"><span class="fas fa-fw fa-trash"></button>';
+                      rows = rows + '</td>';
+                      rows = rows + '</tr>';
+                  });
+                  $('.show_kecakapan_olahraga').html(rows);
+              },
+              error: function(xhr, ajaxOptions, thrownError){
+                          alert("Mohon Data Masukkan Dengan Tepat");
+                      },
+              complete: function(){
+                  $('.ajax-loader').css("visibility", "hidden");
+              }
+          });
+      } //tutup akhir tampil
+      //Simpan
+    $('#btn-simpan-kecakapan-olahraga').click(function(e){
+        e.preventDefault();
+        var nip_nrp=$("#modal-add-kecakapan-olahraga").find("input[name=nip_nrp]").val();
+        var nama_olahraga=$("#modal-add-kecakapan-olahraga").find("input[name=nama_olahraga]").val();
+        var keterangan=$("#modal-add-kecakapan-olahraga").find("input[name=keterangan]").val();
+
+        event.preventDefault();
+            $.ajax({
+                type : "POST",
+                beforeSend: function(){
+                    $('.ajax-loader').css("visibility", "visible");
+                },
+                url  : '{{route('kecakapan_olahraga.store')}}',
+                datatype:"html",
+                data : {nip_nrp:nip_nrp,nama_olahraga:nama_olahraga,keterangan:keterangan},
+                success: function(data){
+                    $("#modal-add-kecakapan-olahraga").find("input[name=nama_olahraga]").val();
+                    $("#modal-add-kecakapan-olahraga").find("input[name=keterangan]").val();
+                    tampil_data_kecakapan_olahraga();
+                    $('.modal').modal('hide');
+                },
+                error: function(xhr, ajaxOptions, thrownError){
+                        alert("Mohon Data Masukkan Dengan Tepat");
+                    },
+                complete: function(){
+                    $('.ajax-loader').css("visibility", "hidden");
+                }
+            }).done(function(data){
+                toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+            })
+
+    });
+          // edit
+          /* Edit Post */
+          $("body").on("click",".edit-item-kecakapan-olahraga",function(){
+            var id = $(this).parent("td").data('id');
+            var nip_nrp=$(this).parent("td").prev("td").prev("td").prev("td").text();
+            var nama_olahraga=$(this).parent("td").prev("td").prev("td").text();
+            var keterangan=$(this).parent("td").prev("td").text();
+
+            // set
+            $("#edit-kecakapan-olahraga").find("input[name='id']").val(id);
+            $("#edit-kecakapan-olahraga").find("input[name='nip_nrp']").val(nip_nrp);
+            $("#edit-kecakapan-olahraga").find("input[name='nama_olahraga']").val(nama_olahraga);
+            $("#edit-kecakapan-olahraga").find("input[name='keterangan']").val(keterangan);
+          });
+          /* Updated  Post baru (Updated new Post) */
+          $(".btn-edit-kecakapan-olahraga").click(function(e){
+              e.preventDefault();
+              var id = $("#edit-kecakapan-olahraga").find("input[name='id']").val();
+              var nip_nrp = $("#edit-kecakapan-olahraga").find("input[name='nip_nrp']").val();
+              var nama_olahraga= $("#edit-kecakapan-olahraga").find("input[name='nama_olahraga']").val();
+              var keterangan= $("#edit-kecakapan-olahraga").find("input[name='keterangan']").val();
+              $.ajax({
+                  dataType: 'json',
+                  type:'post',
+                  url: '{{route('kecakapan_olahraga.update')}}',
+                  data:{id:id,nip_nrp,nama_olahraga:nama_olahraga,keterangan:keterangan,_token: '{{csrf_token()}}'},
+                   success: function(data){
+
+                   }
+              }).done(function(data){
+                    tampil_data_kecakapan_olahraga();
+                    $(".modal").modal('hide');
+                    toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+                })
+
+          })
+        // klik delete
+        $("body").on("click",".delete-kecakapan-olahraga",function(){
+            var id = $(this).parent("td").data('id');
+            $("#hapus-kecakapan-olahraga").find("input[name='id_hapus']").val(id);
+
+        });
+        /* Remove Post (Hapus) */
+        $("#btn-hapus-kecakapan-olahraga").click(function(e){
+        event.preventDefault();
+        var id = $("#hapus-kecakapan-olahraga").find("input[name='id_hapus']").val();
+        var c_obj = $(this).parents("tr");
+        $.ajax({
+            dataType: 'json',
+            type:'POST',
+            data:{id:id,_token: '{{csrf_token()}}'},
+            url: '{{route('kecakapan_olahraga.delete')}}',
+
+
+        }).done(function(data){
+            c_obj.remove();
+            toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+            tampil_data_kecakapan_olahraga();
+            $(".modal").modal('hide');
+        });
+        });
+
     })//end ready
 </script>
 <!----------------------------------------------------------------akhir kecakapan bahasa-------------------------------------------->

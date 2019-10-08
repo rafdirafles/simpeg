@@ -41,15 +41,16 @@ class KecakapanOlahRagaController extends Controller
             'nip_nrp'=>'required',
             'nama_olahraga'=>'required'
         ]);
-        
+
         if(empty($request->keterangan)){
             $request['keterangan']='-';
         }
         else{
             $request['keterangan']=$request->input('keterangan');
         }
-        Kecakapan_olahraga_dan_beladiri::create($request->all());
-        return redirect()->route('master.index')->with('success','Data berhasil ditambahkan');
+       $data= Kecakapan_olahraga_dan_beladiri::create($request->all());
+        // return redirect()->route('master.index')->with('success','Data berhasil ditambahkan');
+        return Response()->json($data);
     }
 
     /**
@@ -61,6 +62,8 @@ class KecakapanOlahRagaController extends Controller
     public function show($id)
     {
         //
+        $data=Kecakapan_olahraga_dan_beladiri::where('nip_nrp',$id)->get();
+        return Response()->json($data);
     }
 
     /**
@@ -81,23 +84,24 @@ class KecakapanOlahRagaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $id=$request->id;
         $data=Kecakapan_olahraga_dan_beladiri::findOrFail($id);
         $this->validate($request,[
             'nip_nrp'=>'required',
             'nama_olahraga'=>'required'
         ]);
-        
+
         if(empty($request->keterangan)){
             $request['keterangan']=$data->keterangan;
         }
         else{
-            $request['keterangan']=$request->input('keterangan');
+            $request['keterangan']=$request->keterangan;
         }
         $data->update($request->all());
-        return back()->with('success','Data berhasil ditambahkan');
+        return Response()->json($data);
     }
 
     /**
@@ -106,11 +110,12 @@ class KecakapanOlahRagaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $id=$request->id;
         $data=Kecakapan_olahraga_dan_beladiri::findOrFail($id);
         $data->delete();
-        return back()->with('success','Data berhasil ditambahkan');
+        return Response()->json($data);
     }
 }
