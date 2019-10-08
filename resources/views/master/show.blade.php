@@ -757,29 +757,11 @@
                                                     <th width="10%">Aksi</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="text-center">
-                                                            <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                            <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="text-center">
-                                                            <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                            <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="5" class="text-right"><a href="" class="btn btn-primary btn-sm">(+)tambah</a></td>
-                                                </tr>
+                                                <tbody class="show_kecakapan_brevet">
                                                 </tbody>
+                                                <tr>
+                                                    <td colspan="9" class="text-right"><a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-add-kecakapan-brevet">(+)tambah</a></td>
+                                                </tr>
                                             </table>
                                             <!--end: datatable -->
                                         </div>
@@ -965,7 +947,8 @@
             </div>
         </form>
     </div>
-</div>	</div>
+</div>
+</div>
 
 <!----------------------------------------------modal riwayat gaji---------------------------------------------------------------->
 <!-- MODAL ADD -->
@@ -973,7 +956,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="myModalLabel">Tambah Jabatan</h3>
+                <h3 class="modal-title" id="myModalLabel">Tambah Riwayat Gaji</h3>
             </div>
             <!-- form -->
             <form class="form-horizontal" data-toggle="validator">
@@ -1030,7 +1013,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Data</h4>
+                <h4 class="modal-title" id="myModalLabel">Edit Data Riwayat Gaji</h4>
             </div>
             <!-- body modal -->
             <div class="modal-body">
@@ -1266,7 +1249,7 @@
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jdlbrevet">Add Jabatan</h5>
+                <h5 class="modal-title" id="jdlbrevet">Add Tanda Jasa</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1588,7 +1571,7 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Data Keluarag</h5>
+                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Data Keluarga</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1739,7 +1722,7 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Riwayat Kepangkatan</h5>
+                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Kecakapan Bahasa</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1808,7 +1791,7 @@
 <!-------end hapus------>
 <!-------------------------------------------------akhir modal kecakapan bahasa---------------------------------------------------------->
 
-<!--------------------------------------------------awal modal kecakapan oalahraga------------------------------------------------------------>
+<!--------------------------------------------------awal modal kecakapan olahraga------------------------------------------------------------>
 <!--add MODAL -->
 <div class="modal fade " id="modal-add-kecakapan-olahraga" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
     <div class="modal-dialog ">
@@ -1849,7 +1832,7 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Data Keluarag</h5>
+                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Data Kecakapan Olahraga</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1898,6 +1881,104 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button class="btn btn-primary" id="btn-hapus-kecakapan-olahraga">Hapus</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<!-------end hapus------>
+<!--------------------------------------------------akhir modal kecakapan olahraga------------------------------------------------------------>
+
+<!--------------------------------------------------awal modal kecakapan brevet------------------------------------------------------------>
+<!--add MODAL -->
+<div class="modal fade " id="modal-add-kecakapan-brevet" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jdlbrevet">Add Data Brevet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- form -->
+        <form class="form-horizontal" data-toggle="validator" method="post" action="{{route('kecakapan_brevet.store')}}">
+            @csrf
+                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                <div class="modal-body">
+                    <input type="hidden" name="nip_nrp" value="{{$datas->nip_nrp}}" >
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Nama Brevet *</label>
+                        <input type="text" class="form-control" name="nama_brevet" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Asal Perolehan *</label>
+                        <input class="form-control" name="asal_perolehan" type="text">
+                    </div>
+                </div> <!-- tutup body modal -->
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button type="submit" class="btn btn-primary" id="btn-simpan-kecakapan-brevet">Kirim</button>
+                </div>
+            </form>
+            <!-- form -->
+        </div>
+    </div>
+</div>
+<!--END MODAL ADD-->
+<!--edit MODAL -->
+<div class="modal fade" id="edit-kecakapan-brevet" tabindex="-1" role="dialog" aria-labelledby="jdl-edit-jabatan" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Data Brevet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+                    <form data-toggle="validator" method="post">
+                        <input type="hidden" name="nip_nrp" value="" >
+                        <input type="hidden" name="id" value="">
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Nama Brevet *</label>
+                            <input type="text" class="form-control" name="nama_brevet" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Asal Perolehan *</label>
+                            <input class="form-control" name="asal_perolehan" type="text">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary btn-edit-kecakapan-brevet">Edit</button>
+                        </div>
+                    </form>
+            </div><!-- tutup body modal -->
+
+        </div>
+    </div>
+</div>
+<!--end edit MODAL-->
+<!------modal Hapus ---->
+<div class="modal fade" id="hapus-kecakapan-brevet">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Hapus Data</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <form method="post">
+            {{csrf_field()}}
+            <input type="hidden" name="id_hapus">
+            <div class="modal-body">
+                <p>Apakah Anda Yakin Menghapus Data </strong>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="btn-hapus-kecakapan-brevet">Hapus</button>
             </div>
         </form>
         </div>
@@ -2962,7 +3043,7 @@
 </script>
 <!----------------------------------------------------------------akhir kecakapan bahasa-------------------------------------------->
 
-<!-----------------------------------------------------------------awal kecakapan bahasa--------------------------------------------->
+<!-----------------------------------------------------------------awal kecakapan olahraga--------------------------------------------->
 <script>
 
     $(document).ready(function(){
@@ -3026,8 +3107,8 @@
                 datatype:"html",
                 data : {nip_nrp:nip_nrp,nama_olahraga:nama_olahraga,keterangan:keterangan},
                 success: function(data){
-                    $("#modal-add-kecakapan-olahraga").find("input[name=nama_olahraga]").val();
-                    $("#modal-add-kecakapan-olahraga").find("input[name=keterangan]").val();
+                    $("#modal-add-kecakapan-olahraga").find("input[name=nama_olahraga]").val("");
+                    $("#modal-add-kecakapan-olahraga").find("input[name=keterangan]").val("");
                     tampil_data_kecakapan_olahraga();
                     $('.modal').modal('hide');
                 },
@@ -3106,5 +3187,148 @@
 
     })//end ready
 </script>
-<!----------------------------------------------------------------akhir kecakapan bahasa-------------------------------------------->
+<!----------------------------------------------------------------akhir kecakapan olahrga-------------------------------------------->
+
+<!-----------------------------------------------------------------awal kecakapan brevet--------------------------------------------->
+<script>
+    $(document).ready(function(){
+              $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+      tampil_data_kecakapan_brevet();  //pemanggilan fungsi
+    //fungsi tampil
+      function tampil_data_kecakapan_brevet(){
+          $.ajax({
+              type  : 'GET',
+              beforeSend: function(){
+                  $('.ajax-loader').css("visibility", "visible");
+              },
+              url   : '/kecakapan_brevet/'+nrp,
+              async : true,
+              dataType : 'json',
+              success : function(data){
+                  console.log(data);
+                  var i;
+                  var no=1;
+                  var rows ='';
+                  $.each( data, function( key, value ) {
+                      rows = rows + '<tr>';
+                      rows = rows + '<td>'+ no++ +'</td>';
+                      rows = rows +'<td style="display:none">'+value.nip_nrp+'</td>';
+                      rows = rows +'<td >'+value.nama_brevet+'</td>';
+                      rows = rows + '<td>'+value.asal_perolehan+'</td>';
+                      rows = rows + '<td class="text-center" data-id="'+value.id+'">';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-kecakapan-brevet" class="badge badge-success edit-item-kecakapan-brevet"><span class="fas fa-fw fa-edit " ></a> ';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#hapus-kecakapan-brevet" class="badge badge-danger delete-kecakapan-brevet"><span class="fas fa-fw fa-trash"></button>';
+                      rows = rows + '</td>';
+                      rows = rows + '</tr>';
+                  });
+                  $('.show_kecakapan_brevet').html(rows);
+              },
+              error: function(xhr, ajaxOptions, thrownError){
+                          alert("Mohon Data Masukkan Dengan Tepat");
+                      },
+              complete: function(){
+                  $('.ajax-loader').css("visibility", "hidden");
+              }
+          });
+      } //tutup akhir tampil
+      //Simpan
+    $('#btn-simpan-kecakapan-brevet').click(function(e){
+        e.preventDefault();
+        var nip_nrp=$("#modal-add-kecakapan-brevet").find("input[name=nip_nrp]").val();
+        var nama_brevet=$("#modal-add-kecakapan-brevet").find("input[name=nama_brevet]").val();
+        var asal_perolehan=$("#modal-add-kecakapan-brevet").find("input[name=asal_perolehan]").val();
+        event.preventDefault();
+            $.ajax({
+                type : "POST",
+                beforeSend: function(){
+                    $('.ajax-loader').css("visibility", "visible");
+                },
+                url  : '{{route('kecakapan_brevet.store')}}',
+                datatype:"html",
+                data : {nip_nrp:nip_nrp,nama_brevet:nama_brevet,asal_perolehan:asal_perolehan},
+                success: function(data){
+                    $("#modal-add-kecakapan-brevet").find("input[name=nama_brevet]").val("");
+                    $("#modal-add-kecakapan-brevet").find("input[name=asal_perolehan]").val("");
+                    tampil_data_kecakapan_brevet();
+                    $('.modal').modal('hide');
+                },
+                error: function(xhr, ajaxOptions, thrownError){
+                        alert("Mohon Data Masukkan Dengan Tepat");
+                    },
+                complete: function(){
+                    $('.ajax-loader').css("visibility", "hidden");
+                }
+            }).done(function(data){
+                toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+            })
+        });
+        /* Edit Post */
+        $("body").on("click",".edit-item-kecakapan-brevet",function(){
+            var id = $(this).parent("td").data('id');
+            var nip_nrp=$(this).parent("td").prev("td").prev("td").prev("td").text();
+            var nama_brevet=$(this).parent("td").prev("td").prev("td").text();
+            var asal_perolehan=$(this).parent("td").prev("td").text();
+
+            // set
+            $("#edit-kecakapan-brevet").find("input[name='id']").val(id);
+            $("#edit-kecakapan-brevet").find("input[name='nip_nrp']").val(nip_nrp);
+            $("#edit-kecakapan-brevet").find("input[name='nama_brevet']").val(nama_brevet);
+            $("#edit-kecakapan-brevet").find("input[name='asal_perolehan']").val(asal_perolehan);
+            console.log(nip_nrp);
+          });
+          /* Updated  Post baru (Updated new Post) */
+          $(".btn-edit-kecakapan-brevet").click(function(e){
+              e.preventDefault();
+              var id = $("#edit-kecakapan-brevet").find("input[name='id']").val();
+              var nip_nrp = $("#edit-kecakapan-brevet").find("input[name='nip_nrp']").val();
+              var nama_brevet= $("#edit-kecakapan-brevet").find("input[name='nama_brevet']").val();
+              var asal_perolehan= $("#edit-kecakapan-brevet").find("input[name='asal_perolehan']").val();
+              $.ajax({
+                  dataType: 'json',
+                  type:'post',
+                  url: '{{route('kecakapan_brevet.update')}}',
+                  data:{id:id,nip_nrp:nip_nrp,nama_brevet:nama_brevet,asal_perolehan:asal_perolehan,_token: '{{csrf_token()}}'},
+                   success: function(data){
+                    console.log(data);
+                   }
+              }).done(function(data){
+                    tampil_data_kecakapan_brevet();
+                    $(".modal").modal('hide');
+                    toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+                })
+
+          })
+        // klik delete
+        $("body").on("click",".delete-kecakapan-brevet",function(){
+            var id = $(this).parent("td").data('id');
+            $("#hapus-kecakapan-brevet").find("input[name='id_hapus']").val(id);
+
+        });
+        /* Remove Post (Hapus) */
+        $("#btn-hapus-kecakapan-brevet").click(function(e){
+            event.preventDefault();
+            var id = $("#hapus-kecakapan-brevet").find("input[name='id_hapus']").val();
+            var c_obj = $(this).parents("tr");
+            $.ajax({
+                dataType: 'json',
+                type:'POST',
+                data:{id:id,_token: '{{csrf_token()}}'},
+                url: '{{route('kecakapan_brevet.delete')}}',
+            }).done(function(data){
+                c_obj.remove();
+                toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                tampil_data_kecakapan_brevet();
+                $(".modal").modal('hide');
+            });
+        })
+
+    })//end ready
+</script>
+<!----------------------------------------------------------------akhir kecakapan brevet-------------------------------------------->
+
+
 @endsection

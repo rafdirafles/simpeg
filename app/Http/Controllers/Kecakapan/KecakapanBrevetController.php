@@ -36,7 +36,7 @@ class KecakapanBrevetController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $this->validate($request,[
             'nip_nrp'=>'required',
             'nama_brevet'=>'required',
@@ -56,6 +56,8 @@ class KecakapanBrevetController extends Controller
     public function show($id)
     {
         //
+        $data=Kecakapan_brevet::where('nip_nrp',$id)->get();
+        return Response()->json($data);
     }
 
     /**
@@ -76,9 +78,10 @@ class KecakapanBrevetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $id=$request->id;
         $this->validate($request,[
             'nip_nrp'=>'required',
             'nama_brevet'=>'required',
@@ -86,7 +89,8 @@ class KecakapanBrevetController extends Controller
         ]);
         $data=Kecakapan_brevet::findOrFail($id);
         $data->update($request->all());
-        return back()->with('success','Data berhasil edit');
+        return Response()->json($data);
+        // return back()->with('success','Data berhasil edit');
     }
 
     /**
@@ -95,11 +99,12 @@ class KecakapanBrevetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $id=$request->id;
         $data=Kecakapan_brevet::findOrFail($id);
         $data->delete();
-        return back()->with('success','Data berhasil delete');
+        return Response()->json($data);
     }
 }

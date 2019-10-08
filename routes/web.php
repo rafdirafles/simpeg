@@ -66,22 +66,22 @@ Route::post('/kecakapan_bahasa/delete','Kecakapan\KecakapanBahasaController@dest
 Route::resource('/kecakapan_olahraga','Kecakapan\KecakapanOlahRagaController');
 Route::post('/kecakapan_olahraga/update','Kecakapan\KecakapanOlahRagaController@update')->name('kecakapan_olahraga.update');
 Route::post('/kecakapan_olahraga/delete','Kecakapan\KecakapanOlahRagaController@destroy')->name('kecakapan_olahraga.delete');
-//
+//brevet
 Route::resource('/kecakapan_brevet','Kecakapan\KecakapanBrevetController');
+Route::post('/kecakapan_brevet/update','Kecakapan\KecakapanBrevetController@update')->name('kecakapan_brevet.update');
+Route::post('/kecakapan_brevet/delete','Kecakapan\KecakapanBrevetController@destroy')->name('kecakapan_brevet.delete');
 // tanda jasa
 Route::resource('/tanda_jasa','TandaJasaController');
 Route::post('/tanda_jasa/update','TandaJasaController@update')->name('tanda_jasa.update');
 Route::post('/tanda_jasa/delete','TandaJasaController@destroy')->name('tanda_jasa.delete');
-// di bawah masih eror ada dupilcate
-Route::resource('/riwayat_gaji','Riwayat\RiwayatGajiController');
 
 // R pangkat
 Route::resource('/riwayat_kepangkatan','Riwayat\RiwayatKepangkatanController');
 Route::post('/riwayat_kepangkatan/update','Riwayat\RiwayatKepangkatanController@update')->name('riwayat_kepangkatan.update');
 Route::post('/riwayat_kepangkatan/delete','Riwayat\RiwayatKepangkatanController@destroy')->name('riwayat_kepangkatan.delete');
 // gaji
-Route::resource('/riwayat_unit_kerja','Riwayat\RiwayatGajiController');
-Route::post('/riwayat_unit_kerja/update','Riwayat\RiwayatGajiController@update')->name('riwayat_gaji.update');
-Route::post('/riwayat_unit_kerja/delete','Riwayat\RiwayatGajiController@destroy')->name('riwayat_gaji.delete');
+Route::resource('/riwayat_gaji','Riwayat\RiwayatGajiController');
+Route::post('/riwayat_gaji/update','Riwayat\RiwayatGajiController@update')->name('riwayat_gaji.update');
+Route::post('/riwayat_gaji/delete','Riwayat\RiwayatGajiController@destroy')->name('riwayat_gaji.delete');
 //
 Route::get('/setting/getDivisi','Setting\DivisiController@getDivisi')->name('getDivisi');
