@@ -709,31 +709,11 @@
                                                     <th width="10%">Aksi</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="text-center">
-                                                            <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                            <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="text-center">
-                                                            <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                            <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="6" class="text-right"><a href="" class="btn btn-primary btn-sm">(+)tambah</a></td>
-                                                </tr>
+                                                <tbody class="show_kecakapan_bahasa">
                                                 </tbody>
+                                                <tr>
+                                                    <td colspan="10" class="text-right"><a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-add-kecakapan-bahasa">(+)tambah</a></td>
+                                                </tr>
                                             </table>
                                             <!--end: datatable -->
                                         </div>
@@ -1724,9 +1704,133 @@
 <!-------end hapus------>
 <!------------------------------------------------------akhir keluarga------------------------------------------------------------>
 
+<!-------------------------------------------------awal modal kecakapan bahasa------------------------------------------------------------>
+<!--add MODAL -->
+<div class="modal fade " id="modal-add-kecakapan-bahasa" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jdlbrevet">Add Kecakapan Bahasa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- form -->
+        <form class="form-horizontal" data-toggle="validator" method="post" action="{{route('kecakapan_bahasa.store')}}">
+            @csrf
+                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                <div class="modal-body">
+                    <input type="hidden" name="nip_nrp" value="{{$datas->nip_nrp}}" >
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Jenis Bahasa*</label>
+                        <select class="form-control" required name="jenis_bahasa">
+                            <option value="">pilih jenis bahasa</option>
+                            <option value="Daerah">Daerah</option>
+                            <option value="Asing">Asing</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                            <label for="message-text" class="form-control-label">Nama Bahasa*</label>
+                            <input type="text" class="form-control" name="nama_bahasa" required>
+                    </div>
+                    <div class="form-group">
+                            <label for="message-text" class="form-control-label">Kemampuan Bahasa*</label>
+                            <select class="form-control" required name="kemampuan_bahasa">
+                                <option value="">pilih</option>
+                                <option value="Aktif">Aktif</option>
+                                <option value="Pasif">Pasif</option>  
+                            </select>
+                    </div>
+                </div> <!-- tutup body modal-->
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button type="submit" class="btn btn-primary " id="btn-simpan-kecakapan-bahasa">Kirim</button>
+                </div>
+            </form>
+            <!-- form -->
+        </div>
+    </div>
+</div>
+<!--END MODAL ADD-->
+<!--edit MODAL -->
+<div class="modal fade" id="edit-kecakapan-bahasa" tabindex="-1" role="dialog" aria-labelledby="jdl-edit-jabatan" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Riwayat Kepangkatan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+                    <form data-toggle="validator" method="post">
+                        <input type="hidden" name="nip_nrp" value="" >
+                        <input type="hidden" name="id" value="">
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Jenis Bahasa*</label>
+                            <select class="form-control" required name="jenis_bahasa">
+                                <option value="">pilih jenis bahasa</option>
+                                <option value="Daerah">Daerah</option>
+                                <option value="Asing">Asing</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                                <label for="message-text" class="form-control-label">Nama Bahasa*</label>
+                                <input type="text" class="form-control" name="nama_bahasa" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="message-text" class="form-control-label">Kemampuan Bahasa*</label>
+                                <select class="form-control" required name="kemampuan_bahasa">
+                                    <option value="">pilih</option>
+                                    <option value="Aktif">Aktif</option>
+                                    <option value="Pasif">Pasif</option>  
+                                </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary btn-edit-kecakapan-bahasa">Edit</button>
+                        </div>
+                    </form>
+            </div><!-- body modal -->
+                
+        </div>
+    </div>
+</div>
+<!--end edit MODAL-->
+<!------modal Hapus ---->
+<div class="modal fade" id="hapus-kecakapan-bahasa">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Hapus Data</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <form method="post">
+            {{csrf_field()}}
+            <input type="hidden" name="id_hapus">
+            <div class="modal-body">
+                <p>Apakah Anda Yakin Menghapus Data </strong>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="btn-hapus-kecakapan-bahasa">Hapus</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<!-------end hapus------>
+<!-------------------------------------------------akhir modal kecakapan bahasa---------------------------------------------------------->
+
+
+
 @endsection
-
-
+{{-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ --}}
+{{-- ################################################################################################################################### --}}
 @section('asset-buttom')
 <script>
  var nrp='<?php echo $datas->nip_nrp?>';
@@ -2080,6 +2184,7 @@
     })
 </script>
 <!------------------------------------------------------------------akhir riwayat jabatan-------------------------------------------->
+
 <!--------------------------------------------------------------------awal tanda jasa----------------------------------------------->
 <script>
   $(document).ready(function(){
@@ -2461,49 +2566,49 @@
           });
       } //tutup akhir tampil
       //Simpan
-$('#btn-simpan-keluarga').click(function(e){
-    e.preventDefault();
-    var nip_nrp=$("#modal-add-keluarga").find("input[name=nip_nrp]").val();
-    var nama=$("#modal-add-keluarga").find("input[name=nama]").val();
-    var hubungan_keluarga=$("#modal-add-keluarga").find("select[name=hubungan_keluarga]").val();
-    var jk=$("#modal-add-keluarga").find("select[name=jk]").val();
-    var tempat_lahir=$("#modal-add-keluarga").find("input[name=tempat_lahir]").val();
-    var tanggal_lahir=$("#modal-add-keluarga").find("input[name=tanggal_lahir]").val();
-    var status_hidup=$("#modal-add-keluarga").find("select[name=status_hidup]").val();
-    var pekerjaan=$("#modal-add-keluarga").find("input[name=pekerjaan]").val();
-    var keterangan=$("#modal-add-keluarga").find("input[name=keterangan]").val();
-    event.preventDefault();
-        $.ajax({
-            type : "POST",
-            beforeSend: function(){
-                $('.ajax-loader').css("visibility", "visible");
-            },
-            url  : '{{route('keluarga.store')}}',
-            datatype:"html",
-            data : {nip_nrp:nip_nrp,nama:nama,hubungan_keluarga:hubungan_keluarga,jk:jk,tempat_lahir:tempat_lahir,tanggal_lahir:tanggal_lahir,status_hidup:status_hidup,pekerjaan:pekerjaan,keterangan:keterangan},
-            success: function(data){
-                
-            $("#modal-add-keluarga").find("input[name=nama]").val("");
-            $("#modal-add-keluarga").find("select[name=hubungan_keluarga]").val("");
-            $("#modal-add-keluarga").find("select[name=jk]").val("");
-            $("#modal-add-keluarga").find("input[name=tempat_lahir]").val("");
-            $("#modal-add-keluarga").find("input[name=tanggal_lahir]").val("");
-            $("#modal-add-keluarga").find("select[name=pekerjaan]").val("");
-            $("#modal-add-keluarga").find("input[name=keterangan]").val("");
-            $("#modal-add-keluarga").find("input[name=status_hidup]").val("");
-            tampil_data_keluarga();
-            $('.modal').modal('hide');
-            },
-            error: function(xhr, ajaxOptions, thrownError){
-                    alert("Mohon Data Masukkan Dengan Tepat");
-                },
-            complete: function(){
-                $('.ajax-loader').css("visibility", "hidden");
-            }
-        }).done(function(data){
-            toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
-        })
-});
+        $('#btn-simpan-keluarga').click(function(e){
+            e.preventDefault();
+            var nip_nrp=$("#modal-add-keluarga").find("input[name=nip_nrp]").val();
+            var nama=$("#modal-add-keluarga").find("input[name=nama]").val();
+            var hubungan_keluarga=$("#modal-add-keluarga").find("select[name=hubungan_keluarga]").val();
+            var jk=$("#modal-add-keluarga").find("select[name=jk]").val();
+            var tempat_lahir=$("#modal-add-keluarga").find("input[name=tempat_lahir]").val();
+            var tanggal_lahir=$("#modal-add-keluarga").find("input[name=tanggal_lahir]").val();
+            var status_hidup=$("#modal-add-keluarga").find("select[name=status_hidup]").val();
+            var pekerjaan=$("#modal-add-keluarga").find("input[name=pekerjaan]").val();
+            var keterangan=$("#modal-add-keluarga").find("input[name=keterangan]").val();
+            event.preventDefault();
+                $.ajax({
+                    type : "POST",
+                    beforeSend: function(){
+                        $('.ajax-loader').css("visibility", "visible");
+                    },
+                    url  : '{{route('keluarga.store')}}',
+                    datatype:"html",
+                    data : {nip_nrp:nip_nrp,nama:nama,hubungan_keluarga:hubungan_keluarga,jk:jk,tempat_lahir:tempat_lahir,tanggal_lahir:tanggal_lahir,status_hidup:status_hidup,pekerjaan:pekerjaan,keterangan:keterangan},
+                    success: function(data){
+                        
+                    $("#modal-add-keluarga").find("input[name=nama]").val("");
+                    $("#modal-add-keluarga").find("select[name=hubungan_keluarga]").val("");
+                    $("#modal-add-keluarga").find("select[name=jk]").val("");
+                    $("#modal-add-keluarga").find("input[name=tempat_lahir]").val("");
+                    $("#modal-add-keluarga").find("input[name=tanggal_lahir]").val("");
+                    $("#modal-add-keluarga").find("select[name=pekerjaan]").val("");
+                    $("#modal-add-keluarga").find("input[name=keterangan]").val("");
+                    $("#modal-add-keluarga").find("input[name=status_hidup]").val("");
+                    tampil_data_keluarga();
+                    $('.modal').modal('hide');
+                    },
+                    error: function(xhr, ajaxOptions, thrownError){
+                            alert("Mohon Data Masukkan Dengan Tepat");
+                        },
+                    complete: function(){
+                        $('.ajax-loader').css("visibility", "hidden");
+                    }
+                }).done(function(data){
+                    toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+                })
+        });
           // edit
           /* Edit Post */
           $("body").on("click",".edit-item-keluarga",function(){
@@ -2564,60 +2669,218 @@ $('#btn-simpan-keluarga').click(function(e){
             $("#edit-keluarga").find("input[name=keterangan]").val(keterangan);
           });
           /* Updated  Post baru (Updated new Post) */
-          $(".btn-edit-keluarga").click(function(e){
-              e.preventDefault();
-              var id =$("#edit-keluarga").find("input[name='id']").val();
-              var nip_nrp =$("#edit-keluarga").find("input[name='nip_nrp']").val();
-              var nama=$("#edit-keluarga").find("input[name=nama]").val();
-              var hubungan_keluarga=$("#edit-keluarga").find("select[name=hubungan_keluarga]").val();
-              var jk=$("#edit-keluarga").find("select[name=jk]").val();
-              var tempat_lahir=$("#edit-keluarga").find("input[name=tempat_lahir]").val();
-              var tanggal_lahir=$("#edit-keluarga").find("input[name=tanggal_lahir]").val();
-              var status_hidup=$("#edit-keluarga").find("select[name=status_hidup]").val();
-              var pekerjaan=$("#edit-keluarga").find("input[name=pekerjaan]").val();
-              var keterangan=$("#edit-keluarga").find("input[name=keterangan]").val();
-              $.ajax({
-                  dataType: 'json',
-                  type:'post',
-                  url: '{{route('keluarga.update')}}',
-                  data:{id:id,nip_nrp,nama:nama,hubungan_keluarga:hubungan_keluarga,jk:jk,tempat_lahir:tempat_lahir,
+        $(".btn-edit-keluarga").click(function(e){
+            e.preventDefault();
+            var id =$("#edit-keluarga").find("input[name='id']").val();
+            var nip_nrp =$("#edit-keluarga").find("input[name='nip_nrp']").val();
+            var nama=$("#edit-keluarga").find("input[name=nama]").val();
+            var hubungan_keluarga=$("#edit-keluarga").find("select[name=hubungan_keluarga]").val();
+            var jk=$("#edit-keluarga").find("select[name=jk]").val();
+            var tempat_lahir=$("#edit-keluarga").find("input[name=tempat_lahir]").val();
+            var tanggal_lahir=$("#edit-keluarga").find("input[name=tanggal_lahir]").val();
+            var status_hidup=$("#edit-keluarga").find("select[name=status_hidup]").val();
+            var pekerjaan=$("#edit-keluarga").find("input[name=pekerjaan]").val();
+            var keterangan=$("#edit-keluarga").find("input[name=keterangan]").val();
+            $.ajax({
+                dataType: 'json',
+                type:'post',
+                url: '{{route('keluarga.update')}}',
+                data:{id:id,nip_nrp,nama:nama,hubungan_keluarga:hubungan_keluarga,jk:jk,tempat_lahir:tempat_lahir,
                         tanggal_lahir:tanggal_lahir,status_hidup:status_hidup,pekerjaan:pekerjaan,keterangan:keterangan,_token: '{{csrf_token()}}'},
-                   success: function(data){
-                       console.log(data);
-                   }
-              }).done(function(data){
-              tampil_data_keluarga();
-              $(".modal").modal('hide');
-              toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
-          })
-  
-          })
-              // klik delete
-              $("body").on("click",".delete-keluarga",function(){
-                  var id = $(this).parent("td").data('id');
-                  $("#hapus-keluarga").find("input[name='id_hapus']").val(id);
-                 
-              });
-              /* Remove Post (Hapus) */
-              $("#btn-hapus-keluarga").click(function(e){
-              event.preventDefault();
-              var id = $("#hapus-keluarga").find("input[name='id_hapus']").val();
-              var c_obj = $(this).parents("tr");
-              $.ajax({
-                  dataType: 'json',
-                  type:'post',
-                  data:{id:id,_token: '{{csrf_token()}}'},
-                  url: '{{route('keluarga.delete')}}',
-  
-              }).done(function(data){
-                  c_obj.remove();
-                  toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
-                   tampil_data_keluarga();
+                success: function(data){
+                    console.log(data);
+                }
+            }).done(function(data){
+                tampil_data_keluarga();
+                $(".modal").modal('hide');
+                toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+            })
+        })
+            // klik delete
+            $("body").on("click",".delete-keluarga",function(){
+                var id = $(this).parent("td").data('id');
+                $("#hapus-keluarga").find("input[name='id_hapus']").val(id);
+                
+            });
+            /* Remove Post (Hapus) */
+            $("#btn-hapus-keluarga").click(function(e){
+            event.preventDefault();
+            var id = $("#hapus-keluarga").find("input[name='id_hapus']").val();
+            var c_obj = $(this).parents("tr");
+            $.ajax({
+                dataType: 'json',
+                type:'post',
+                data:{id:id,_token: '{{csrf_token()}}'},
+                url: '{{route('keluarga.delete')}}',
+
+            }).done(function(data){
+                c_obj.remove();
+                toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                tampil_data_keluarga();
                     $(".modal").modal('hide');
-              });
-              });
+            });
+            });
   
     })//end ready
 </script>
 <!---------------------------------------------------------------------akhir keluarga----------------------------------------------->
+
+<!-----------------------------------------------------------------awal kecakapan bahasa--------------------------------------------->
+<script>
+  
+    $(document).ready(function(){
+              $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+      tampil_data_kecakapan_bahasa();  //pemanggilan fungsi 
+    //fungsi tampil 
+      function tampil_data_kecakapan_bahasa(){
+          $.ajax({
+              type  : 'GET',
+              beforeSend: function(){
+                  $('.ajax-loader').css("visibility", "visible");
+              },
+              url   : '/kecakapan_bahasa/'+nrp,
+              async : true,
+              dataType : 'json',
+              success : function(data){
+                  console.log(data);
+                  var i;
+                  var no=1;
+                  var rows ='';
+                  $.each( data, function( key, value ) {
+                      rows = rows + '<tr>';
+                      rows = rows + '<td>'+ no++ +'</td>';
+                      rows = rows +'<td style="display:none" >'+value.nip_nrp+'</td>';
+                      rows = rows + '<td>'+value.jenis_bahasa+'</td>';
+                      rows = rows + '<td>'+value.nama_bahasa+'</td>';
+                      rows = rows + '<td>'+value.kemampuan_bahasa+'</td>';
+                      rows = rows + '<td class="text-center" data-id="'+value.id+'">';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-kecakapan-bahasa" class="badge badge-success edit-item-kecakapan-bahasa"><span class="fas fa-fw fa-edit " ></a> ';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#hapus-kecakapan-bahasa" class="badge badge-danger delete-kecakapan-bahasa"><span class="fas fa-fw fa-trash"></button>';
+                      rows = rows + '</td>';
+                      rows = rows + '</tr>';
+                  });
+                  $('.show_kecakapan_bahasa').html(rows);
+              },
+              error: function(xhr, ajaxOptions, thrownError){
+                          alert("Mohon Data Masukkan Dengan Tepat");
+                      },
+              complete: function(){
+                  $('.ajax-loader').css("visibility", "hidden");
+              }
+          });
+      } //tutup akhir tampil
+      //Simpan
+    $('#btn-simpan-kecakapan-bahasa').click(function(e){
+        e.preventDefault();
+        var nip_nrp=$("#modal-add-kecakapan-bahasa").find("input[name=nip_nrp]").val();
+        var nama_bahasa=$("#modal-add-kecakapan-bahasa").find("input[name=nama_bahasa]").val();
+        var jenis_bahasa=$("#modal-add-kecakapan-bahasa").find("select[name=jenis_bahasa]").val();
+        var kemampuan_bahasa=$("#modal-add-kecakapan-bahasa").find("select[name=kemampuan_bahasa]").val();
+        event.preventDefault();
+            $.ajax({
+                type : "POST",
+                beforeSend: function(){
+                    $('.ajax-loader').css("visibility", "visible");
+                },
+                url  : '{{route('kecakapan_bahasa.store')}}',
+                datatype:"html",
+                data : {nip_nrp:nip_nrp,nama_bahasa:nama_bahasa,jenis_bahasa:jenis_bahasa,kemampuan_bahasa:kemampuan_bahasa},
+                success: function(data){
+                    $("#modal-add-keluarga").find("input[name=nama_bahasa]").val();
+                    $("#modal-add-keluarga").find("select[name=jenis_bahasa]").val();
+                    $("#modal-add-keluarga").find("input[name=kemampuan_bahasa]").val();
+                    tampil_data_kecakapan_bahasa();
+                    $('.modal').modal('hide');
+                },
+                error: function(xhr, ajaxOptions, thrownError){
+                        alert("Mohon Data Masukkan Dengan Tepat");
+                    },
+                complete: function(){
+                    $('.ajax-loader').css("visibility", "hidden");
+                }
+            }).done(function(data){
+                toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+            })
+
+    });
+          // edit
+          /* Edit Post */
+          $("body").on("click",".edit-item-kecakapan-bahasa",function(){
+            var id = $(this).parent("td").data('id');
+            var nip_nrp=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").text();
+            var jenis_bahasa=$(this).parent("td").prev("td").prev("td").prev("td").text();
+            var nama_bahasa=$(this).parent("td").prev("td").prev("td").text();
+            var kemampuan_bahasa=$(this).parent("td").prev("td").text();
+            // set
+            $("#edit-kecakapan-bahasa").find("input[name='id']").val(id);
+            $("#edit-kecakapan-bahasa").find("input[name='nip_nrp']").val(nip_nrp);
+            $("#edit-kecakapan-bahasa").find("input[name='nama_bahasa']").val(nama_bahasa);
+            if(jenis_bahasa =='Daerah'){
+                $("#edit-kecakapan-bahasa").find("select[name=jenis_bahasa]").val('Daerah');
+            }
+            if(jenis_bahasa =='Asing'){
+                $("#edit-kecakapan-bahasa").find("select[name=jenis_bahasa]").val('Asing');
+            }
+            if(kemampuan_bahasa =='Aktif'){
+                $("#edit-kecakapan-bahasa").find("select[name=kemampuan_bahasa]").val('Aktif');
+            }
+            if(kemampuan_bahasa =='Pasif'){
+                $("#edit-kecakapan-bahasa").find("select[name=kemampuan_bahasa]").val('Pasif');
+            }
+          });
+          /* Updated  Post baru (Updated new Post) */
+          $(".btn-edit-kecakapan-bahasa").click(function(e){
+              e.preventDefault();
+              var id = $("#edit-kecakapan-bahasa").find("input[name='id']").val();
+              var nip_nrp =  $("#edit-kecakapan-bahasa").find("input[name='nip_nrp']").val();
+              var nama_bahasa= $("#edit-kecakapan-bahasa").find("input[name='nama_bahasa']").val();
+              var jenis_bahasa= $("#edit-kecakapan-bahasa").find("select[name='jenis_bahasa']").val();
+              var kemampuan_bahasa= $("#edit-kecakapan-bahasa").find("select[name='kemampuan_bahasa']").val();
+              $.ajax({
+                  dataType: 'json',
+                  type:'post',
+                  url: '{{route('kecakapan_bahasa.update')}}',
+                  data:{id:id,nip_nrp,nama_bahasa:nama_bahasa,jenis_bahasa:jenis_bahasa,kemampuan_bahasa:kemampuan_bahasa,_token: '{{csrf_token()}}'},
+                   success: function(data){
+                       console.log(data);
+                   }
+              }).done(function(data){
+                    tampil_data_kecakapan_bahasa();
+                    $(".modal").modal('hide');
+                    toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+                })
+  
+          })
+        // klik delete
+        $("body").on("click",".delete-kecakapan-bahasa",function(){
+            var id = $(this).parent("td").data('id');
+            $("#hapus-kecakapan-bahasa").find("input[name='id_hapus']").val(id);
+           
+        });
+        /* Remove Post (Hapus) */
+        $("#btn-hapus-kecakapan-bahasa").click(function(e){
+        event.preventDefault();
+        var id = $("#hapus-kecakapan-bahasa").find("input[name='id_hapus']").val();
+        var c_obj = $(this).parents("tr");
+        $.ajax({
+            dataType: 'json',
+            type:'POST',
+            data:{id:id,_token: '{{csrf_token()}}'},
+            url: '{{route('kecakapan_bahasa.delete')}}',
+
+        }).done(function(data){
+            c_obj.remove();
+            toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+            tampil_data_kecakapan_bahasa();
+            $(".modal").modal('hide');
+        });
+        });
+  
+    })//end ready
+</script>
+<!----------------------------------------------------------------akhir kecakapan bahasa-------------------------------------------->
 @endsection

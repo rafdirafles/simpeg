@@ -60,6 +60,8 @@ Route::resource('/pendidikan_kejuruan','PendidikankejuruanController');
 Route::resource('/pendidikan_polri','PendidikanPolriController');
 // kecakapan bahasa
 Route::resource('/kecakapan_bahasa','Kecakapan\KecakapanBahasaController');
+Route::post('/kecakapan_bahasa/update','Kecakapan\KecakapanBahasaController@update')->name('kecakapan_bahasa.update');
+Route::post('/kecakapan_bahasa/delete','Kecakapan\KecakapanBahasaController@destroy')->name('kecakapan_bahasa.delete');
 // kecakapan olahraga
 Route::resource('/kecakapan_olahraga','Kecakapan\KecakapanOlahRagaController');
 //

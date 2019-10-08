@@ -30,14 +30,20 @@ class KecakapanBahasaController extends Controller
             'nama_bahasa'=>'required',
             'kemampuan_bahasa'=>'required',
         ]);
-        Kecakapan_bahasa::create($request->all());
-        return back()->with('success','Data berhasil ditambahkan');
-        // return $request->all();
+        $data=Kecakapan_bahasa::create($request->all());
+        // return back()->with('success','Data berhasil ditambahkan');
+        return Response()->json($data);
+    }
+    public function show($id)
+    {
+        $data=Kecakapan_bahasa::where('nip_nrp',$id)->get();
+        return Response()->json($data);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $id=$request->id;
         $data=Kecakapan_bahasa::findOrFail($id);
         $this->validate($request,[
             'nip_nrp'=>'required',
@@ -46,7 +52,7 @@ class KecakapanBahasaController extends Controller
             'kemampuan_bahasa'=>'required',
         ]);
         $data->update($request->all());
-        return back()->with('success','Data berhasil diedit');
+        return Response()->json($data);
     }
 
     /**
@@ -55,11 +61,12 @@ class KecakapanBahasaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $id=$request->id;
         $data=Kecakapan_bahasa::findOrFail($id);
         $data->delete();
-        return back()->with('success','Data berhasil diedit');
+        return Response()->json($data);
     }
 }
