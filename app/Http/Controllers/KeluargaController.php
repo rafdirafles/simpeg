@@ -55,8 +55,9 @@ class KeluargaController extends Controller
         else{
             $request['keterangan']=$request->input('keterangan');
         }
-        Data_keluarga::create($request->all());
-        return back()->with('success','Data berhasil di tambahkan');
+        $data=Data_keluarga::create($request->all());
+        return Response()->json($data);
+        // return back()->with('success','Data berhasil di tambahkan');
     }
     /**
      * Display the specified resource.
@@ -67,6 +68,8 @@ class KeluargaController extends Controller
     public function show($id)
     {
         //
+        $datas=Data_keluarga::where('nip_nrp',$id)->get();
+        return Response()->json($datas);
       
     }
 
@@ -88,10 +91,10 @@ class KeluargaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
-        
+        $id=$request->id;
         $this->validate($request,[
             'nip_nrp'=>'required',
             'nama'=>'required',
@@ -108,10 +111,10 @@ class KeluargaController extends Controller
             $request['keterangan']=$data->keterangan;
         }
         else{
-            $request['keterangan']=$request->input('keterangan');
+            $request['keterangan']=$request->keterangan;
         }
         $data->update($request->all());
-        return back()->with('success','Data berhasil di edit');
+        return Response()->json($data);
     }
 
     /**
@@ -120,11 +123,12 @@ class KeluargaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        $id=$request->id;
         $data=Data_keluarga::findOrFail($id);
         $data->delete();
-        return back()->with('success','Data berhasil di delete');
+        return Response()->json($data);
     }
 }

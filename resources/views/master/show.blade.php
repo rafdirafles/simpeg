@@ -426,41 +426,11 @@
                                         <th width="10%">Aksi</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="text-center">
-                                                <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="text-center">
-                                                <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="10" class="text-right"><a href="" class="btn btn-primary btn-sm">(+)tambah</a></td>
-                                    </tr>
+                                    <tbody class="show_keluarga">
                                     </tbody>
+                                    <tr>
+                                        <td colspan="10" class="text-right"><a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-add-keluarga">(+)tambah</a></td>
+                                    </tr>
                                 </table>
                                 <!--end: datatable -->
                             </div>
@@ -1574,6 +1544,186 @@
 </div>
 <!-------end hapus------>
 <!-------------------------------------------------akhir modal riwayat kepagkatan------------------------------------------------------------>
+
+<!----------------------------------------------------awal modal keluarga------------------------------------------------------------>
+<!--add MODAL -->
+<div class="modal fade " id="modal-add-keluarga" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jdlbrevet">Add Data Keluarga</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- form -->
+        <form class="form-horizontal" data-toggle="validator" method="post" action="{{route('keluarga.store')}}">
+            @csrf
+                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                <div class="modal-body">
+                    <input type="hidden" name="nip_nrp" value="{{$datas->nip_nrp}}" >
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Nama *</label>
+                        <input class="form-control" name="nama" type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Jenis Kelamin *</label>
+                        <select class="form-control" required name="jk">
+                            <option value="">pilih jenis kelamin</option>
+                            <option value="L">Laki-Laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Hubungan Keluarga *</label>
+                        <select class="form-control" required name="hubungan_keluarga">
+                            <option value="">Pilih Hubungan Keluarga</option>
+                            <option value="Ayah">Ayah</option>
+                            <option value="Ibu">Ibu</option>
+                            <option value="Saudara kandung">Saudara Kandung</option>
+                            <option value="Saudara tiri">Saudara Tiri</option>
+                            <option value="Anak kandung">Anak Kandung</option>
+                            <option value="Anak tiri">Anak Tiri</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Tempat Lahir *</label>
+                        <input type="text" class="form-control" name="tempat_lahir" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Tanggal Lahir * </label>
+                        <input type="date" class="form-control" name="tanggal_lahir" required >
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="form-control-label">Status Hidup *</label>
+                        <select class="form-control" required name="status_hidup">
+                            <option value="">pilih jenis status hidup</option>
+                            <option value="Hidup">Hidup</option>
+                            <option value="Meninggal">Meninggal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                            <label for="message-text" class="form-control-label">Pekerjaan * </label>
+                            <input type="text" class="form-control" name="pekerjaan" required >
+                    </div>
+                    <div class="form-group">
+                            <label for="message-text" class="form-control-label">Keterangan </label>
+                            <input type="text" class="form-control" name="keterangan">
+                    </div>
+                </div> <!-- tutup body modal -->
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button type="submit" class="btn btn-primary" id="btn-simpan-keluarga">Kirim</button>
+                </div>
+            </form>
+            <!-- form -->
+        </div>
+    </div>
+</div>
+<!--END MODAL ADD-->
+<!--edit MODAL -->
+<div class="modal fade" id="edit-keluarga" tabindex="-1" role="dialog" aria-labelledby="jdl-edit-jabatan" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Data Keluarag</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+                    <form data-toggle="validator" method="post">
+                        <input type="hidden" name="nip_nrp" value="" >
+                        <input type="hidden" name="id" value="">
+                        <input type="hidden" name="nip_nrp" value="{{$datas->nip_nrp}}" >
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Nama *</label>
+                            <input class="form-control" name="nama" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Jenis Kelamin *</label>
+                            <select class="form-control" required name="jk" id="jk_keluarga">
+                                <option value="">pilih jenis kelamin</option>
+                                <option value="L">Laki-Laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Hubungan Keluarga *</label>
+                            <select class="form-control" required name="hubungan_keluarga">
+                                <option value="">Pilih Hubungan Keluarga</option>
+                                <option value="Ayah">Ayah</option>
+                                <option value="Ibu">Ibu</option>
+                                <option value="Saudara kandung">Saudara Kandung</option>
+                                <option value="Saudara tiri">Saudara Tiri</option>
+                                <option value="Anak kandung">Anak Kandung</option>
+                                <option value="Anak tiri">Anak Tiri</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Tempat Lahir *</label>
+                            <input type="text" class="form-control" name="tempat_lahir" required >
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Tanggal Lahir * </label>
+                            <input type="date" class="form-control" name="tanggal_lahir" required >
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Status Hidup *</label>
+                            <select class="form-control" required name="status_hidup" id="edit_status_hidup">
+                                <option value="">pilih jenis status hidup</option>
+                                <option value="Hidup">Hidup</option>
+                                <option value="Meninggal">Meninggal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                                <label for="message-text" class="form-control-label">Pekerjaan * </label>
+                                <input type="text" class="form-control" name="pekerjaan" required >
+                        </div>
+                        <div class="form-group">
+                                <label for="message-text" class="form-control-label">Keterangan </label>
+                                <input type="text" class="form-control" name="keterangan">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary btn-edit-keluarga">Edit</button>
+                        </div>
+                    </form>
+            </div><!-- tutup body modal -->
+                
+        </div>
+    </div>
+</div>
+<!--end edit MODAL-->
+<!------modal Hapus ---->
+<div class="modal fade" id="hapus-keluarga">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Hapus Data</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <form method="post">
+            {{csrf_field()}}
+            <input type="hidden" name="id_hapus">
+            <div class="modal-body">
+                <p>Apakah Anda Yakin Menghapus Data </strong>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="btn-hapus-keluarga">Hapus</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<!-------end hapus------>
+<!------------------------------------------------------akhir keluarga------------------------------------------------------------>
+
 @endsection
 
 
@@ -2254,7 +2404,220 @@
         });
         });
   
-})//end ready
+    })//end ready
 </script>
 <!----------------------------------------------------------------akhir riwayat kepangkatan-------------------------------------------->
+
+<!--------------------------------------------------------------------awal Keluarga----------------------------------------------->
+<script>
+    $(document).ready(function(){
+              $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+      tampil_data_keluarga();  //pemanggilan fungsi.
+              //fungsi tampil 
+      function tampil_data_keluarga(){
+          $.ajax({
+              type  : 'GET',
+              beforeSend: function(){
+                  $('.ajax-loader').css("visibility", "visible");
+              },
+              url   : '/keluarga/'+nrp,
+              async : true,
+              dataType : 'json',
+              success : function(data){
+                  console.log(data);
+                  var i;
+                  var no=1;
+                  var rows ='';
+                  $.each( data, function( key, value ) {
+                      rows = rows + '<tr>';
+                      rows = rows + '<td>'+ no++ +'</td>';
+                      rows = rows +'<td style="display:none" >'+value.nip_nrp+'</td>';
+                      rows = rows + '<td >'+value.nama+'</td>';
+                      rows = rows + '<td>'+value.hubungan_keluarga+'</td>';
+                      rows = rows + '<td>'+value.jk+'</td>';
+                      rows = rows + '<td>'+value.tempat_lahir+'</td>';
+                      rows = rows + '<td>'+value.tanggal_lahir+'</td>';
+                      rows = rows + '<td>'+value.status_hidup+'</td>';
+                      rows = rows + '<td>'+value.pekerjaan+'</td>';
+                      rows = rows + '<td>'+value.keterangan+'</td>';
+                      rows = rows + '<td class="text-center" data-id="'+value.id+'">';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-keluarga" class="badge badge-success edit-item-keluarga"><span class="fas fa-fw fa-edit " ></a> ';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#hapus-keluarga" class="badge badge-danger delete-keluarga"><span class="fas fa-fw fa-trash"></button>';
+                      rows = rows + '</td>';
+                      rows = rows + '</tr>';
+                  });
+                  $('.show_keluarga').html(rows);
+              },
+              error: function(xhr, ajaxOptions, thrownError){
+                          alert("Mohon Data Masukkan Dengan Tepat");
+                      },
+              complete: function(){
+                  $('.ajax-loader').css("visibility", "hidden");
+              }
+          });
+      } //tutup akhir tampil
+      //Simpan
+$('#btn-simpan-keluarga').click(function(e){
+    e.preventDefault();
+    var nip_nrp=$("#modal-add-keluarga").find("input[name=nip_nrp]").val();
+    var nama=$("#modal-add-keluarga").find("input[name=nama]").val();
+    var hubungan_keluarga=$("#modal-add-keluarga").find("select[name=hubungan_keluarga]").val();
+    var jk=$("#modal-add-keluarga").find("select[name=jk]").val();
+    var tempat_lahir=$("#modal-add-keluarga").find("input[name=tempat_lahir]").val();
+    var tanggal_lahir=$("#modal-add-keluarga").find("input[name=tanggal_lahir]").val();
+    var status_hidup=$("#modal-add-keluarga").find("select[name=status_hidup]").val();
+    var pekerjaan=$("#modal-add-keluarga").find("input[name=pekerjaan]").val();
+    var keterangan=$("#modal-add-keluarga").find("input[name=keterangan]").val();
+    event.preventDefault();
+        $.ajax({
+            type : "POST",
+            beforeSend: function(){
+                $('.ajax-loader').css("visibility", "visible");
+            },
+            url  : '{{route('keluarga.store')}}',
+            datatype:"html",
+            data : {nip_nrp:nip_nrp,nama:nama,hubungan_keluarga:hubungan_keluarga,jk:jk,tempat_lahir:tempat_lahir,tanggal_lahir:tanggal_lahir,status_hidup:status_hidup,pekerjaan:pekerjaan,keterangan:keterangan},
+            success: function(data){
+                
+            $("#modal-add-keluarga").find("input[name=nama]").val("");
+            $("#modal-add-keluarga").find("select[name=hubungan_keluarga]").val("");
+            $("#modal-add-keluarga").find("select[name=jk]").val("");
+            $("#modal-add-keluarga").find("input[name=tempat_lahir]").val("");
+            $("#modal-add-keluarga").find("input[name=tanggal_lahir]").val("");
+            $("#modal-add-keluarga").find("select[name=pekerjaan]").val("");
+            $("#modal-add-keluarga").find("input[name=keterangan]").val("");
+            $("#modal-add-keluarga").find("input[name=status_hidup]").val("");
+            tampil_data_keluarga();
+            $('.modal').modal('hide');
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+                    alert("Mohon Data Masukkan Dengan Tepat");
+                },
+            complete: function(){
+                $('.ajax-loader').css("visibility", "hidden");
+            }
+        }).done(function(data){
+            toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+        })
+});
+          // edit
+          /* Edit Post */
+          $("body").on("click",".edit-item-keluarga",function(){
+            var id = $(this).parent("td").data('id');
+            var nip_nrp = $(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var nama = $(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var hubungan_keluarga = $(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var jk = $(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var tempat_lahir = $(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var tanggal_lahir = $(this).parent("td").prev("td").prev("td").prev("td").prev("td").text();
+            var status_hidup = $(this).parent("td").prev("td").prev("td").prev("td").text();
+            var pekerjaan = $(this).parent("td").prev("td").prev("td").text();
+            var keterangan =  $(this).parent("td").prev("td").text();
+            // 
+            $("#edit-keluarga").find("input[name=id]").val(id);
+            $("#edit-keluarga").find("input[name=nip_nrp]").val(nip_nrp);
+            $("#edit-keluarga").find("input[name=nama]").val(nama);
+            // 
+            if(jk== "L" ){
+                $("#edit-keluarga").find("select[name=jk]").val('L');
+            }
+            if(jk== "P" ){
+                $("#edit-keluarga").find("select[name=jk]").val('P');
+            }
+            else{
+                $("#edit-keluarga").find("select[name=jk]").val();
+            }
+            // 
+            if(status_hidup== "Hidup" ){
+                $("#edit-keluarga").find("select[name=status_hidup]").val('Hidup');
+            }
+            if(hubungan_keluarga== "Meninggal" ){
+                $("#edit-keluarga").find("select[name=hubungan_keluarga]").val('Meninggal');
+            }
+            // 
+            if(hubungan_keluarga== "Ibu" ){
+                $("#edit-keluarga").find("select[name=hubungan_keluarga]").val('Ibu');
+            }
+            if(hubungan_keluarga== "Ayah" ){
+                $("#edit-keluarga").find("select[name=hubungan_keluarga]").val('Ayah');
+            }
+            if(hubungan_keluarga== "Anak kandung" ){
+                $("#edit-keluarga").find("select[name=hubungan_keluarga]").val('Anak kandung');
+            }
+            if(hubungan_keluarga== "Anak tiri" ){
+                $("#edit-keluarga").find("select[name=hubungan_keluarga]").val('Anak tiri');
+            }
+            if(hubungan_keluarga== "Saudara kandung" ){
+                $("#edit-keluarga").find("select[name=hubungan_keluarga]").val('Saudara kandung');
+            }
+            if(hubungan_keluarga== "Saudara Tiri" ){
+                $("#edit-keluarga").find("select[name=hubungan_keluarga]").val('Saudara Tiri');
+            }
+            $("#edit-keluarga").find("input[name=tempat_lahir]").val(tempat_lahir);
+            $("#edit-keluarga").find("input[name=tanggal_lahir]").val(tanggal_lahir);
+            $("#edit-keluarga").find("input[name=status_hidup]").val(status_hidup);
+            $("#edit-keluarga").find("input[name=pekerjaan]").val(pekerjaan);
+            $("#edit-keluarga").find("input[name=keterangan]").val(keterangan);
+          });
+          /* Updated  Post baru (Updated new Post) */
+          $(".btn-edit-keluarga").click(function(e){
+              e.preventDefault();
+              var id =$("#edit-keluarga").find("input[name='id']").val();
+              var nip_nrp =$("#edit-keluarga").find("input[name='nip_nrp']").val();
+              var nama=$("#edit-keluarga").find("input[name=nama]").val();
+              var hubungan_keluarga=$("#edit-keluarga").find("select[name=hubungan_keluarga]").val();
+              var jk=$("#edit-keluarga").find("select[name=jk]").val();
+              var tempat_lahir=$("#edit-keluarga").find("input[name=tempat_lahir]").val();
+              var tanggal_lahir=$("#edit-keluarga").find("input[name=tanggal_lahir]").val();
+              var status_hidup=$("#edit-keluarga").find("select[name=status_hidup]").val();
+              var pekerjaan=$("#edit-keluarga").find("input[name=pekerjaan]").val();
+              var keterangan=$("#edit-keluarga").find("input[name=keterangan]").val();
+              $.ajax({
+                  dataType: 'json',
+                  type:'post',
+                  url: '{{route('keluarga.update')}}',
+                  data:{id:id,nip_nrp,nama:nama,hubungan_keluarga:hubungan_keluarga,jk:jk,tempat_lahir:tempat_lahir,
+                        tanggal_lahir:tanggal_lahir,status_hidup:status_hidup,pekerjaan:pekerjaan,keterangan:keterangan,_token: '{{csrf_token()}}'},
+                   success: function(data){
+                       console.log(data);
+                   }
+              }).done(function(data){
+              tampil_data_keluarga();
+              $(".modal").modal('hide');
+              toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+          })
+  
+          })
+              // klik delete
+              $("body").on("click",".delete-keluarga",function(){
+                  var id = $(this).parent("td").data('id');
+                  $("#hapus-keluarga").find("input[name='id_hapus']").val(id);
+                 
+              });
+              /* Remove Post (Hapus) */
+              $("#btn-hapus-keluarga").click(function(e){
+              event.preventDefault();
+              var id = $("#hapus-keluarga").find("input[name='id_hapus']").val();
+              var c_obj = $(this).parents("tr");
+              $.ajax({
+                  dataType: 'json',
+                  type:'post',
+                  data:{id:id,_token: '{{csrf_token()}}'},
+                  url: '{{route('keluarga.delete')}}',
+  
+              }).done(function(data){
+                  c_obj.remove();
+                  toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                   tampil_data_keluarga();
+                    $(".modal").modal('hide');
+              });
+              });
+  
+    })//end ready
+</script>
+<!---------------------------------------------------------------------akhir keluarga----------------------------------------------->
 @endsection

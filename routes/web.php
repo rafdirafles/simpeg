@@ -48,6 +48,8 @@ Route::resource('/setting/cuti','Setting\CutiController');
 // // end setting // //
 // keluarga
 Route::resource('/keluarga','KeluargaController');
+Route::post('/keluarga/update','KeluargaController@update')->name('keluarga.update');
+Route::post('/keluarga/delete','KeluargaController@destroy')->name('keluarga.delete');
 // cuti
 Route::resource('/cuti','CutiController');
 //pendidikan umum
