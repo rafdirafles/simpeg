@@ -2148,11 +2148,11 @@
 </div>
 <!--END MODAL ADD-->
 <!--edit MODAL -->
-<div class="modal fade" id="edit-pendidikan-polri" tabindex="-1" role="dialog" aria-labelledby="jdl-edit-jabatan" aria-hidden="true">
+<div class="modal fade" id="edit-pendidikan-umum" tabindex="-1" role="dialog" aria-labelledby="jdl-edit-jabatan" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Data Pendidikan Polri</h5>
+                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Data Pendidikan Umum</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -2162,33 +2162,37 @@
                     <form data-toggle="validator" method="post">
                         <input type="hidden" name="nip_nrp" value="" >
                         <input type="hidden" name="id" value="">
-                        <input type="hidden" name="file_lama" value="">
-                       
-                            <input type="hidden" name="nip_nrp" value="{{$datas->nip_nrp}}" >
-                            <div class="form-group">
-                                <label for="message-text" class="form-control-label">Nama Pendidikan*</label>
-                                <input class="form-control" required name="nama_pendidikan" type="text">
-                        </div>
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Tahun Pendidikan*</label>
-                            <input type="number" class="form-control" required name="tahun">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="form-control-label">Lulus / Tidak* </label>
-                            <select class="form-control kt-select2" required  name="lulus_tidak">
-                                    <option value="">-----pilih------</option>
-                                    <option value="Lulus">Lulus</option>
-                                    <option value="Tidak">Tidak</option>
-    
+                            <label for="message-text" class="form-control-label">Jenjang Pendidikan *</label>
+                            <select name="jenjang_pendidikan" id="" class="form-control" required>
+                                <option value="">Pilih jenjang pendidikan</option>
+                                <option value="SD">SD</option>
+                                <option value="SLTA">SLTP</option>
+                                <option value="SLTA">SLTA</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                                <option value="S3">S3</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Lama Bulan*</label>
-                        <input type="number" name="lama_bulan" class="form-control" >
+                            <label for="message-text" class="form-control-label">Nama Sekolah *</label>
+                            <input class="form-control" name="nama_sekolah" type="text" required>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="form-control-label">Ranking</label>
-                            <input class="form-control"  name="rangking" type="number">
+                            <label for="message-text" class="form-control-label">Jurusan </label>
+                            <input class="form-control" name="jurusan" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Kota *</label>
+                            <input class="form-control" name="kota" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Tahun Lulus *</label>
+                            <input type="number" class="form-control" name="tahun_lulus" required placeholder="exp:2019">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Nomer Ijazah * </label>
+                            <input type="text" class="form-control" name="no_ijazah" required >
                         </div>
                         {{-- file --}}
                         <div class="form-group">
@@ -2203,17 +2207,16 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button class="btn btn-primary btn-edit-pendidikan-polri">Edit</button>
+                            <button class="btn btn-primary btn-edit-pendidikan-umum">Edit</button>
                         </div>
                     </form>
             </div><!-- tutup body modal -->
-
         </div>
     </div>
 </div>
 <!--end edit MODAL-->
 <!------modal Hapus ---->
-<div class="modal fade" id="hapus-pendidikan-polri">
+<div class="modal fade" id="hapus-pendidikan-umum">
     <div class="modal-dialog">
         <div class="modal-content">
         <!-- Modal Header -->
@@ -2231,7 +2234,7 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" id="btn-hapus-pendidikan-polri">Hapus</button>
+                <button class="btn btn-primary" id="btn-hapus-pendidikan-umum">Hapus</button>
             </div>
         </form>
         </div>
@@ -3813,8 +3816,8 @@
                       rows = rows + '<td>'+value.no_ijazah+'</td>';
                       rows = rows + '<td>'+'<a href=' +'{{ URL::asset('file/') }}'+'/'+value.file+'>'+value.file+'</a>'+'</td>';
                       rows = rows + '<td class="text-center" data-id="'+value.id+'">';
-                      rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-pendidikan-polri" class="badge badge-success edit-item-pendidikan-polri"><span class="fas fa-fw fa-edit " ></a> ';
-                      rows = rows + '<a href="#" data-toggle="modal" data-target="#hapus-pendidikan-polri" class="badge badge-danger delete-pendidikan-polri"><span class="fas fa-fw fa-trash"></button>';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-pendidikan-umum" class="badge badge-success edit-item-pendidikan-umum"><span class="fas fa-fw fa-edit " ></a> ';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#hapus-pendidikan-umum" class="badge badge-danger delete-pendidikan-umum"><span class="fas fa-fw fa-trash"></button>';
                       rows = rows + '</td>';
                       rows = rows + '</tr>';
                   });
@@ -3884,49 +3887,70 @@
             })
     });
         /* Edit Post */
-        $("body").on("click",".edit-item-pendidikan-polri",function(){
+        $("body").on("click",".edit-item-pendidikan-umum",function(){
             var id = $(this).parent("td").data('id');
-            var nip_nrp=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
-            var nama_pendidikan=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
-            var tahun=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
-            var lulus_tidak=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").text();
-            var lama_bulan=$(this).parent("td").prev("td").prev("td").prev("td").text();
-            var rangking=$(this).parent("td").prev("td").prev("td").text();
+            var nip_nrp=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var jenjang_pendidikan=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var nama_sekolah=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var jurusan=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var kota=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").text();
+            var tahun_lulus=$(this).parent("td").prev("td").prev("td").prev("td").text();
+            var no_ijazah=$(this).parent("td").prev("td").prev("td").text();
             var file=$(this).parent("td").prev("td").text();
-            console.log(rangking);
+            console.log(no_ijazah);
             // set
-            $("#edit-pendidikan-polri").find("input[name='id']").val(id);
-            $("#edit-pendidikan-polri").find("input[name='nip_nrp']").val(nip_nrp);
-            $("#edit-pendidikan-polri").find("input[name='nama_pendidikan']").val(nama_pendidikan);
-            $("#edit-pendidikan-polri").find("input[name='tahun']").val(tahun);
-            (lulus_tidak == "Lulus" ?  $("#edit-pendidikan-polri").find("select[name=lulus_tidak]").val('Lulus') :  $("#edit-pendidikan-polri").find("select[name=lulus_tidak]").val('Tidak'));
-            // $("#edit-pendidikan-polri").find("input[name='lulus_tidak']").val(lulus_tidak);
-            $("#edit-pendidikan-polri").find("input[name='lama_bulan']").val(lama_bulan);
-            $("#edit-pendidikan-polri").find("input[name='rangking']").val(rangking);
-            $("#edit-pendidikan-polri").find("input[name='file_lama']").val(file);
+            $("#edit-pendidikan-umum").find("input[name='id']").val(id);
+            $("#edit-pendidikan-umum").find("input[name='nip_nrp']").val(nip_nrp);
+
+            if(jenjang_pendidikan =="SD"){
+                $("#edit-pendidikan-umum").find("select[name=jenjang_pendidikan]").val('SD')
+            }
+            if(jenjang_pendidikan =="SLTP"){
+                $("#edit-pendidikan-umum").find("select[name=jenjang_pendidikan]").val('SLTP')
+            }
+            if(jenjang_pendidikan =="SLTA"){
+                $("#edit-pendidikan-umum").find("select[name=jenjang_pendidikan]").val('SLTA')
+            }
+            if(jenjang_pendidikan =="S1"){
+                $("#edit-pendidikan-umum").find("select[name=jenjang_pendidikan]").val('S1')
+            }
+            if(jenjang_pendidikan =="S2"){
+                $("#edit-pendidikan-umum").find("select[name=jenjang_pendidikan]").val('S2')
+            }
+            if(jenjang_pendidikan =="S3"){
+                $("#edit-pendidikan-umum").find("select[name=jenjang_pendidikan]").val('S3')
+            }
+            $("#edit-pendidikan-umum").find("input[name='nama_sekolah']").val(nama_sekolah);
+            $("#edit-pendidikan-umum").find("input[name='jurusan']").val(jurusan);
+            $("#edit-pendidikan-umum").find("input[name='kota']").val(kota);
+            $("#edit-pendidikan-umum").find("input[name='tahun_lulus']").val(tahun_lulus);
+            $("#edit-pendidikan-umum").find("input[name='no_ijazah']").val(no_ijazah);
+            $("#edit-pendidikan-umum").find("input[name='file_lama']").val(file);
             // current file
-            $("#edit-pendidikan-polri #file_prev").html(file);
-            $("#edit-pendidikan-polri .file_prev").attr("href",'{{ URL::asset('file/')}}'+'/'+file);
+            $("#edit-pendidikan-umum #file_prev").html(file);
+            $("#edit-pendidikan-umum .file_prev").attr("href",'{{ URL::asset('file/')}}'+'/'+file);
         });
           /* Updated  Post baru (Updated new Post) */
-          $(".btn-dedit-pendidikan-polri").click(function(e){
+          $(".btn-edit-pendidikan-umum").click(function(e){
               e.preventDefault();
-              var id = $("#edit-pendidikan-polri").find("input[name='id']").val();
-              var nip_nrp = $("#edit-pendidikan-polri").find("input[name='nip_nrp']").val();
-              var nama_pendidikan= $("#edit-pendidikan-polri").find("input[name='nama_pendidikan']").val();
-              var tahun= $("#edit-pendidikan-polri").find("input[name='tahun']").val();
-              var lulus_tidak= $("#edit-pendidikan-polri").find("select[name='lulus_tidak']").val();
-              var lama_bulan= $("#edit-pendidikan-polri").find("input[name='lama_bulan']").val();
-              var rangking= $("#edit-pendidikan-polri").find("input[name='rangking']").val();
-              var file =$("#edit-pendidikan-polri").find("input[name=file]")[0].files[0];
+              var id = $("#edit-pendidikan-umum").find("input[name='id']").val();
+              var nip_nrp = $("#edit-pendidikan-umum").find("input[name='nip_nrp']").val();
+              var jenjang_pendidikan= $("#edit-pendidikan-umum").find("select[name='jenjang_pendidikan']").val();
+              var nama_sekolah= $("#edit-pendidikan-umum").find("input[name='nama_sekolah']").val();
+              var jurusan= $("#edit-pendidikan-umum").find("input[name='jurusan']").val();
+              var kota= $("#edit-pendidikan-umum").find("input[name='kota']").val();
+              var tahun_lulus= $("#edit-pendidikan-umum").find("input[name='tahun_lulus']").val();
+              var no_ijazah= $("#edit-pendidikan-umum").find("input[name='no_ijazah']").val();
+              var file =$("#edit-pendidikan-umum").find("input[name=file]")[0].files[0];
               var form = new FormData();
             form.append('id',id);
             form.append('nip_nrp', nip_nrp);
-            form.append('nama_pendidikan', nama_pendidikan);
-            form.append('tahun', tahun);
-            form.append('lulus_tidak', lulus_tidak);
-            form.append('lama_bulan', lama_bulan);
-            form.append('rangking', rangking);
+            form.append('jenjang_pendidikan', jenjang_pendidikan);
+            form.append('nama_sekolah', nama_sekolah);
+            form.append('jurusan', jurusan);
+            form.append('kota', kota);
+            form.append('tahun_lulus', tahun_lulus);
+            form.append('no_ijazah', no_ijazah);
             form.append('file', file);
               $.ajax({
                 cache: false,
@@ -3934,10 +3958,11 @@
                 processData: false,
                   dataType: 'json',
                   type:'post',
-                  url: '{{route('pendidikan_polri.update')}}',
+                  url: '{{route('pendidikan_umum.update')}}',
                   data:form,
                    success: function(data){
-                    $("#edit-pendidikan-polri").find("input[name=file]").val("");
+                       console.log(data);
+                    $("#edit-pendidikan-umum").find("input[name=file]").val("");
                    }
               }).done(function(data){
                     tampil_data_pendidikan_umum();
@@ -3947,20 +3972,20 @@
 
           })
         // klik delete
-        $("body").on("click",".delete-pendidikan-polri",function(){
+        $("body").on("click",".delete-pendidikan-umum",function(){
             var id = $(this).parent("td").data('id');
-            $("#hapus-pendidikan-polri").find("input[name='id_hapus']").val(id);
+            $("#hapus-pendidikan-umum").find("input[name='id_hapus']").val(id);
         });
         /* Remove Post (Hapus) */
-        $("#btn-dhapus-pendidikan-polri").click(function(e){
+        $("#btn-hapus-pendidikan-umum").click(function(e){
             event.preventDefault();
-            var id = $("#hapus-pendidikan-polri").find("input[name='id_hapus']").val();
+            var id = $("#hapus-pendidikan-umum").find("input[name='id_hapus']").val();
             var c_obj = $(this).parents("tr");
             $.ajax({
                 dataType: 'json',
                 type:'POST',
                 data:{id:id,_token: '{{csrf_token()}}'},
-                url: '{{route('pendidikan_polri.delete')}}',
+                url: '{{route('pendidikan_umum.delete')}}',
             }).done(function(data){
                 c_obj.remove();
                 toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});

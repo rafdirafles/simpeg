@@ -108,17 +108,18 @@ class PendidikanUmumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
-        $this->validate($request,[
-            'file' =>'file|max:2048',
-            'jenjang_pendidikan'=>'required',
-            'nama_sekolah'=>'required',
-            'kota'=>'required',
-            'tahun_lulus'=>'required',
-            'no_ijazah'=>'required',
-            'nip_nrp'=>'required',
-        ]);
+        $id=$request->id;
+        // $this->validate($request,[
+        //     'file' =>'file|max:2048',
+        //     'jenjang_pendidikan'=>'required',
+        //     'nama_sekolah'=>'required',
+        //     'kota'=>'required',
+        //     'tahun_lulus'=>'required',
+        //     'no_ijazah'=>'required',
+        //     'nip_nrp'=>'required',
+        // ]);
         // foto
         $data=Pendidikan_umum::findOrFail($id);
         $file = $request->file('file');
@@ -127,12 +128,16 @@ class PendidikanUmumController extends Controller
             $file = $request->file('file');
         }
         else{
-            if(!$data->file == '-'){
-                $image_path = public_path().'/img/'.$data->file;
+            $this->validate($request,[
+
+                'file' =>'mimes:pdf|max:10000',
+            ]);
+            if($data->file != '-'){
+                $image_path = public_path().'/file/'.$data->file;
                 unlink($image_path);
             }
             $nama_file = time()."_".$file->getClientOriginalName();
-            $tujuan_upload = 'img';
+            $tujuan_upload = 'file';
             $file->move($tujuan_upload,$nama_file);
         }
 
@@ -146,7 +151,7 @@ class PendidikanUmumController extends Controller
             'no_ijazah'=>$request->no_ijazah,
             'file' =>$nama_file,
         ]);
-        return back()->with('success','data pendidikan berhasil di edit');
+        return Response()->json($data);
         // return var_dump($request->file);
     }
 
@@ -156,15 +161,16 @@ class PendidikanUmumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request)
     {
         //
+        $id=$request->id;
         $data=Pendidikan_umum::findOrFail($id);
-        if(!$data->file == '-'){
-            $image_path = public_path().'/img/'.$data->file;
+        if($data->file != '-'){
+            $image_path = public_path().'/file/'.$data->file;
             unlink($image_path);
         }
         $data->delete();
-        return back()->with("success","data berhasil di Hapus");
+        return Response()->json($data);
     }
 }

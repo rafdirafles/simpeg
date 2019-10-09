@@ -123,7 +123,6 @@
             <form action="{{route('pendidikan_umum.store')}}" method="post" enctype="multipart/form-data" name="registration">
                 @csrf
                 <input type="hidden" value="{{$datas->nip_nrp}}" name="nip_nrp">
-                <input type="hidden" value="{{$datas->nip_nrp}}" name="nip_nrp">
                 <div class="form-group">
                     <label for="message-text" class="form-control-label">Jenjang Pendidikan *</label>
                     <select name="jenjang_pendidikan" id="" class="form-control" required>

@@ -54,6 +54,8 @@ Route::post('/keluarga/delete','KeluargaController@destroy')->name('keluarga.del
 Route::resource('/cuti','CutiController');
 //pendidikan umum
 Route::resource('/pendidikan_umum','PendidikanUmumController');
+Route::post('/pendidikan_umum/update','PendidikanUmumController@update')->name('pendidikan_umum.update');
+Route::post('/pendidikan_umum/delete','PendidikanUmumController@destroy')->name('pendidikan_umum.delete');
 // pendidikan kejuruan
 Route::resource('/pendidikan_kejuruan','PendidikankejuruanController');
 //pendidikan polri
