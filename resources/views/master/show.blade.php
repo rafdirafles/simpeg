@@ -555,37 +555,11 @@
                                                     <th width="10%">Aksi</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="text-center">
-                                                            <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                            <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="text-center">
-                                                            <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                            <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="8" class="text-right"><a href="" class="btn btn-primary btn-sm">(+)tambah</a></td>
-                                                </tr>
+                                                <tbody class="show_pendidikan_non_formal">
                                                 </tbody>
+                                                <tr>
+                                                    <td colspan="9" class="text-right"><a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-add-pendidikan-non-formal">(+)tambah</a></td>
+                                                </tr>
                                             </table>
                                             <!--end: datatable -->
                                         </div>
@@ -2377,7 +2351,141 @@
 <!-------end hapus------>
 <!--------------------------------------------------akhir modal pendidikan kejuruan------------------------------------------------------------>
 
+<!-------------------------------------------------awal modal pendidikan non formal------------------------------------------------------------>
+<!--add MODAL -->
+<div class="modal fade " id="modal-add-pendidikan-non-formal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="jdlbrevet">Add Data Pendidikan Non Formal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- form -->
+                <form class="form-horizontal" data-toggle="validator" method="post" enctype="multipart/form-data" action="{{route('pendidikan_non_formal.store')}}">
+                    @csrf
+                    <input type="hidden" name="_token" value="{{ Session::token() }}">
+                    <input type="hidden" value="{{$datas->nip_nrp}}" name="nip_nrp">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Nama Pendidikan *</label>
+                            <input class="form-control" name="nama_pendidikan" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Lama Pendidikan *</label>
+                            <input class="form-control" name="lama_pendidikan" type="number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Tahun Pendidikan *</label>
+                            <input class="form-control" name="tahun_pendidikan" type="number">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Tempat Pendidikan *</label>
+                            <input class="form-control" name="tempat_pendidikan" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Keterangan </label>
+                            <input class="form-control" name="keterangan" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">file </label>
+                            <input class="form-control" type="file" name="file">
+                        </div>
+                    </div> <!-- tutup body modal -->
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                        <button type="submit" class="btn btn-primary" id="btn-simpan-pendidikan-non-formal">Kirim</button>
+                    </div>
+                </form>
+                <!-- form -->
+            </div>
+        </div>
+</div>
+<!--END MODAL ADD-->
+<!--edit MODAL -->
+<div class="modal fade" id="edit-pendidikan-non-formal" tabindex="-1" role="dialog" aria-labelledby="jdl-edit-jabatan" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jdl-edit-jabatan">Edit Data Pendidikan Non Formal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+                    <form data-toggle="validator" method="post">
+                        <input type="hidden" name="nip_nrp" value="" >
+                        <input type="hidden" name="id" value="">
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Nama Pendidikan *</label>
+                            <input class="form-control" name="nama_pendidikan" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Lama Pendidikan *</label>
+                            <input class="form-control" name="lama_pendidikan" type="number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Tahun Pendidikan *</label>
+                            <input class="form-control" name="tahun_pendidikan" type="number">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Tempat Pendidikan *</label>
+                            <input class="form-control" name="tempat_pendidikan" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Keterangan </label>
+                            <input class="form-control" name="keterangan" type="text">
+                        </div>
+                        {{-- file --}}
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">Prev File</label>
+                            <a href="" class="file_prev"><p id="file_prev"></p></a>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="message-text" class="form-control-label">file </label>
+                            <input class="form-control" type="file" name="file">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary btn-edit-pendidikan-non-formal">Edit</button>
+                        </div>
+                    </form>
+            </div><!-- tutup body modal -->
+        </div>
+    </div>
+</div>
+<!--end edit MODAL-->
+<!------modal Hapus ---->
+<div class="modal fade" id="hapus-pendidikan-non-formal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Hapus Data</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <form method="post">
+            {{csrf_field()}}
+            <input type="hidden" name="id_hapus">
+            <div class="modal-body">
+                <p>Apakah Anda Yakin Menghapus Data </strong>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="btn-hapus-pendidikan-non-formal">Hapus</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<!-------end hapus------>
+<!--------------------------------------------------akhir modal pendidikan non formal------------------------------------------------------------>
 @endsection
 {{-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ --}}
 {{-- ################################################################################################################################### --}}
@@ -4133,7 +4241,6 @@
 </script>
 <!----------------------------------------------------------------akhir pendidikan umum-------------------------------------------->
 
-
 <!-----------------------------------------------------------------awal pendidikan kejuruan--------------------------------------------->
 <script>
     $(document).ready(function(){
@@ -4345,5 +4452,199 @@
     })//end ready
 </script>
 <!----------------------------------------------------------------akhir pendidikan kejuruan-------------------------------------------->
+
+
+<!-----------------------------------------------------------------awal pendidikan non formal--------------------------------------------->
+<script>
+    $(document).ready(function(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+        tampil_data_pendidikan_non_formal();  //pemanggilan fungsi
+    //fungsi tampil
+        function tampil_data_pendidikan_non_formal(){
+            $.ajax({
+                type  : 'GET',
+                beforeSend: function(){
+                    $('.ajax-loader').css("visibility", "visible");
+                },
+                url   : '/pendidikan_non_formal/'+nrp,
+                async : true,
+                dataType : 'json',
+                success : function(data){
+                    console.log(data);
+                    var i;
+                    var no=1;
+                    var rows ='';
+                    $.each( data, function( key, value ) {
+                        rows = rows + '<tr>';
+                        rows = rows + '<td>'+ no++ +'</td>';
+                        rows = rows +'<td style="display:none">'+value.nip_nrp+'</td>';
+                        rows = rows +'<td >'+value.nama_pendidikan+'</td>';
+                        rows = rows +'<td >'+value.lama_pendidikan+'</td>';
+                        rows = rows + '<td>'+value.tahun_pendidikan+'</td>';
+                        rows = rows + '<td>'+value.tempat_pendidikan+'</td>';
+                        rows = rows + '<td>'+value.keterangan+'</td>';
+                        rows = rows + '<td>'+'<a href=' +'{{ URL::asset('file/') }}'+'/'+value.file+'>'+value.file+'</a>'+'</td>';
+                        rows = rows + '<td class="text-center" data-id="'+value.id+'">';
+                        rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-pendidikan-non-formal" class="badge badge-success edit-item-pendidikan-non-formal"><span class="fas fa-fw fa-edit " ></a> ';
+                        rows = rows + '<a href="#" data-toggle="modal" data-target="#hapus-pendidikan-non-formal" class="badge badge-danger delete-pendidikan-non-formal"><span class="fas fa-fw fa-trash"></button>';
+                        rows = rows + '</td>';
+                        rows = rows + '</tr>';
+                    });
+                    $('.show_pendidikan_non_formal').html(rows);
+                },
+                error: function(xhr, ajaxOptions, thrownError){
+                            alert("Mohon Data Masukkan Dengan Tepat");
+                        },
+                complete: function(){
+                    $('.ajax-loader').css("visibility", "hidden");
+                }
+            });
+        } //tutup akhir tampil
+        //Simpan
+    $('#btn-simpan-pendidikan-non-formal').click(function(e){
+        e.preventDefault();
+        var nip_nrp = $("#modal-add-pendidikan-non-formal").find("input[name=nip_nrp]").val();
+        var nama_pendidikan = $("#modal-add-pendidikan-non-formal").find("input[name=nama_pendidikan]").val();
+        var lama_pendidikan = $("#modal-add-pendidikan-non-formal").find("input[name=lama_pendidikan]").val();
+        var tahun_pendidikan = $("#modal-add-pendidikan-non-formal").find("input[name=tahun_pendidikan]").val();
+        var tempat_pendidikan = $("#modal-add-pendidikan-non-formal").find("input[name=tempat_pendidikan]").val();
+        var keterangan = $("#modal-add-pendidikan-non-formal").find("input[name=keterangan]").val();
+        var file =$("#modal-add-pendidikan-non-formal").find("input[name=file]")[0].files[0];
+        //
+        var form = new FormData();
+        form.append('nip_nrp', nip_nrp);
+        form.append('nama_pendidikan', nama_pendidikan);
+        form.append('lama_pendidikan', lama_pendidikan);
+        form.append('tahun_pendidikan', tahun_pendidikan);
+        form.append('tempat_pendidikan', tempat_pendidikan);
+        form.append('keterangan', keterangan);
+        form.append('file', file);
+        event.preventDefault();
+            $.ajax({
+                type : "POST",
+                beforeSend: function(){
+                    $('.ajax-loader').css("visibility", "visible");
+                },
+                url  : '{{route('pendidikan_non_formal.store')}}',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data : form,
+                success: function(data){
+                    console.log(data);
+                    $("#modal-add-pendidikan-non-formal").find("input[name=nama_pendidikan]").val("");
+                    $("#modal-add-pendidikan-non-formal").find("input[name=lama_pendidikan]").val("");
+                    $("#modal-add-pendidikan-non-formal").find("input[name=tahun_pendidikan]").val("");
+                    $("#modal-add-pendidikan-non-formal").find("input[name=tempat_pendidikan]").val("");
+                    $("#modal-add-pendidikan-non-formal").find("input[name=keterangan]").val("");
+                    $("#modal-add-pendidikan-non-formal").find("input[name=file]").val("");
+                    tampil_data_pendidikan_non_formal();
+                    $('.modal').modal('hide');
+
+                },
+                error: function(xhr, ajaxOptions, thrownError){
+                        alert("Mohon Data Masukkan Dengan Tepat");
+                    },
+                complete: function(){
+                    $('.ajax-loader').css("visibility", "hidden");
+                }
+            }).done(function(data){
+                toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+            })
+    });
+        /* Edit Post */
+        $("body").on("click",".edit-item-pendidikan-non-formal",function(){
+            var id = $(this).parent("td").data('id');
+            var nip_nrp=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var nama_pendidikan=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var lama_pendidikan=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var tahun_pendidikan=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").text();
+            var tempat_pendidikan=$(this).parent("td").prev("td").prev("td").prev("td").text();
+            var keterangan=$(this).parent("td").prev("td").prev("td").text();
+            var file=$(this).parent("td").prev("td").text();
+            // console.log(file);
+            // set
+            $("#edit-pendidikan-non-formal").find("input[name='id']").val(id);
+            $("#edit-pendidikan-non-formal").find("input[name='nip_nrp']").val(nip_nrp);
+            $("#edit-pendidikan-non-formal").find("input[name='nama_pendidikan']").val(nama_pendidikan);
+            $("#edit-pendidikan-non-formal").find("input[name='lama_pendidikan']").val(lama_pendidikan);
+            $("#edit-pendidikan-non-formal").find("input[name='tahun_pendidikan']").val(tahun_pendidikan);
+            $("#edit-pendidikan-non-formal").find("input[name='tempat_pendidikan']").val(tempat_pendidikan);
+            $("#edit-pendidikan-non-formal").find("input[name='keterangan']").val(keterangan);
+            // current file
+            $("#edit-pendidikan-non-formal #file_prev").html(file);
+            $("#edit-pendidikan-non-formal .file_prev").attr("href",'{{ URL::asset('file/')}}'+'/'+file);
+        });
+            /* Updated  Post baru (Updated new Post) */
+            $(".btn-edit-pendidikan-non-formal").click(function(e){
+                e.preventDefault();
+                var id = $("#edit-pendidikan-non-formal").find("input[name='id']").val();
+                var nip_nrp = $("#edit-pendidikan-non-formal").find("input[name='nip_nrp']").val();
+                var nama_pendidikan= $("#edit-pendidikan-non-formal").find("input[name='nama_pendidikan']").val();
+                var lama_pendidikan= $("#edit-pendidikan-non-formal").find("input[name='lama_pendidikan']").val();
+                var tahun_pendidikan= $("#edit-pendidikan-non-formal").find("input[name='tahun_pendidikan']").val();
+                var tempat_pendidikan= $("#edit-pendidikan-non-formal").find("input[name='tempat_pendidikan']").val();
+                var keterangan= $("#edit-pendidikan-non-formal").find("input[name='keterangan']").val();
+                var file =$("#edit-pendidikan-non-formal").find("input[name=file]")[0].files[0];
+                var form = new FormData();
+            form.append('id',id);
+            form.append('nip_nrp', nip_nrp);
+            form.append('nama_pendidikan', nama_pendidikan);
+            form.append('lama_pendidikan', lama_pendidikan);
+            form.append('tahun_pendidikan', tahun_pendidikan);
+            form.append('tempat_pendidikan', tempat_pendidikan);
+            form.append('keterangan', keterangan);
+            form.append('file', file);
+                $.ajax({
+                cache: false,
+                contentType: false,
+                processData: false,
+                    dataType: 'json',
+                    type:'post',
+                    url: '{{route('pendidikan_non_formal.update')}}',
+                    data:form,
+                    success: function(data){
+                        console.log(data);
+                    $("#edit-pendidikan-non-formal").find("input[name=file]").val("");
+                    }
+                }).done(function(data){
+                    tampil_data_pendidikan_non_formal();
+                    $(".modal").modal('hide');
+                    toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+                })
+
+            })
+        // klik delete
+        $("body").on("click",".delete-pendidikan-non-formal",function(){
+            var id = $(this).parent("td").data('id');
+            $("#hapus-pendidikan-non-formal").find("input[name='id_hapus']").val(id);
+        });
+        /* Remove Post (Hapus) */
+        $("#btn-hapus-pendidikan-non-formal").click(function(e){
+            event.preventDefault();
+            var id = $("#hapus-pendidikan-non-formal").find("input[name='id_hapus']").val();
+            var c_obj = $(this).parents("tr");
+            $.ajax({
+                dataType: 'json',
+                type:'POST',
+                data:{id:id,_token: '{{csrf_token()}}'},
+                url: '{{route('pendidikan_non_formal.delete')}}',
+            }).done(function(data){
+                c_obj.remove();
+                toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                tampil_data_pendidikan_non_formal();
+                $(".modal").modal('hide');
+            });
+        })
+
+    })//end ready
+</script>
+<!------------------------------------------------------------akhir pendidikan non formal-------------------------------------------->
+
+
 
 @endsection

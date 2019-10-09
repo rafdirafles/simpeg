@@ -64,6 +64,10 @@ Route::post('/pendidikan_kejuruan/delete','PendidikankejuruanController@destroy'
 Route::resource('/pendidikan_polri','PendidikanPolriController');
 Route::post('/pendidikan_polri/update','PendidikanPolriController@update')->name('pendidikan_polri.update');
 Route::post('/pendidikan_polri/delete','PendidikanPolriController@destroy')->name('pendidikan_polri.delete');
+//pendidikan Non Formal
+Route::resource('/pendidikan_non_formal','PendidikanNonFormalController');
+Route::post('/pendidikan_non_formal/update','PendidikanNonFormalController@update')->name('pendidikan_non_formal.update');
+Route::post('/pendidikan_non_formal/delete','PendidikanNonFormalController@destroy')->name('pendidikan_non_formal.delete');
 // kecakapan bahasa
 Route::resource('/kecakapan_bahasa','Kecakapan\KecakapanBahasaController');
 Route::post('/kecakapan_bahasa/update','Kecakapan\KecakapanBahasaController@update')->name('kecakapan_bahasa.update');
