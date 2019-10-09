@@ -58,6 +58,8 @@ Route::post('/pendidikan_umum/update','PendidikanUmumController@update')->name('
 Route::post('/pendidikan_umum/delete','PendidikanUmumController@destroy')->name('pendidikan_umum.delete');
 // pendidikan kejuruan
 Route::resource('/pendidikan_kejuruan','PendidikankejuruanController');
+Route::post('/pendidikan_kejuruan/update','PendidikankejuruanController@update')->name('pendidikan_kejuruan.update');
+Route::post('/pendidikan_kejuruan/delete','PendidikankejuruanController@destroy')->name('pendidikan_kejuruan.delete');
 //pendidikan polri
 Route::resource('/pendidikan_polri','PendidikanPolriController');
 Route::post('/pendidikan_polri/update','PendidikanPolriController@update')->name('pendidikan_polri.update');

@@ -69,9 +69,9 @@ class PendidikanPolriController extends Controller
             'file' =>$nama_file,
         ]);
        return Response()->json($data);
-        
 
-       
+
+
     }
 
     /**
@@ -110,7 +110,7 @@ class PendidikanPolriController extends Controller
         //
         $id=$request->id;
         $data=Pendidikan_polri::findOrFail($id);
-        
+
         // $this->validate($request,[
         //     'nip_nrp'=>'required',
         //     'nama_pendidikan'=>'required',
@@ -160,7 +160,7 @@ class PendidikanPolriController extends Controller
     {
         //
         $id=$request->id;
-        
+
         $data=Pendidikan_polri::findOrFail($id);
          if($data->file != '-'){
             $image_path = public_path().'/file/'.$data->file;
@@ -168,6 +168,6 @@ class PendidikanPolriController extends Controller
         }
         $data->delete();
         return Response()->json($data);
-      
+
     }
 }

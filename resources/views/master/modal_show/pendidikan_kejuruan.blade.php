@@ -193,8 +193,8 @@
     </form>
     </div>
   </div>
-</div>              
-@endforeach 
+</div>
+@endforeach
  <!------------------------end hapus------------------------------>
  @section('asset-buttom')
  <script>
