@@ -34,15 +34,15 @@ class PendidikanUmumController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request,[
-            'file' =>'file|max:2048',
-            'jenjang_pendidikan'=>'required',
-            'nama_sekolah'=>'required',
-            'kota'=>'required',
-            'tahun_lulus'=>'required',
-            'no_ijazah'=>'required',
-            'nip_nrp'=>'required',
-        ]);
+        // $this->validate($request,[
+        //     'file' =>'file|max:2048',
+        //     'jenjang_pendidikan'=>'required',
+        //     'nama_sekolah'=>'required',
+        //     'kota'=>'required',
+        //     'tahun_lulus'=>'required',
+        //     'no_ijazah'=>'required',
+        //     'nip_nrp'=>'required',
+        // ]);
         // cek inputan jurusan kosong atau tidak
         if(empty($request->jurusan)){
             $request['jurusan']='-';
@@ -56,12 +56,15 @@ class PendidikanUmumController extends Controller
 
         }
         else{
+            $this->validate($request,[
+                'file' =>'mimes:pdf|max:10000',
+            ]);
             $file = $request->file('file');
             $nama_file = time()."_".$file->getClientOriginalName();
-            $tujuan_upload = 'img';
+            $tujuan_upload = 'file';
             $file->move($tujuan_upload,$nama_file);
         }
-        Pendidikan_umum::create([
+        $data=Pendidikan_umum::create([
             'nip_nrp'=>$request->nip_nrp,
             'jenjang_pendidikan'=>$request->jenjang_pendidikan,
             'nama_sekolah'=>$request->nama_sekolah,
@@ -71,7 +74,7 @@ class PendidikanUmumController extends Controller
             'no_ijazah'=>$request->no_ijazah,
             'file' =>$nama_file,
         ]);
-        return back()->with('success','data pendidikan berhasil ditambahkan');
+        return Response()->json($data);
     }
 
     /**
@@ -83,6 +86,8 @@ class PendidikanUmumController extends Controller
     public function show($id)
     {
         //
+        $data=Pendidikan_umum::where('nip_nrp',$id)->get();
+        return Response()->json($data);
     }
 
     /**

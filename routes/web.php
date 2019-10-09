@@ -56,8 +56,10 @@ Route::resource('/cuti','CutiController');
 Route::resource('/pendidikan_umum','PendidikanUmumController');
 // pendidikan kejuruan
 Route::resource('/pendidikan_kejuruan','PendidikankejuruanController');
-//
+//pendidikan polri
 Route::resource('/pendidikan_polri','PendidikanPolriController');
+Route::post('/pendidikan_polri/update','PendidikanPolriController@update')->name('pendidikan_polri.update');
+Route::post('/pendidikan_polri/delete','PendidikanPolriController@destroy')->name('pendidikan_polri.delete');
 // kecakapan bahasa
 Route::resource('/kecakapan_bahasa','Kecakapan\KecakapanBahasaController');
 Route::post('/kecakapan_bahasa/update','Kecakapan\KecakapanBahasaController@update')->name('kecakapan_bahasa.update');
@@ -74,7 +76,6 @@ Route::post('/kecakapan_brevet/delete','Kecakapan\KecakapanBrevetController@dest
 Route::resource('/tanda_jasa','TandaJasaController');
 Route::post('/tanda_jasa/update','TandaJasaController@update')->name('tanda_jasa.update');
 Route::post('/tanda_jasa/delete','TandaJasaController@destroy')->name('tanda_jasa.delete');
-
 // R pangkat
 Route::resource('/riwayat_kepangkatan','Riwayat\RiwayatKepangkatanController');
 Route::post('/riwayat_kepangkatan/update','Riwayat\RiwayatKepangkatanController@update')->name('riwayat_kepangkatan.update');
