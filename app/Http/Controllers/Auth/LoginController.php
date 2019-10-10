@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -72,5 +74,30 @@ class LoginController extends Controller
     public function username()
     {
         return $this->username;
+    }
+     /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => [
+                'required','string',
+                Rule::exists('users')->where(function($query){
+                    $query->where('is_status',true);
+                })
+            ],
+            'password' => 'required|string',
+        ],$this->validasi());
+    }
+    public function validasi(){
+        return [
+            $this->username().'.exits'=> 'Maaf akun anda dinonaktifkan hubungi admin'
+        ];
     }
 }

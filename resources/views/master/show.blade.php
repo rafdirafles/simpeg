@@ -123,6 +123,17 @@
 </svg>                        Riwayat Kecakapan
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_6" role="tab">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect x="0" y="0" width="24" height="24"/>
+        <path d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M7.5,5 C7.22385763,5 7,5.22385763 7,5.5 C7,5.77614237 7.22385763,6 7.5,6 L13.5,6 C13.7761424,6 14,5.77614237 14,5.5 C14,5.22385763 13.7761424,5 13.5,5 L7.5,5 Z M7.5,7 C7.22385763,7 7,7.22385763 7,7.5 C7,7.77614237 7.22385763,8 7.5,8 L10.5,8 C10.7761424,8 11,7.77614237 11,7.5 C11,7.22385763 10.7761424,7 10.5,7 L7.5,7 Z" fill="#000000" opacity="0.3"/>
+        <path d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z" fill="#000000"/>
+    </g>
+</svg>                        Riwayat Mutasi
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -670,59 +681,6 @@
                         <div class="kt-form__body">
                             <div class="kt-section kt-section--first">
                                 <div class="kt-section__body">
-                                    <!-- row tabel MUTASI -->
-                    <div class="row">
-                            <div class="col-lg-12">
-                                <h5>Riwayat Unit Kerja(Mutasi)</h5>
-                                <table class="table table-striped- table-bordered table-hover table-checkable" id="datatable">
-                                    <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Jenis Mutasi</th>
-                                        <th>Unit Kerja</th>
-                                        <th>No SK</th>
-                                        <th>Tanggal SK</th>
-                                        <th>TMT</th>
-                                        <th>Keterangan</th>
-                                        <th width="10%">Aksi</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="text-center">
-                                                <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="text-center">
-                                                <a class="badge badge-success" href="#modal-edit" data-toggle="modal" title="Edit"><span class="fas fa-fw fa-edit"></span></a>
-                                                <a class="badge badge-danger" href="#modal-hapus" data-toggle="modal" title="Hapus"><span class="fas fa-fw fa-trash"></span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="8" class="text-right"><a href="" class="btn btn-primary btn-sm">(+)tambah</a></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <!--end: datatable -->
-                            </div>
-                    </div>
-                    <!-- akhir row tabel  -->
                     <br><br>
                     <!-- row tabel PANGKAT -->
                     <div class="row">
@@ -835,7 +793,67 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>{{-- endi tab 5 --}}
+                <div class="tab-pane" id="kt_user_edit_tab_6" role="tabpanel">
+                    <div class="kt-form kt-form--label-right">
+                        <div class="kt-form__body">
+                            <div class="kt-section kt-section--first">
+                                <div class="kt-section__body">
+                                    <!-- row tabel MUTASI -->
+                                    <div class="row">
+                                            <div class="col-lg-12">
+                                                <h5>Mutasi Keluar</h5>
+                                                <table class="table table-striped- table-bordered table-hover table-checkable" id="datatable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Tempat Tujuan</th>
+                                                        <th>No SK</th>
+                                                        <th>Pejabat</th>
+                                                        <th>Tanggal SK</th>
+                                                        <th>TMT</th>
+                                                        <th>Keterangan</th>
+                                                        <th width="10%">Aksi</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody class="show_mutasi_keluar">
+                                                    </tbody>
+                                                    <tr>
+                                                        <td colspan="9" class="text-right"><a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-add-mutasi-keluar">(+)tambah</a></td>
+                                                    </tr>
+                                                </table>
+                                                <!--end: datatable -->
+                                            </div>
+                                    </div>
+                                    <!-- akhir row tabel  -->
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h5>Mutasi Internal</h5>
+                                            <table class="table table-striped- table-bordered table-hover table-checkable" id="datatable">
+                                                <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>belum fix</th>
+                                                    <th>No SK</th>
+                                                    <th>Pejabat</th>
+                                                    <th>Tanggal SK</th>
+                                                    <th>TMT</th>
+                                                    <th>Keterangan</th>
+                                                    <th width="10%">Aksi</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            <!--end: datatable -->
+                                        </div>
+                                </div>  {{-- akhir row --}}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>{{-- endi tab 5 --}}
             </div>
         </form>
     </div>
@@ -2486,6 +2504,142 @@
 </div>
 <!-------end hapus------>
 <!--------------------------------------------------akhir modal pendidikan non formal------------------------------------------------------------>
+
+<!---------------------------------------------------modal mutasi keluar---------------------------------------------------------------->
+<!-- MODAL ADD -->
+<div class="modal fade" id="modal-add-mutasi-keluar" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel">Tambah Mutasi</h3>
+            </div>
+            <!-- form -->
+            <form class="form-horizontal" data-toggle="validator">
+                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                <div class="modal-body">
+                    <form data-toggle="validator" method="post">
+                        <input type="hidden" name="nip_nrp" value="{{$datas->nip_nrp}}" >
+                        <div class="form-group">
+                            <label class="control-label" for="title">Tempat Tujuan *:</label>
+                            <input type="text" name="tempat_tujuan" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Nomor SK *:</label>
+                            <input type="text" name="nomor_sk" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Pejabat *:</label>
+                            <input type="text" name="pejabat" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Tanggal SK *:</label>
+                            <input type="date" name="tanggal_sk" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Tanggal Mulai Terhitung *:</label>
+                            <input type="date" name="tmt" class="form-control" data-error="Please enter tmt." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Keterangan :</label>
+                            <input type="text" name="keterangan" class="form-control"  required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button class="btn btn-primary" id="btn_simpan_mutasi_keluar">Kirim</button>
+                </div>
+            </form>
+            <!-- form -->
+        </div>
+    </div>
+</div>
+<!--END MODAL ADD-->
+<!--edit MODAL -->
+<div class="modal fade" id="edit-mutasi-keluar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit Data Riwayat Gaji</h4>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+                    <form data-toggle="validator" method="post">
+                        <input type="hidden" name="nip_nrp" value="" >
+                        <input type="hidden" name="id" value="">
+                        <div class="form-group">
+                            <label class="control-label" for="title">Tempat Tujuan *:</label>
+                            <input type="text" name="tempat_tujuan" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Nomor SK *:</label>
+                            <input type="text" name="nomor_sk" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Pejabat *:</label>
+                            <input type="text" name="pejabat" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Tanggal SK *:</label>
+                            <input type="date" name="tanggal_sk" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Tanggal Mulai Terhitung *:</label>
+                            <input type="date" name="tmt" class="form-control" data-error="Please enter tmt." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Keterangan :</label>
+                            <input type="text" name="keterangan" class="form-control"  required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                         <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary btn-edit-mutasi-keluar">Edit</button>
+                        </div>
+                    </form>
+            </div>
+            <!-- body modal -->
+        </div>
+    </div>
+</div>
+<!--end MODAL-->
+<!------modal Hapus ---->
+<div class="modal fade" id="hapus-mutasi-keluar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Hapus Data</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <form method="post">
+            {{csrf_field()}}
+            <input type="hidden" name="id_hapus">
+            <div class="modal-body">
+                <p>Apakah Anda Yakin Menghapus Data </strong>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="btn-hapus-mutasi-keluar">Hapus</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<!-------end hapus------>
+<!---------------------------------------------akhir modal mutasi keluar ----------------------------------------------------------->
 @endsection
 {{-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ --}}
 {{-- ################################################################################################################################### --}}
@@ -4454,7 +4608,7 @@
 <!----------------------------------------------------------------akhir pendidikan kejuruan-------------------------------------------->
 
 
-<!-----------------------------------------------------------------awal pendidikan non formal--------------------------------------------->
+<!-------------------------------------------------------------awal pendidikan non formal--------------------------------------------->
 <script>
     $(document).ready(function(){
                 $.ajaxSetup({
@@ -4643,8 +4797,170 @@
 
     })//end ready
 </script>
-<!------------------------------------------------------------akhir pendidikan non formal-------------------------------------------->
+<!-------------------------------------------------------------akhir pendidikan non formal-------------------------------------------->
 
+<!----------------------------------------------------------------awal mutasi masuk--------------------------------------------->
+<script>
+    $(document).ready(function(){
+              $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+      tampil_data_mutasi_keluar();  //pemanggilan fungsi
+    //fungsi tampil
+      function tampil_data_mutasi_keluar(){
+          $.ajax({
+              type  : 'GET',
+              beforeSend: function(){
+                  $('.ajax-loader').css("visibility", "visible");
+              },
+              url   : '/mutasi_keluar/'+nrp,
+              async : true,
+              dataType : 'json',
+              success : function(data){
+                  console.log(data);
+                  var i;
+                  var no=1;
+                  var rows ='';
+                  $.each( data, function( key, value ) {
+                      rows = rows + '<tr>';
+                      rows = rows + '<td>'+ no++ +'</td>';
+                      rows = rows +'<td style="display:none">'+value.nip_nrp+'</td>';
+                      rows = rows +'<td >'+value.tempat_tujuan+'</td>';
+                      rows = rows +'<td >'+value.nomor_sk+'</td>';
+                      rows = rows + '<td>'+value.pejabat+'</td>';
+                      rows = rows + '<td>'+value.tanggal_sk+'</td>';
+                      rows = rows + '<td>'+value.tmt+'</td>';
+                      rows = rows + '<td>'+value.keterangan+'</td>';
+                      rows = rows + '<td class="text-center" data-id="'+value.id+'">';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-mutasi-keluar" class="badge badge-success edit-item-mutasi-keluar"><span class="fas fa-fw fa-edit " ></a> ';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#hapus-mutasi-keluar" class="badge badge-danger delete-mutasi-keluar"><span class="fas fa-fw fa-trash"></button>';
+                      rows = rows + '</td>';
+                      rows = rows + '</tr>';
+                  });
+                  $('.show_mutasi_keluar').html(rows);
+              },
+              error: function(xhr, ajaxOptions, thrownError){
+                          alert("Mohon Data Masukkan Dengan Tepat");
+                      },
+              complete: function(){
+                  $('.ajax-loader').css("visibility", "hidden");
+              }
+          });
+      } //tutup akhir tampil
+      //Simpan
+    $('#btn_simpan_mutasi_keluar').click(function(e){
+        e.preventDefault();
+        var nip_nrp = $("#modal-add-mutasi-keluar").find("input[name=nip_nrp]").val();
+        var tempat_tujuan = $("#modal-add-mutasi-keluar").find("input[name=tempat_tujuan]").val();
+        var nomor_sk = $("#modal-add-mutasi-keluar").find("input[name=nomor_sk]").val();
+        var pejabat = $("#modal-add-mutasi-keluar").find("input[name=pejabat]").val();
+        var tanggal_sk = $("#modal-add-mutasi-keluar").find("input[name=tanggal_sk]").val();
+        var tmt = $("#modal-add-mutasi-keluar").find("input[name=tmt]").val();
+        var keterangan = $("#modal-add-mutasi-keluar").find("input[name=keterangan]").val();
+        event.preventDefault();
+            $.ajax({
+                type : "POST",
+                beforeSend: function(){
+                    $('.ajax-loader').css("visibility", "visible");
+                },
+                url  : '{{route('mutasi_keluar.store')}}',
+                data : {nip_nrp:nip_nrp,tempat_tujuan:tempat_tujuan,nomor_sk:nomor_sk,pejabat:pejabat,tanggal_sk:tanggal_sk,tmt:tmt,keterangan:keterangan},
+                success: function(data){
+                    console.log(data);
+                    $("#modal-add-mutasi-keluar").find("input[name=tempat_tujuan]").val("");
+                    $("#modal-add-mutasi-keluar").find("input[name=nomor_sk]").val("");
+                    $("#modal-add-mutasi-keluar").find("input[name=pejabat]").val("");
+                    $("#modal-add-mutasi-keluar").find("input[name=tanggal_sk]").val("");
+                    $("#modal-add-mutasi-keluar").find("input[name=tmt]").val("");
+                    $("#modal-add-mutasi-keluar").find("input[name=keterangan]").val("");
+                    tampil_data_mutasi_keluar();
+                    $('.modal').modal('hide');
 
+                },
+                error: function(xhr, ajaxOptions, thrownError){
+                        alert("Mohon Data Masukkan Dengan Tepat");
+                    },
+                complete: function(){
+                    $('.ajax-loader').css("visibility", "hidden");
+                }
+            }).done(function(data){
+                toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+            })
+    });
+        /* Edit Post */
+        $("body").on("click",".edit-item-mutasi-keluar",function(){
+            var id = $(this).parent("td").data('id');
+            var nip_nrp=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var tempat_tujuan=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var nomor_sk=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var pejabat=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").text();
+            var tanggal_sk=$(this).parent("td").prev("td").prev("td").prev("td").text();
+            var tmt=$(this).parent("td").prev("td").prev("td").text();
+            var keterangan=$(this).parent("td").prev("td").text();
+
+            // set
+            $("#edit-mutasi-keluar").find("input[name='id']").val(id);
+            $("#edit-mutasi-keluar").find("input[name='nip_nrp']").val(nip_nrp);
+            $("#edit-mutasi-keluar").find("input[name='tempat_tujuan']").val(tempat_tujuan);
+            $("#edit-mutasi-keluar").find("input[name='nomor_sk']").val(nomor_sk);
+            $("#edit-mutasi-keluar").find("input[name='pejabat']").val(pejabat);
+            $("#edit-mutasi-keluar").find("input[name='tanggal_sk']").val(tanggal_sk);
+            $("#edit-mutasi-keluar").find("input[name='tmt']").val(tmt);
+            $("#edit-mutasi-keluar").find("input[name='keterangan']").val(keterangan);
+        });
+          /* Updated  Post baru (Updated new Post) */
+          $(".btn-edit-mutasi-keluar").click(function(e){
+              e.preventDefault();
+              var id = $("#edit-mutasi-keluar").find("input[name='id']").val();
+              var nip_nrp = $("#edit-mutasi-keluar").find("input[name='nip_nrp']").val();
+              var tempat_tujuan= $("#edit-mutasi-keluar").find("input[name='tempat_tujuan']").val();
+              var nomor_sk= $("#edit-mutasi-keluar").find("input[name='nomor_sk']").val();
+              var pejabat= $("#edit-mutasi-keluar").find("input[name='pejabat']").val();
+              var tanggal_sk= $("#edit-mutasi-keluar").find("input[name='tanggal_sk']").val();
+              var tmt= $("#edit-mutasi-keluar").find("input[name='tmt']").val();
+              var keterangan= $("#edit-mutasi-keluar").find("input[name='keterangan']").val();
+              $.ajax({
+                  dataType: 'json',
+                  type:'post',
+                  url: '{{route('mutasi_keluar.update')}}',
+                  data:{id:id,nip_nrp:nip_nrp,tempat_tujuan:tempat_tujuan,nomor_sk:nomor_sk,pejabat:pejabat,tanggal_sk:tanggal_sk,tmt:tmt,keterangan:keterangan},
+                   success: function(data){
+                        console.log(data);
+                   }
+              }).done(function(data){
+                    tampil_data_mutasi_keluar();
+                    $(".modal").modal('hide');
+                    toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+                })
+
+          })
+        // klik delete
+        $("body").on("click",".delete-mutasi-keluar",function(){
+            var id = $(this).parent("td").data('id');
+            $("#hapus-mutasi-keluar").find("input[name='id_hapus']").val(id);
+        });
+        /* Remove Post (Hapus) */
+        $("#btn-hapus-mutasi-keluar").click(function(e){
+            event.preventDefault();
+            var id = $("#hapus-mutasi-keluar").find("input[name='id_hapus']").val();
+            var c_obj = $(this).parents("tr");
+            $.ajax({
+                dataType: 'json',
+                type:'POST',
+                data:{id:id,_token: '{{csrf_token()}}'},
+                url: '{{route('mutasi_keluar.delete')}}',
+            }).done(function(data){
+                c_obj.remove();
+                toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                tampil_data_mutasi_keluar();
+                $(".modal").modal('hide');
+            });
+        })
+
+    })//end ready
+</script>
+<!----------------------------------------------------------------akhir mutasi masuk-------------------------------------------->
 
 @endsection

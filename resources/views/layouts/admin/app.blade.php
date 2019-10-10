@@ -134,7 +134,16 @@
                                 </div>
                             </a>
                             <div class="kt-notification__custom kt-valign-middle">
-                                <a href="custom/user/login-v2.html" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold" >Sign Out</a>
+                                {{-- <a href="custom/user/login-v2.html" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold" >Sign Out</a> --}}
+                                <a class="btn btn-label btn-label-brand btn-sm btn-bold" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                  Sign Out
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </div>
                         </div>
                     </div>

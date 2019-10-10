@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('gelar_depan',20);
             $table->string('gelar_belakang',20);
             $table->string('no_kta_pegawai',30)->unique();
-            $table->string('jenis_pegawai',30);
+            $table->enum('jenis_pegawai', ['Polri','PNS','Dosen','External']);
             $table->string('password',255);
             $table->string('nidn',30);
             $table->text('alamat');

@@ -17,7 +17,7 @@ class CreatePendidikanUmumsTable extends Migration
             $table->Increments('id');
             $table->string('nip_nrp',20)->index();
             $table->foreign('nip_nrp')->references('nip_nrp')->on('users')->onDelete('cascade');
-            $table->enum('jenjang_pendidikan',['SD','SLTP','SLTA','S1']);
+            $table->enum('jenjang_pendidikan',['SD','SLTP','SLTA','S1','S2','S3']);
             $table->string('nama_sekolah',50);
             $table->string('jurusan',50);
             $table->string('kota',50);

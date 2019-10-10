@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMutasiInternalsTable extends Migration
+class CreateMutasiKeluarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateMutasiInternalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mutasi_internals', function (Blueprint $table) {
-            $table->Increments('id');
+        Schema::create('mutasi_keluars', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('nip_nrp',20)->index();
             $table->foreign('nip_nrp')->references('nip_nrp')->on('users')->onDelete('cascade');
-            $table->string('tempat_bekerja',50);
+            $table->string('tempat_tujuan',50);
             $table->string('nomor_sk',50);
             $table->string('pejabat',50);
             $table->date('tanggal_sk');
@@ -34,6 +34,6 @@ class CreateMutasiInternalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mutasi_internals');
+        Schema::dropIfExists('mutasi_keluars');
     }
 }
