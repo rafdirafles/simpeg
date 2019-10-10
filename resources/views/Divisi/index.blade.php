@@ -1,7 +1,11 @@
 @extends('layouts.admin.app')
 @section('asset-top')
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-
+<style>
+        .help-block {
+        color: red;
+}
+</style>
 @endsection
 @section('body')
 <div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
@@ -10,10 +14,7 @@
             <div class="kt-subheader   kt-grid__item" id="kt_subheader">
                 <div class="kt-container ">
                     <div class="kt-subheader__main">
-                        <h3 class="kt-subheader__title">TABEL Divisi</h3>
-                        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
                         <span class="kt-subheader__desc">MASTER DATA</span>
-                            <a href="#" class="btn btn-label-primary btn-bold btn-icon-h kt-margin-l-10" data-toggle="modal" data-target="#modal-add-divisi"> Tambah Divisi</a>
                     </div>
                 </div>
             </div>
@@ -26,7 +27,7 @@
                             <span class="kt-portlet__head-icon">
                                 <i class="kt-font-brand flaticon2-line-chart"></i>
                             </span>
-                            <h3 class="kt-portlet__head-title" style="margin-right:20px">Divisi</h3>
+                            <h3 class="kt-portlet__head-title" style="margin-right:20px">TABEL DIVISI</h3>
                         </div>
                         <div class="ajax-loader">
                                 <img width=100px src="{{ asset('/img/1.gif') }}" class="img-responsive" />
@@ -34,7 +35,7 @@
                         <div class="kt-portlet__head-toolbar">
                             <div class="kt-portlet__head-wrapper">
                                 <div class="kt-portlet__head-actions">
-                                    <button href="#" class="btn btn-brand btn-elevate btn-icon-sm" data-toggle="modal" data-target="#modal-add-divisi"><i class="la la-plus"></i> Tambah Divisi</button>
+                                    <button href="#" class="btn btn-brand btn-elevate btn-icon-sm klik-tambah" data-toggle="modal" data-target="#modal-add-divisi"><i class="la la-plus"></i> Tambah Divisi</button>
                                     {{-- <a href="#" class="btn btn-label-primary btn-bold btn-icon-h kt-margin-l-10" data-toggle="modal" data-target="#modal-add-unit_kerja"> New Record</a> --}}
                                 </div>
                             </div>
@@ -70,8 +71,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-
-                <h3 class="modal-title" id="myModalLabel">Tambah Divisi</h3>
+                <h5 class="modal-title" id="jdlbrevet">Tambah Divisi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <!-- form -->
             <form class="form-horizontal" data-toggle="validator">
@@ -79,17 +82,16 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label" for="title">Nama Unit Kerja :</label>
-                        <select name="id_unit_kerja" class="form-control"  data-error="Please enter unit kerja." required>
+                        <select name="id_unit_kerja" class="form-control" id="id_unit_kerja" data-error="Please enter unit kerja." required>
                             <option value="">Pilih Unit Kerja</option>
                             @foreach ($unit as $data)
                                 <option value="{{$data->id}}">{{$data->nama_unit_kerja}}</option>
                             @endforeach
                         </select>
-                        <p style="color:red"><div class="help-block with-errors"></div></p>
                     </div>
                     <div class="form-group">
                             <label class="control-label" for="title">Divisi :</label>
-                            <input type="text" name="nama_devisi" class="form-control" data-error="Please enter title." required />
+                            <input type="text" name="nama_devisi" class="form-control" id="nama_devisi" required />
                             <p style="color:red"><div class="help-block with-errors"></div></p>
                     </div>
                 </div>
@@ -108,8 +110,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Data</h4>
+                <h5 class="modal-title" id="jdlbrevet">Edit Divisi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <!-- body modal -->
             <div class="modal-body">
@@ -127,8 +131,8 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="title">Divisi :</label>
-                        <input type="text" name="nama_devisi" class="form-control" data-error="Please enter title." required />
-                        <p style="color:red"><div class="help-block with-errors"></div></p>
+                        <input type="text" name="nama_devisi" class="form-control" id="nama_devisi" required />
+                      
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -147,8 +151,10 @@
         <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-            <h4 class="modal-title">Hapus Data</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h5 class="modal-title" id="jdlbrevet">Delete Divisi</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <!-- Modal body -->
         <form method="post">
@@ -159,7 +165,7 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 <button class="btn btn-primary" id="btn_hapus_divisi">Hapus</button>
             </div>
         </form>
@@ -224,6 +230,9 @@
             var nama_devisi=$("input[name=nama_devisi]").val();
             var id_unit_kerja=$("select[name=id_unit_kerja]").val();
             event.preventDefault();
+            var form=$("body");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
                 $.ajax({
                     type : "POST",
                     beforeSend: function(){
@@ -238,9 +247,17 @@
                         tampil_data_divisi();
                         $('#modal-add-divisi').modal('hide');
                     },
-                    error: function(xhr, ajaxOptions, thrownError){
-                            alert("Mohon Data Masukkan Dengan Tepat");
-                        },
+                    error: function(xhr){
+                        var res=xhr.responseJSON;
+                        if($.isEmptyObject(res)==false){
+                            $.each(res.errors,function(key,value){
+                                $("#"+key)
+                                    .closest('.form-group')
+                                    .addClass('has-error')
+                                    .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                            })
+                        }
+                    },
                     complete: function(){
                         $('.ajax-loader').css("visibility", "hidden");
                     }
@@ -256,6 +273,9 @@
             var divisi = $(this).parent("td").prev("td").prev("td").text();
             var z= $(this).parent("td").prev("td").text();
             //
+            var form= $("body");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
             var i;
             var x= document.getElementById("id_unit_kerja");
                 for(i=0; i<x.options.length;i++){
@@ -277,11 +297,26 @@
             var id = $("#edit-item-devisi").find("input[name='id']").val();
             var nama_devisi = $("#edit-item-devisi").find("input[name='nama_devisi']").val();
             var id_unit_kerja =  $("#edit-item-devisi").find("select[name=id_unit_kerja]").val();
+            var form=$("body");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
             $.ajax({
                 dataType: 'json',
                 type:'post',
                 url: '{{route('divisi.update')}}',
                 data:{id:id,id_unit_kerja:id_unit_kerja,nama_devisi:nama_devisi,_token: '{{csrf_token()}}'},
+                error: function(xhr){
+                        var res=xhr.responseJSON;
+                        if($.isEmptyObject(res)==false){
+                            $.each(res.errors,function(key,value){
+                                $("#edit-item-devisi").find("#"+key)
+                                    .closest('.form-group')
+                                    .addClass('has-error')
+                                    .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                            })
+                        }
+                },
+                
             }).done(function(data){
                 tampil_data_divisi();
                 $(".modal").modal('hide');
@@ -315,5 +350,10 @@
             });
         });
     });
+    $("body").on("click",".klik-tambah",function(){
+        var form=$("body");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
+    })
 </script>
 @endsection

@@ -1,7 +1,11 @@
 @extends('layouts.admin.app')
 @section('asset-top')
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-
+<style>
+    .help-block {
+    color: red;
+}
+</style>
 @endsection
 @section('body')
 <!-- tabel mulai -->
@@ -11,10 +15,7 @@
         <div class="kt-subheader   kt-grid__item" id="kt_subheader">
             <div class="kt-container ">
                 <div class="kt-subheader__main">
-                    <h3 class="kt-subheader__title">TABEL PANGKAT</h3>
-                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
                     <span class="kt-subheader__desc">MASTER DATA</span>
-                        <a href="#" class="btn btn-label-primary btn-bold btn-icon-h kt-margin-l-10" data-toggle="modal" data-target="#modal-add-pangkat"> Tambah Pangkat</a>
                 </div>
             </div>
         </div>
@@ -27,7 +28,7 @@
                         <span class="kt-portlet__head-icon">
                             <i class="kt-font-brand flaticon2-line-chart"></i>
                         </span>
-                        <h3 class="kt-portlet__head-title" style="margin-right:20px">Pangkat</h3>
+                        <h3 class="kt-portlet__head-title" style="margin-right:20px">PANGKAT</h3>
                     </div>
                     <div class="ajax-loader">
                             <img width=100px src="{{ asset('/img/1.gif') }}" class="img-responsive" />
@@ -35,7 +36,7 @@
                     <div class="kt-portlet__head-toolbar">
                         <div class="kt-portlet__head-wrapper">
                             <div class="kt-portlet__head-actions">
-                                <button href="#" class="btn btn-brand btn-elevate btn-icon-sm" data-toggle="modal" data-target="#modal-add-pangkat"><i class="la la-plus"></i> Tambah Pangkat</button>
+                                <button href="#" class="btn btn-brand btn-elevate btn-icon-sm klik-tambah" data-toggle="modal" data-target="#modal-add-pangkat"><i class="la la-plus"></i> Tambah Pangkat</button>
                             </div>
                         </div>
                     </div>
@@ -65,7 +66,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="myModalLabel">Tambah Pangkat</h3>
+                <h5 class="modal-title" id="jdlbrevet">Tambah Pangkat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <!-- form -->
             <form class="form-horizontal" data-toggle="validator">
@@ -73,8 +77,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                             <label class="control-label" for="title">Nama Pangkat :</label>
-                            <input type="text" name="nama_pangkat" class="form-control" data-error="Please enter title." required />
-                            <p style="color:red"><div class="help-block with-errors"></div></p>
+                            <input type="text" name="nama_pangkat" class="form-control" required />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -92,8 +95,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-              <h4 class="modal-title" id="myModalLabel">Edit Data</h4>
+                <h5 class="modal-title" id="jdlbrevet">Edit Pangkat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <!-- body modal -->
             <div class="modal-body">
@@ -128,8 +133,10 @@
      <div class="modal-content">
        <!-- Modal Header -->
        <div class="modal-header">
-         <h4 class="modal-title">Hapus Data</h4>
-         <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h5 class="modal-title" id="jdlbrevet">Hapus Data</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
        </div>
        <!-- Modal body -->
      <form method="post">
@@ -140,7 +147,7 @@
          </div>
          <!-- Modal footer -->
          <div class="modal-footer">
-             <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
              <button class="btn btn-primary" id="btn_hapus_pangkat">Hapus</button>
          </div>
      </form>
@@ -193,6 +200,9 @@
         $('#btn_simpan_pangkat').click(function(){
             var nama_pangkat=$("input[name=nama_pangkat]").val();
             event.preventDefault();
+            var form=$("#modal-add-pangkat");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
                 $.ajax({
                     type : "POST",
                     beforeSend: function(){
@@ -206,9 +216,18 @@
                         tampil_data_barang();
                         $('#modal-add-pangkat').modal('hide');
                     },
-                    error: function(xhr, ajaxOptions, thrownError){
-                            alert("Mohon Data Masukkan Dengan Tepat");
-                        },
+                    error: function(xhr){
+                        var res=xhr.responseJSON;
+                        if($.isEmptyObject(res)==false){
+                            $.each(res.errors,function(key,value){
+                                $("input[name="+key+"]")
+                                    .closest('.form-group')
+                                    .addClass('has-error')
+                                    .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                            })
+                        }
+                            
+                    },
                     complete: function(){
                         $('.ajax-loader').css("visibility", "hidden");
                     }
@@ -222,21 +241,37 @@
             var id = $(this).parent("td").data('id');
             var nama_pangkat = $(this).parent("td").prev("td").text();
             // $("#edit-item").find("input[name='title']").val(title);
+            var form=$("#edit-item");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
             $("#edit-item").find("input[name='nama_pangkat']").val(nama_pangkat);
             $("#edit-item").find("input[name='id']").val(id);
            
         });
         /* Kirim Updated  Post baru (Updated new Post) */
         $(".crud-submit-edit").click(function(e){
-
             event.preventDefault();
             var nama_pangkat = $("#edit-item").find("input[name='nama_pangkat']").val();
             var id = $("#edit-item").find("input[name='id']").val();
+            var form=$("#edit-item");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
             $.ajax({
                 dataType: 'json',
                 type:'POST',
                 url: '{{route('pangkat.update')}}',
                 data:{nama_pangkat:nama_pangkat,id:id,_token: '{{csrf_token()}}'},
+                error: function(xhr){
+                        var res=xhr.responseJSON;
+                        if($.isEmptyObject(res)==false){
+                            $.each(res.errors,function(key,value){
+                                $("input[name="+key+"]")
+                                    .closest('.form-group')
+                                    .addClass('has-error')
+                                    .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                            })
+                        }       
+                },
             }).done(function(data){
                 tampil_data_barang();
                 $(".modal").modal('hide');
@@ -269,12 +304,18 @@
             });
         });
     });
+
+    $("body").on("click",".klik-tambah",function(){
+        var form=$("#modal-add-pangkat");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
+    })
+    // $("body").on("click",".close",function(){
+    //         body.find('.help-block').remove();
+    //         body.find('.form-group').removeClass('has-error');
+    // })
 </script>
 <script>
- $(document).ready(function() {
-        $('#datatable').DataTable({
-            responsive: true
-        });
-    } );
+ 
 </script>
 @endsection

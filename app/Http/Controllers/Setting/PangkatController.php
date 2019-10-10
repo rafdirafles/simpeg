@@ -40,6 +40,9 @@ class PangkatController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,[
+            'nama_pangkat'=>'required|string',
+        ]);
         if($request->ajax()){
             $nama=$request->get('nama_pangkat');
             $datas=Pangkat::create([
@@ -88,8 +91,10 @@ class PangkatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-
     {
+        $this->validate($request,[
+            'nama_pangkat'=>'required|string',
+        ]);
         $id=$request->id;
         $post =Pangkat::find($id)->update([
             'nama_pangkat'=>$request->nama_pangkat,

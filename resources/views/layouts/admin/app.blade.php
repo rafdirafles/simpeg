@@ -146,15 +146,9 @@
 <!-- begin: Header Menu -->
     @include('layouts.admin.navbar')
 </div>
-<!-- end:: Header -->
-<div class="kt-subheader   kt-grid__item" id="kt_subheader">
-</div>
-<br>
-{{-- begin body --}}
-	<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+
         @yield('body')
 
-    </div>
 {{-- end body --}}
 <!-- begin:: Footer -->
 <div class="kt-footer  kt-footer--extended  kt-grid__item" id="kt_footer">

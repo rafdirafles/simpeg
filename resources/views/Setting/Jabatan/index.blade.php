@@ -1,7 +1,11 @@
 @extends('layouts.admin.app')
 @section('asset-top')
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-
+<style>
+        .help-block {
+        color: red;
+}
+</style>
 @endsection
 @section('body')
 <!-- tabel mulai -->
@@ -11,10 +15,7 @@
         <div class="kt-subheader   kt-grid__item" id="kt_subheader">
             <div class="kt-container ">
                 <div class="kt-subheader__main">
-                    <h3 class="kt-subheader__title">TABEL PANGKAT</h3>
-                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
                     <span class="kt-subheader__desc">MASTER DATA</span>
-                        <a href="#" class="btn btn-label-primary btn-bold btn-icon-h kt-margin-l-10" data-toggle="modal" data-target="#modal-add-jabatan"> Tambah Jabatan</a>
                 </div>
             </div>
         </div>
@@ -27,7 +28,7 @@
                         <span class="kt-portlet__head-icon">
                             <i class="kt-font-brand flaticon2-line-chart"></i>
                         </span>
-                        <h3 class="kt-portlet__head-title" style="margin-right:20px">Pangkat</h3>
+                        <h3 class="kt-portlet__head-title" style="margin-right:20px">TABEL JABATAN</h3>
                     </div>
                     <div class="ajax-loader">
                             <img width=100px src="{{ asset('/img/1.gif') }}" class="img-responsive" />
@@ -36,9 +37,6 @@
                         <div class="kt-portlet__head-wrapper">
                             <div class="kt-portlet__head-actions">
                                 <div class="dropdown dropdown-inline">
-                                    <button type="button" class="btn btn-default btn-icon-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="la la-download"></i> Export
-                                    </button>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <ul class="kt-nav">
                                             <li class="kt-nav__section kt-nav__section--first">
@@ -72,7 +70,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <button href="#" class="btn btn-brand btn-elevate btn-icon-sm" data-toggle="modal" data-target="#modal-add-jabatan"><i class="la la-plus"></i> Tambah Jabatan</button>
+                                <button href="#" class="btn btn-brand btn-elevate btn-icon-sm klik-tambah" data-toggle="modal" data-target="#modal-add-jabatan"><i class="la la-plus"></i> Tambah Jabatan</button>
                             </div>
                         </div>
                     </div>
@@ -82,7 +80,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama Pangkat</th>
+                            <th>Nama Jabatan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -101,8 +99,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
-                <h3 class="modal-title" id="myModalLabel">Tambah Jabatan</h3>
+                <h5 class="modal-title" id="jdlbrevet">Tambah Jabatan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <!-- form -->
             <form class="form-horizontal" data-toggle="validator">
@@ -110,7 +110,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                             <label class="control-label" for="title">Nama Jabatan* :</label>
-                            <input type="text" name="nama_jabatan" class="form-control" data-error="Please enter jabatan." required />
+                            <input type="text" name="nama_jabatan" class="form-control" id="nama_jabatan" data-error="Please enter jabatan." required />
                             <p style="color:red"><div class="help-block with-errors"></div></p>
                     </div>
                 </div>
@@ -129,8 +129,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-              <h4 class="modal-title" id="myModalLabel">Edit Data</h4>
+                <h5 class="modal-title" id="jdlbrevet">Edit Jabatan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <!-- body modal -->
             <div class="modal-body">
@@ -139,8 +141,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label" for="title">Nama Pangkat *:</label>
-                            <input type="text" name="nama_jabatan" class="form-control" data-error="Please enter title." required />
-                            <div class="help-block with-errors"></div>
+                            <input type="text" name="nama_jabatan" id="nama_jabatan" class="form-control" required />
                         </div>
                         <div class="modal-footer">
                                 <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -160,8 +161,10 @@
           <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-              <h4 class="modal-title">Hapus Data</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title" id="jdlbrevet">Hapus Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
             </div>
             <!-- Modal body -->
           <form method="post">
@@ -172,7 +175,7 @@
               </div>
               <!-- Modal footer -->
               <div class="modal-footer">
-                  <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
                   <button class="btn btn-primary" id="btn_hapus_jabatan">Hapus</button>
               </div>
           </form>
@@ -226,6 +229,9 @@
         $('#btn_simpan_jabatan').click(function(){
             var nama_jabatan=$("input[name=nama_jabatan]").val();
             event.preventDefault();
+            var form=$("body");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
                 $.ajax({
                     type : "POST",
                     beforeSend: function(){
@@ -239,9 +245,17 @@
                         tampil_data_barang();
                         $('#modal-add-jabatan').modal('hide');
                     },
-                    error: function(xhr, ajaxOptions, thrownError){
-                            alert("Mohon Data Masukkan Dengan Tepat");
-                        },
+                    error: function(xhr){
+                        var res=xhr.responseJSON;
+                        if($.isEmptyObject(res)==false){
+                            $.each(res.errors,function(key,value){
+                                $("input[name="+key+"]")
+                                    .closest('.form-group')
+                                    .addClass('has-error')
+                                    .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                            })
+                        }
+                    },
                     complete: function(){
                         $('.ajax-loader').css("visibility", "hidden");
                     }
@@ -256,20 +270,35 @@
             var nama_jabatan = $(this).parent("td").prev("td").text();
             $("#edit-item").find("input[name='nama_jabatan']").val(nama_jabatan);
             $("#edit-item").find("input[name='id']").val(id);
+            var form=$("body");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
            
         });
-        
         /* Updated  Post baru (Updated new Post) */
         $(".edit-jabatan").click(function(e){
             e.preventDefault();
-           
             var nama_jabatan = $("#edit-item").find("input[name='nama_jabatan']").val();
             var id = $("#edit-item").find("input[name='id']").val();
+            var form=$("body");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
             $.ajax({
                 dataType: 'json',
                 type:'POST',
                 url:'{{route('jabatan.update')}}',
                 data:{id:id,nama_jabatan:nama_jabatan,_token: '{{csrf_token()}}'},
+                error: function(xhr){
+                        var res=xhr.responseJSON;
+                        if($.isEmptyObject(res)==false){
+                            $.each(res.errors,function(key,value){
+                                $("input[name="+key+"]")
+                                    .closest('.form-group')
+                                    .addClass('has-error')
+                                    .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                            })
+                        }
+                },
             }).done(function(data){
                 tampil_data_barang();
                 $(".modal").modal('hide');
@@ -303,5 +332,10 @@
             });
         });
     });
+    $("body").on("click",".klik-tambah",function(){
+        var form=$("body");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
+    })
 </script>
 @endsection

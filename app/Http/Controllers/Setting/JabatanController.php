@@ -38,6 +38,9 @@ class JabatanController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,[
+            'nama_jabatan'=>'required',
+        ]);
         $data=Jabatan::create($request->all());
         return response()->json($data);
     }
@@ -77,6 +80,9 @@ class JabatanController extends Controller
     public function update(Request $request)
     {
         //
+        $this->validate($request,[
+            'nama_jabatan'=>'required',
+        ]);
         $id=$request->id;
         $post =Jabatan::find($id)->update($request->all());
         return response()->json($post);

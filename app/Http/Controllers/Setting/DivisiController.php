@@ -74,6 +74,7 @@ class DivisiController extends Controller
     public function edit($id)
     {
         //
+        
         $unit=Unit_kerja::all();
         $datas=Divisi::findOrFail($id);
         return view('divisi.edit',compact('datas','unit'));

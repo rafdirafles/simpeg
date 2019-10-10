@@ -37,6 +37,9 @@ class UnitKerjaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'nama_unit_kerja'=>'required',
+        ]);
         $data=Unit_kerja::create($request->all());
         return response()->json($data);
         // return $request->all();
