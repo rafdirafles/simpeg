@@ -48,6 +48,7 @@ class UserSeed extends Seeder
                 'cacat_tubuh' =>$faker->randomElement(['sakit','cidera']),
                 'is_status' =>intval($faker->boolean),
                 'id_unit_kerja'=>1,
+                'id_divisi'=>1,
                 'foto' => $faker->address,
     		]);
 

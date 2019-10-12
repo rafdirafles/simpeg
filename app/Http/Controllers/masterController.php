@@ -145,36 +145,37 @@ class masterController extends Controller
         $datas=user::findOrFail($id);
         $p_umum=Pendidikan_umum::where('nip_nrp',$id)->get();
         $p_umum->groupBy('nip_nrp');
-        // 
+        //
         $p_kejuruan=Pendidikan_kejuruan::where('nip_nrp',$id)->get();
         $p_kejuruan->groupBy('nip_nrp');
-        // 
+        //
         $keluargas=Data_keluarga::where('nip_nrp',$id)->get();
         $keluargas->groupBy('nip_nrp');
         //
         $k_bahasa=Kecakapan_bahasa::where('nip_nrp',$id)->get();
         $k_bahasa->groupBy('nip_nrp');
-        // 
+        //
         $k_olahraga=Kecakapan_olahraga_dan_beladiri::where('nip_nrp',$id)->get();
         $k_olahraga->groupBy('nip_nrp');
-        // 
+        //
         $k_brevet=Kecakapan_brevet::where('nip_nrp',$id)->get();
         $k_brevet->groupBy('nip_nrp');
-        // 
+        //
         $tanda_jasas=Tanda_jasa_Prestasi::where('nip_nrp',$id)->get();
         $tanda_jasas->groupBy('nip_nrp');
-        // 
+        //
         $p_polris=Pendidikan_polri::where('nip_nrp',$id)->get();
         $p_polris->groupBy('nip_nrp');
         //
         $r_gaji=Riwayat_gaji_berkala::where('nip_nrp',$id)->get();
         $r_gaji->groupBy('nip_nrp');
-        // 
+        //
         $jabatan=Jabatan::all();
+        $unit_kerja=Unit_kerja::all();
         // pangkat
         $pangkats=Pangkat::all();
         return view('master.show',compact('datas','p_umum','p_kejuruan','keluargas','k_bahasa','k_olahraga','k_brevet',
-        'tanda_jasas','p_polris','r_gaji','jabatan','pangkats'));
+        'tanda_jasas','p_polris','r_gaji','jabatan','pangkats','unit_kerja'));
     }
 
     /**
@@ -186,6 +187,9 @@ class masterController extends Controller
     public function edit($id)
     {
         //
+        $data =User::where('nip_nrp',$id)->with('unit_kerja')->first();
+        // $data=User::all();
+        return Response()->json($data);
     }
 
     /**
@@ -195,9 +199,99 @@ class masterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        // $this->validate($request,[
+        //     'foto' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+        //     'nip_nrp'=>['required'],
+        //     'nama_pegawai'=>'required|string',
+        //     'gelar_depan'=>'required',
+        //     'gelar_belakang'=>'required',
+        //     'no_kta_pegawai'=>'required',
+        //     'jenis_pegawai'=>'required',
+        //     'email'=>'required|unique:users',
+        //     'password'=>'min:6|required_with:re_password|same:re_password',
+        //     're_password' => 'min:6',
+        //     'nidn'=>'required',
+        //     'alamat'=>'required',
+        //     'tempat_lahir'=>'required|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/',
+        //     'tanggal_lahir'=>'required|date',
+        //     'jk'=>'required',
+        //     'agama'=>'required|string',
+        //     'no_kep_jabatan'=>'required|string',
+        //     'nik'=>'required|string|unique:users',
+        //     'status_menikah'=>'required|string',
+        //     'no_kk'=>'required|string',
+        //     'hobi'=>'required|string',
+        //     'no_tlp'=>'required|string',
+        //     'no_hp'=>'required|string',
+        //     'tgl_masuk'=>'required|date',
+        //     'warna_rambut'=>'required|string',
+        //     'bentuk_muka'=>'required|string',
+        //     'warna_kulit'=>'required|string',
+        //     'ciri_khas'=>'required|string',
+        //     'cacat_tubuh'=>'required|string',
+        //     'id_unit_kerja'=>'required',
+        //     'hobi'=>'required'
+        // ]);
+        $data=User::findOrFail($request->nip_nrp);
+        // menyimpan data file yang diupload ke variabel $file
+        if(empty($request->file('foto'))){
+            $nama_file=$data->foto;
+
+        }
+        else{
+            $this->validate($request,[
+
+                'foto' =>'file|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+           
+                $image_path = public_path().'/img/'.$data->foto;
+                unlink($image_path);
+            
+            $file = $request->file('foto');
+            $text = str_replace(' ', '',$file->getClientOriginalName());
+            $nama_file = time()."_".$text;
+            $tujuan_upload = 'img';
+            $file->move($tujuan_upload,$nama_file);
+        }
+
+		$data->update([
+            'foto' => $nama_file ,
+            'nip_nrp'=> $request->nip_nrp,
+            'nama_pegawai'=> $request->nama_pegawai,
+            'gelar_depan'=> $request->gelar_depan,
+            'gelar_belakang'=> $request->gelar_belakang,
+            'no_kta_pegawai'=> $request->no_kta_pegawai,
+            'jenis_pegawai'=> $request->jenis_pegawai,
+            'email'=> $request->email,
+            'nidn'=> $request->nidn,
+            'alamat'=> $request->alamat,
+            'tempat_lahir'=> $request->tempat_lahir,
+            'tanggal_lahir'=> $request->tanggal_lahir,
+            'jk'=> $request->jk,
+            'agama'=> $request->agama,
+            'no_kep_jabatan'=>$request->no_kep_jabatan,
+            'nik'=> $request->nik,
+            'status_menikah'=> $request->status_menikah,
+          
+            'hobi'=> $request->hobi,
+            'no_tlp'=> $request->no_tlp,
+            'no_hp'=> $request->no_hp,
+            'tgl_masuk'=> $request->tgl_masuk,
+            'tinggi_badan'=> $request->tinggi_badan,
+            'berat_badan'=> $request->berat_badan,
+            'warna_rambut'=> $request->warna_rambut,
+            'bentuk_muka'=> $request->bentuk_muka,
+            'warna_kulit'=> $request->warna_kulit,
+            'ciri_khas'=> $request->ciri_khas,
+            'cacat_tubuh'=> $request->cacat_tubuh,
+            'id_unit_kerja'=> $request->id_unit_kerja,
+            'id_divisi'=> $request->id_divisi,
+           
+        ]);
+        return Response()->json($request->all());
     }
 
     /**
@@ -213,4 +307,5 @@ class masterController extends Controller
         $data->delete();
         return back()->with("success","data berhasil di Hapus");
     }
+
 }

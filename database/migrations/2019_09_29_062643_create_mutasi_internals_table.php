@@ -17,7 +17,10 @@ class CreateMutasiInternalsTable extends Migration
             $table->Increments('id');
             $table->string('nip_nrp',20)->index();
             $table->foreign('nip_nrp')->references('nip_nrp')->on('users')->onDelete('cascade');
-            $table->string('tempat_bekerja',50);
+            $table->unsignedinteger('id_unit_kerja');
+            $table->foreign('id_unit_kerja')->references('id')->on('unit_kerjas');
+            $table->unsignedinteger('id_divisi');
+            $table->foreign('id_divisi')->references('id')->on('divisis');
             $table->string('nomor_sk',50);
             $table->string('pejabat',50);
             $table->date('tanggal_sk');

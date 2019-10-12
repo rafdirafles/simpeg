@@ -47,6 +47,12 @@ class MutasiKeluarController extends Controller
             'tmt'=>'required',
 
         ]);
+        if(empty($request->keterangan)){
+            $request['keterangan']='-';
+        }
+        else{
+            $request['keterangan']=$request->keterangan;
+        }
         $data=mutasi_keluar::create($request->all());
         $user=User::findOrFail($request->nip_nrp);
         $user->update([
@@ -99,6 +105,12 @@ class MutasiKeluarController extends Controller
             'tanggal_sk'=>'required',
             'tmt'=>'required',
         ]);
+        if(empty($request->keterangan)){
+            $request['keterangan']=$data->keterangan;
+        }
+        else{
+            $request['keterangan']=$request->keterangan;
+        }
         $data->update($request->all());
         return Response()->json($data);
     }
@@ -114,6 +126,10 @@ class MutasiKeluarController extends Controller
         //
         $id=$request->id;
         $data=mutasi_keluar::findOrFail($id);
+        $user=User::findOrFail($request->nip_nrp);
+        $user->update([
+            'is_status' => 1,
+        ]);
         $data->delete();
         return Response()->json($data);
 

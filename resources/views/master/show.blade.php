@@ -138,7 +138,7 @@
         </div>
     </div>
     <div class="kt-portlet__body">
-        <form action="#" method="">
+        <form  method="post" enctype="multipart/form-data">
             <div class="tab-content">
                 <div class="tab-pane active" id="kt_user_edit_tab_1" role="tabpanel">
                     <div class="kt-form kt-form--label-right">
@@ -152,12 +152,14 @@
                                                     </h3>
                                                 </div>
                                         </div>
-                                    <div class="kt-portlet__body">
+                                    <div class="kt-portlet__body pegawai">
                                         <div class="form-group row"></div>
                                         <div class="form-group row">
+                                            @csrf
+                                            <input type="hidden" name="id">
                                             <div class="col-lg-6">
                                                 <label for="nrp">NIP / NRP</label>
-                                                <input type="number" id="nrp" name="nip_nrp" class="form-control" placeholder="Masukkan NIP/NRP">
+                                                <input type="text" readonly id="nrp" name="nip_nrp" class="form-control" placeholder="Masukkan NIP/NRP">
                                                 <!-- <span class="form-text text-muted">Please enter your full name</span> -->
                                             </div>
                                             <div class="col-lg-6">
@@ -182,29 +184,42 @@
                                         <div class="form-group row">
                                             <div class="col-lg-6">
                                                     <label for="no_kta" class="">No KTA Pegawai</label>
-                                                    <input type="number" id="no_kta" name="no_kta" class="form-control" placeholder="Masukkan No KTA Pegawai">
+                                                    <input type="number" id="no_kta" name="no_kta_pegawai" class="form-control" placeholder="Masukkan No KTA Pegawai">
                                                     <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="jenis_pegawai" class="">Jenis Pegawai</label>
-                                                <select class="form-control" id="jenis_pegawai">
+                                                <select class="form-control"  name="jenis_pegawai">
                                                         <option value="">------- Pilih -------</option>
-                                                        <option value="POLRI">POLRI</option>
-                                                        <option value="POLRI PNS">POLRI PNS</option>
-                                                        <option value="DOSEN EKSTERNAL">DOSEN EKSTERNAL</option>
+                                                        <option value="Polri">POLRI</option>
+                                                        <option value="PNS">POLRI PNS</option>
+                                                        <option value="Dosen">DOSEN</option>
+                                                        <option value="External">EKSTERNAL</option>
                                                     </select>
                                                 <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-3">
                                                     <label class="">Unit Kerja</label>
-                                                    <input type="text" class="form-control" placeholder="Masukkan Unit Kerja">
-                                                    <!-- <span class="form-text text-muted">Please enter your email</span> -->
+                                                    {{-- <input type="text" class="form-control" placeholder="Masukkan Unit Kerja"> --}}
+                                                    <select class="form-control" name="id_unit_kerja" id="id_unit_kerja_pegawai">
+                                                        <option value="">pilih</option>
+                                                        @foreach ($unit_kerja as $u)
+                                                            <option value="{{$u->id}}">{{$u->nama_unit_kerja}}</option>
+                                                        @endforeach
+                                                    </select>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                    <label class="">Divisi</label>
+                                                    {{-- <input type="text" class="form-control" placeholder="Masukkan Unit Kerja"> --}}
+                                                    <select class="form-control" name="id_divisi" id="id_divisi_pegawai">
+
+                                                    </select>
                                             </div>
                                             <div for="no_kep_jabatan" class="col-lg-6">
                                                     <label class="">No.Kep.Jabatan</label>
-                                                    <input type="number" id="no_kep_jabatan" name="no_kep_jabatan" class="form-control" placeholder="Masukkan No.Kep.Jabatan">
+                                                    <input type="text" id="no_kep_jabatan" name="no_kep_jabatan" class="form-control" placeholder="Masukkan No.Kep.Jabatan">
                                                     <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                                 </div>
                                         </div>
@@ -216,24 +231,13 @@
                                                     <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                                 </div>
                                         </div>
-                                        <div class="form-group row">
-                                                <div class="col-lg-6">
-                                                    <label for="password" class="">Password</label>
-                                                    <input type="password" id="password" class="form-control" placeholder="Masukkan Password">
-                                                    <!-- <span class="form-text text-muted">Please enter your email</span> -->
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label for="retype_password" class="">Retype Password</label>
-                                                    <input type="password" id="retype_password" class="form-control" placeholder="Masukkan Password Kembali">
-                                                    <!-- <span class="form-text text-muted">Please enter your email</span> -->
-                                                </div>
-                                        </div>
+                                       
                                         <div class="form-group row"></div>
 
                                         <div class="form-group row">
                                             <div class="col-lg-6">
                                                 <label for="nidn" class="">NIDN</label>
-                                                <input type="number" id="nidn" name="nidn" class="form-control" placeholder="Masukkan NIDN">
+                                                <input type="text" id="nidn" name="nidn" class="form-control" placeholder="Masukkan NIDN">
                                                 <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                             </div>
                                             <div class="col-lg-6">
@@ -251,7 +255,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="tgl_lahir" class="">Tanggal Lahir</label>
-                                                <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control" placeholder="Masukkan Tanggal Lahir">
+                                                <input type="date" id="tgl_lahir" name="tanggal_lahir" class="form-control" placeholder="Masukkan Tanggal Lahir">
                                                 <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                             </div>
                                         </div>
@@ -290,19 +294,18 @@
                                             <label for="status_menikah" class="">Status Menikah</label>
                                                 <select class="form-control" name="status_menikah" id="status_menikah">
                                                     <option value="">------- Pilih -------</option>
-                                                    <option value="Islam">Islam</option>
-                                                    <option value="Kristen">Kristen</option>
-                                                    <option value="Katolik">Katolik</option>
-                                                    <option value="Hindu">Hindu</option>
-                                                    <option value="Budha">Budha</option>
-                                                    <option value="Konghucu">Konghucu</option>
+                                                    <option value="Belum Kawin">Belum Kawin</option>
+                                                    <option value="Kawin">Kawin</option>
+                                                    <option value="Janda">Janda</option>
+                                                    <option value="Duda">Duda</option>
+
                                                 </select>
                                         </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-lg-6">
                                                 <label for="no_kk" class="">No Kartu Keluarga</label>
-                                                <input type="number" id="no_kk" name="no_kk" class="form-control" placeholder="Masukkan No Kartu Keluarga">
+                                                <input type="text" id="no_kk" name="nik" class="form-control" placeholder="Masukkan No Kartu Keluarga">
                                                 <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                             </div>
                                         </div>
@@ -312,7 +315,7 @@
                                         <div class="form-group row">
                                                 <div class="col-lg-6">
                                                     <label for="no_telp" class="">No Telepon</label>
-                                                    <input type="text" id="no_telp" name="no_telp" class="form-control" placeholder="Masukkan Nomer Telepon">
+                                                    <input type="text" id="no_telp" name="no_tlp" class="form-control" placeholder="Masukkan Nomer Telepon">
                                                     <!-- <span class="form-text text-muted">Please enter your contact</span> -->
                                                 </div>
                                                 <div class="col-lg-6">
@@ -334,7 +337,7 @@
                                         <div class="form-group row">
                                         <div class="col-lg-6">
                                                 <label for="tinggi_badan" class="">Tinggi Badan</label>
-                                                <input type="text" id="tinggi_badan" name="tinggi_badan" class="form-control" placeholder="Tinggi">
+                                                <input type="number" id="tinggi_badan" name="tinggi_badan" class="form-control" placeholder="Tinggi">
                                                 <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                             </div>
                                             <div class="col-lg-6">
@@ -373,12 +376,12 @@
                                         <div class="form-group row">
                                             <div class="col-lg-6">
                                                 <label for="cacat" class="">Cacat Tubuh</label>
-                                                <input type="text" id="cacat" class="form-control" placeholder="Masukkan Cacat Tubuh">
+                                                <input type="text" id="cacat" name="cacat_tubuh" class="form-control" placeholder="Masukkan Cacat Tubuh">
                                                 <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="hobi" class="">Hobi</label>
-                                                <input type="text" id="hobi" class="form-control" placeholder="Masukkan Hobi">
+                                                <input type="text" name="hobi" class="form-control" placeholder="Masukkan Hobi">
                                                 <!-- <span class="form-text text-muted">Please enter your email</span> -->
                                             </div>
                                         </div>
@@ -388,17 +391,17 @@
                                         <div class="kt-widget kt-widget--user-profile-1">
                                             <div class="kt-widget__head">
                                                 <div class="kt-widget__media">
-                                                    <img src="assets/media/users/100_1.jpg" alt="image">
+                                                    <img id="foto" src="assets/media/users/100_1.jpg" alt="image">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                                <input type="file" class="form-control col-lg-2">
+                                                <input type="file" name="foto" class="form-control col-lg-2">
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-4"></div>
                                             <div class="col-lg-8">
-                                                <button type="reset" class="btn btn-primary">Submit</button>
+                                                <button type="submit" class="btn btn-primary btn-edit-pegawai">Submit</button>
                                             </div>
                                         </div><br><br><br>
                                         <div class="kt-portlet__foot">
@@ -833,8 +836,9 @@
                                                 <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>belum fix</th>
-                                                    <th>No SK</th>
+                                                    <th>Unit Kerja</th>
+                                                    <th>Divisi </th>
+                                                    <th>Nomor Sk</th>
                                                     <th>Pejabat</th>
                                                     <th>Tanggal SK</th>
                                                     <th>TMT</th>
@@ -842,8 +846,11 @@
                                                     <th width="10%">Aksi</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="show_mutasi_internal">
                                                 </tbody>
+                                                <tr>
+                                                    <td colspan="9" class="text-right"><a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-add-mutasi-internal">(+)tambah</a></td>
+                                                </tr>
                                             </table>
                                             <!--end: datatable -->
                                         </div>
@@ -2626,6 +2633,7 @@
         <form method="post">
             {{csrf_field()}}
             <input type="hidden" name="id_hapus">
+            <input type="hidden" name="nip_nrp">
             <div class="modal-body">
                 <p>Apakah Anda Yakin Menghapus Data </strong>
             </div>
@@ -2640,6 +2648,167 @@
 </div>
 <!-------end hapus------>
 <!---------------------------------------------akhir modal mutasi keluar ----------------------------------------------------------->
+
+<!---------------------------------------------------modal mutasi internal---------------------------------------------------------------->
+<!-- MODAL ADD -->
+<div class="modal fade" id="modal-add-mutasi-internal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel">Tambah Mutasi Internal</h3>
+            </div>
+            <!-- form -->
+            <form class="form-horizontal" data-toggle="validator">
+                <input type="hidden" name="_token" value="{{ Session::token() }}">
+                <div class="modal-body">
+                    <form data-toggle="validator" method="post">
+                        <input type="hidden" name="nip_nrp" value="{{$datas->nip_nrp}}" >
+                        <div class="form-group">
+                            <label class="control-label" for="title">Tempat unit kerja *:</label>
+                            <select name="id_unit_kerja" id="add_id_unit_kerja"  class="form-control">
+                                <option value="">pilih </option>
+                                @foreach ($unit_kerja as $u)
+                                    <option value="{{$u->id}}">{{$u->nama_unit_kerja}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Divisi *:</label>
+                            <select name="id_divisi" id="add_id_divisi"  class="form-control">
+                               {{-- <option value="">pilih divisi</option> --}}
+                               <option></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Nomor SK *:</label>
+                            <input type="text" name="nomor_sk" class="form-control"  required />
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Pejabat *:</label>
+                            <input type="text" name="pejabat" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Tanggal SK *:</label>
+                            <input type="date" name="tanggal_sk" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Tanggal Mulai Terhitung *:</label>
+                            <input type="date" name="tmt" class="form-control" data-error="Please enter tmt." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Keterangan :</label>
+                            <input type="text" name="keterangan" class="form-control"  required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button class="btn btn-primary" id="btn_simpan_mutasi_internal">Kirim</button>
+                </div>
+            </form>
+            <!-- form -->
+        </div>
+    </div>
+</div>
+<!--END MODAL ADD-->
+<!--edit MODAL -->
+<div class="modal fade" id="edit-mutasi-internal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit Data </h4>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+                    <form data-toggle="validator" method="post">
+                        <input type="hidden" name="nip_nrp" value="" >
+                        <input type="hidden" name="id" value="">
+                        <div class="form-group">
+                                <label class="control-label" for="title">Tempat unit kerja *:</label>
+                                <select name="id_unit_kerja" id="id_unit_kerja"  class="form-control">
+                                    <option value="">pilih </option>
+                                    @foreach ($unit_kerja as $u)
+                                        <option value="{{$u->id}}">{{$u->nama_unit_kerja}}</option>
+                                    @endforeach
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Divisi *:</label>
+                            <select name="id_divisi" id="id_divisi"  class="form-control">
+                                {{-- <option value="">pilih divisi</option> --}}
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Nomor SK *:</label>
+                            <input type="text" name="nomor_sk" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Pejabat *:</label>
+                            <input type="text" name="pejabat" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Tanggal SK *:</label>
+                            <input type="date" name="tanggal_sk" class="form-control" data-error="Please enter title." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Tanggal Mulai Terhitung *:</label>
+                            <input type="date" name="tmt" class="form-control" data-error="Please enter tmt." required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="title">Keterangan :</label>
+                            <input type="text" name="keterangan" class="form-control"  required />
+                            <div class="help-block with-errors"></div>
+                        </div>
+                         <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary btn-edit-mutasi-internal">Edit</button>
+                        </div>
+                    </form>
+            </div>
+            <!-- body modal -->
+        </div>
+    </div>
+</div>
+<!--end MODAL-->
+<!------modal Hapus ---->
+<div class="modal fade" id="hapus-mutasi-internal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Hapus Data</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <form method="post">
+            {{csrf_field()}}
+            <input type="hidden" name="id_hapus">
+            <input type="hidden" name="nip_nrp">
+            <div class="modal-body">
+                <p>Apakah Anda Yakin Menghapus Data </strong>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="btn-hapus-mutasi-internal">Hapus</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<!-------end hapus------>
+<!---------------------------------------------akhir modal mutasi internal ----------------------------------------------------------->
 @endsection
 {{-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ --}}
 {{-- ################################################################################################################################### --}}
@@ -3275,7 +3444,7 @@
               e.preventDefault();
               var id = $("#edit-r-kepangkatan").find("input[name='id']").val();
               var nip_nrp =  $("#edit-r-kepangkatan").find("input[name='nip_nrp']").val();
-              var id_pangkat =  $("#edit-r-kepangkatan").find("input[name='id_pangkat']").val();
+              var id_pangkat =  $("#edit-r-kepangkatan").find("select[name='id_pangkat']").val();
               var tmt =   $("#edit-r-kepangkatan").find("input[name='tmt']").val();
               var pejabat =  $("#edit-r-kepangkatan").find("input[name='pejabat']").val();
               var nomor_sk =  $("#edit-r-kepangkatan").find("input[name='nomor_sk']").val();
@@ -4799,7 +4968,7 @@
 </script>
 <!-------------------------------------------------------------akhir pendidikan non formal-------------------------------------------->
 
-<!----------------------------------------------------------------awal mutasi masuk--------------------------------------------->
+<!----------------------------------------------------------------awal mutasi keluar--------------------------------------------->
 <script>
     $(document).ready(function(){
               $.ajaxSetup({
@@ -4939,17 +5108,20 @@
         // klik delete
         $("body").on("click",".delete-mutasi-keluar",function(){
             var id = $(this).parent("td").data('id');
-            $("#hapus-mutasi-keluar").find("input[name='id_hapus']").val(id);
+            var nip_nrp=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+    ol,        $("#hapus-mutasi-keluar").find("input[name='id_hapus']").val(id);
+            $("#hapus-mutasi-keluar").find("input[name='nip_nrp']").val(nip_nrp);
         });
         /* Remove Post (Hapus) */
         $("#btn-hapus-mutasi-keluar").click(function(e){
             event.preventDefault();
             var id = $("#hapus-mutasi-keluar").find("input[name='id_hapus']").val();
+            var nip_nrp = $("#hapus-mutasi-keluar").find("input[name='nip_nrp']").val();
             var c_obj = $(this).parents("tr");
             $.ajax({
                 dataType: 'json',
                 type:'POST',
-                data:{id:id,_token: '{{csrf_token()}}'},
+                data:{nip_nrp:nip_nrp,id:id,_token: '{{csrf_token()}}'},
                 url: '{{route('mutasi_keluar.delete')}}',
             }).done(function(data){
                 c_obj.remove();
@@ -4961,6 +5133,494 @@
 
     })//end ready
 </script>
-<!----------------------------------------------------------------akhir mutasi masuk-------------------------------------------->
+<!----------------------------------------------------------------akhir mutasi keluar-------------------------------------------->
+
+<!----------------------------------------------------------------awal mutasi internal--------------------------------------------->
+<script>
+    $(document).ready(function(){
+              $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+      tampil_data_mutasi_internal();  //pemanggilan fungsi
+    //fungsi tampil
+      function tampil_data_mutasi_internal(){
+          $.ajax({
+              type  : 'GET',
+              beforeSend: function(){
+                  $('.ajax-loader').css("visibility", "visible");
+              },
+              url   : '/mutasi_internal/'+nrp,
+              async : true,
+              dataType : 'json',
+              success : function(data){
+                //   console.log(data);
+                  var i;
+                  var no=1;
+                  var rows ='';
+                  $.each( data, function( key, value ) {
+                      rows = rows + '<tr>';
+                      rows = rows + '<td>'+ no++ +'</td>';
+                      rows = rows +'<td style="display:none">'+value.nip_nrp+'</td>';
+                      rows = rows +'<td style="display:none">'+value.id_unit_kerja+'</td>';
+                      rows = rows +'<td style="display:none">'+value.id_divisi+'</td>';
+                      rows = rows +'<td >'+value.unit_kerja.nama_unit_kerja+'</td>';
+                      rows = rows +'<td >'+value.divisi.nama_devisi+'</td>';
+                      rows = rows + '<td>'+value.nomor_sk+'</td>';
+                      rows = rows + '<td>'+value.pejabat+'</td>';
+                      rows = rows + '<td>'+value.tanggal_sk+'</td>';
+                      rows = rows + '<td>'+value.tmt+'</td>';
+                      rows = rows + '<td>'+value.keterangan+'</td>';
+                      rows = rows + '<td class="text-center" data-id="'+value.id+'">';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#edit-mutasi-internal" class="badge badge-success edit-item-mutasi-internal"><span class="fas fa-fw fa-edit " ></a> ';
+                      rows = rows + '<a href="#" data-toggle="modal" data-target="#hapus-mutasi-internal" class="badge badge-danger delete-mutasi-internal"><span class="fas fa-fw fa-trash"></button>';
+                      rows = rows + '</td>';
+                      rows = rows + '</tr>';
+                  });
+                  $('.show_mutasi_internal').html(rows);
+              },
+              error: function(xhr, ajaxOptions, thrownError){
+                          alert("Mohon Data Masukkan Dengan Tepat");
+                      },
+              complete: function(){
+                  $('.ajax-loader').css("visibility", "hidden");
+              }
+          });
+      } //tutup akhir tampil
+      //Simpan
+       // ajax get divisi
+       $('#add_id_unit_kerja').change(function(){
+            var divisi=$(this).val();
+            $.ajax({
+                type:'POST',
+                url:'{{route('mutasi_internal.divisi')}}',
+                data:{id:divisi},
+                success:function(data){
+                    $('#add_id_divisi').html(data);
+                    console.log(data);
+                }
+            })
+        })
+    $('#btn_simpan_mutasi_internal').click(function(e){
+        e.preventDefault();
+        var nip_nrp = $("#modal-add-mutasi-internal").find("input[name=nip_nrp]").val();
+        var id_unit_kerja = $("#modal-add-mutasi-internal").find("select[name=id_unit_kerja]").val();
+        var id_divisi = $("#modal-add-mutasi-internal").find("select[name=id_divisi]").val();
+        var nomor_sk = $("#modal-add-mutasi-internal").find("input[name=nomor_sk]").val();
+        var pejabat = $("#modal-add-mutasi-internal").find("input[name=pejabat]").val();
+        var tanggal_sk = $("#modal-add-mutasi-internal").find("input[name=tanggal_sk]").val();
+        var tmt = $("#modal-add-mutasi-internal").find("input[name=tmt]").val();
+        var keterangan = $("#modal-add-mutasi-internal").find("input[name=keterangan]").val();
+        event.preventDefault();
+            $.ajax({
+                type : "POST",
+                beforeSend: function(){
+                    $('.ajax-loader').css("visibility", "visible");
+                },
+                url  : '{{route('mutasi_internal.store')}}',
+                data : {nip_nrp:nip_nrp,id_unit_kerja:id_unit_kerja,id_divisi:id_divisi,nomor_sk:nomor_sk,pejabat:pejabat,tanggal_sk:tanggal_sk,tmt:tmt,keterangan:keterangan},
+                success: function(data){
+                console.log(data);
+                $("#modal-add-mutasi-internal").find("select[name=id_unit_kerja]").val("");
+                $("#modal-add-mutasi-internal").find("select[name=id_divisi]").val("");
+                $("#modal-add-mutasi-internal").find("input[name=nomor_sk]").val("");
+                $("#modal-add-mutasi-internal").find("input[name=pejabat]").val("");
+                $("#modal-add-mutasi-internal").find("input[name=tanggal_sk]").val("");
+                $("#modal-add-mutasi-internal").find("input[name=tmt]").val("");
+                $("#modal-add-mutasi-internal").find("input[name=keterangan]").val("");
+                    tampil_data_mutasi_internal();
+                    $('.modal').modal('hide');
+
+                },
+                error: function(xhr, ajaxOptions, thrownError){
+                        alert("Mohon Data Masukkan Dengan Tepat");
+                    },
+                complete: function(){
+                    $('.ajax-loader').css("visibility", "hidden");
+                }
+            }).done(function(data){
+                toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+            })
+    });
+        $('#id_unit_kerja').change(function(){
+            var divisi=$(this).val();
+            $.ajax({
+                type:'POST',
+                url:'{{route('mutasi_internal.divisi')}}',
+                data:{id:divisi},
+                success:function(data){
+                    $('#id_divisi').html(data);
+                    console.log(data);
+                }
+            })
+        })
+        /* Edit Post */
+        $("body").on("click",".edit-item-mutasi-internal",function(){
+            var id = $(this).parent("td").data('id');
+            var nip_nrp=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var id_unit_kerja=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var id_divisi=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var nama_unit_kerja=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var nama_divisi=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var nomor_sk=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            var pejabat=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").text();
+            var tanggal_sk=$(this).parent("td").prev("td").prev("td").prev("td").text();
+            var tmt=$(this).parent("td").prev("td").prev("td").text();
+            var keterangan=$(this).parent("td").prev("td").text();
+            // console.log(id_unit_kerja);
+            $.ajax({
+                type:'POST',
+                url:'{{route('mutasi_internal.editdivisi')}}',
+                data:{id:id_unit_kerja,selected:id_divisi},
+                success:function(data){
+                    $('#edit-mutasi-internal #id_divisi').html(data);
+                }
+            })
+            var i;
+            var x= document.getElementById("id_unit_kerja");
+            for(i=0; i<x.options.length;i++){
+                if(x.options[i].value == id_unit_kerja){
+                    $("#edit-mutasi-internal").find("select[name=id_unit_kerja]").val(id_unit_kerja);
+                }
+                else{
+                    $("#edit-mutasi-internal").find("select[name=id_unit_kerja]").val();
+
+                }
+            }
+            $("#edit-mutasi-internal").find("input[name='id']").val(id);
+            $("#edit-mutasi-internal").find("input[name='nip_nrp']").val(nip_nrp);
+            $("#edit-mutasi-internal").find("input[name='nomor_sk']").val(nomor_sk);
+            $("#edit-mutasi-internal").find("input[name='pejabat']").val(pejabat);
+            $("#edit-mutasi-internal").find("input[name='tanggal_sk']").val(tanggal_sk);
+            $("#edit-mutasi-internal").find("input[name='tmt']").val(tmt);
+            $("#edit-mutasi-internal").find("input[name='keterangan']").val(keterangan);
+        });
+          /* Updated  Post baru (Updated new Post) */
+          $(".btn-edit-mutasi-internal").click(function(e){
+            e.preventDefault();
+            var id = $("#edit-mutasi-internal").find("input[name=id]").val();
+            var nip_nrp = $("#edit-mutasi-internal").find("input[name=nip_nrp]").val();
+            var id_unit_kerja = $("#edit-mutasi-internal").find("select[name=id_unit_kerja]").val();
+            var id_divisi = $("#edit-mutasi-internal").find("select[name=id_divisi]").val();
+            var nomor_sk = $("#edit-mutasi-internal").find("input[name=nomor_sk]").val();
+            var pejabat = $("#edit-mutasi-internal").find("input[name=pejabat]").val();
+            var tanggal_sk = $("#edit-mutasi-internal").find("input[name=tanggal_sk]").val();
+            var tmt = $("#edit-mutasi-internal").find("input[name=tmt]").val();
+            var keterangan = $("#edit-mutasi-internal").find("input[name=keterangan]").val();
+
+              $.ajax({
+                  dataType: 'json',
+                  type:'post',
+                  url: '{{route('mutasi_internal.update')}}',
+                  data:{id:id,nip_nrp:nip_nrp,id_unit_kerja:id_unit_kerja,id_divisi:id_divisi,nomor_sk:nomor_sk,pejabat:pejabat,tanggal_sk:tanggal_sk,tmt:tmt,keterangan:keterangan},
+                   success: function(data){
+                        console.log(data);
+                   }
+              }).done(function(data){
+                    tampil_data_mutasi_internal();
+                    $(".modal").modal('hide');
+                    toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+                })
+
+          })
+        // klik delete
+        $("body").on("click",".delete-mutasi-internal",function(){
+            var id = $(this).parent("td").data('id');
+           var nip_nrp=$(this).parent("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").prev("td").text();
+            $("#hapus-mutasi-internal").find("input[name='id_hapus']").val(id);
+            $("#hapus-mutasi-internal").find("input[name='nip_nrp']").val(nip_nrp);
+
+        });
+        /* Remove Post (Hapus) */
+        $("#btn-hapus-mutasi-internal").click(function(e){
+            event.preventDefault();
+            var id = $("#hapus-mutasi-internal").find("input[name='id_hapus']").val();
+            var nip_nrp = $("#hapus-mutasi-internal").find("input[name='nip_nrp']").val();
+            var c_obj = $(this).parents("tr");
+            $.ajax({
+                dataType: 'json',
+                type:'POST',
+                data:{id:id,nip_nrp:nip_nrp,_token: '{{csrf_token()}}'},
+                url: '{{route('mutasi_internal.delete')}}',
+                error: function(xhr, ajaxOptions, thrownError){
+                          alert("Maaf Hanya Data Terakhir Yang Bisa Dihapus!!");
+                },
+
+            }).done(function(data){
+                c_obj.remove();
+                toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                tampil_data_mutasi_internal();
+                $(".modal").modal('hide');
+            });
+        })
+
+
+    })//end ready
+</script>
+<!----------------------------------------------------------------akhir mutasi internal-------------------------------------------->
+
+<!-----------------------------------------------------------------awal data pegawai--------------------------------------------->
+<script>
+    $(document).ready(function(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+        tampil_data_pegawai();  //pemanggilan fungsi
+    //fungsi tampil
+        $('#id_unit_kerja_pegawai').change(function(){
+            var divisi=$(this).val();
+            $.ajax({
+                type:'POST',
+                url:'{{route('mutasi_internal.divisi')}}',
+                data:{id:divisi},
+                success:function(data){
+                    $('#id_divisi_pegawai').html(data);
+                    console.log(data);
+                }
+            })
+        })
+        function tampil_data_pegawai(){
+            $.ajax({
+                type  : 'GET',
+                beforeSend: function(){
+                    $('.ajax-loader').css("visibility", "visible");
+                },
+                url   : '/master/'+nrp+'/edit',
+                async : true,
+                dataType : 'json',
+                success : function(data){
+                    // console.log(data.unit_kerja.nama_unit_kerja);
+                    $(".pegawai").find("input[name='nip_nrp']").val(data.nip_nrp);
+                    $(".pegawai").find("input[name='nama_pegawai']").val(data.nama_pegawai);
+                    $(".pegawai").find("input[name='email']").val(data.email);
+                    $(".pegawai").find("input[name='gelar_depan']").val(data.gelar_depan);
+                    $(".pegawai").find("input[name='gelar_belakang']").val(data.gelar_belakang);
+                    $(".pegawai").find("input[name='no_kta_pegawai']").val(data.no_kta_pegawai);
+                    // jenis p
+                    if(data.jenis_pegawai =='Polri'){
+                        $(".pegawai").find("select[name=jenis_pegawai]").val('Polri');
+                    }
+                    if(data.jenis_pegawai =='PNS'){
+                        $(".pegawai").find("select[name=jenis_pegawai]").val('PNS');
+                    }
+                    if(data.jenis_pegawai =='Dosen'){
+                        $(".pegawai").find("select[name=jenis_pegawai]").val('Dosen');
+                    }
+                    if(data.jenis_pegawai =='External'){
+                        $(".pegawai").find("select[name=jenis_pegawai]").val('External');
+                    }
+                    $(".pegawai").find("input[name='nidn']").val(data.nidn);
+                    $(".pegawai").find("input[name='alamat']").val(data.alamat);
+                    $(".pegawai").find("input[name='tempat_lahir']").val(data.tempat_lahir);
+                    $(".pegawai").find("input[name='tanggal_lahir']").val(data.tanggal_lahir);
+                    // jk
+                    if(data.jk =='L'){
+                        $(".pegawai").find("select[name=jk]").val('L');
+                    }
+                    if(data.jk =='P'){
+                        $(".pegawai").find("select[name=jk]").val('P');
+                    }
+                    // agama
+                    if(data.agama =='Islam'){
+                        $(".pegawai").find("select[name=agama]").val('Islam');
+                    }
+                    if(data.agama =='Kristen'){
+                        $(".pegawai").find("select[name=agama]").val('Kristen');
+                    }
+                    if(data.agama =='Katolik'){
+                        $(".pegawai").find("select[name=agama]").val('Katolik');
+                    }
+                    if(data.agama =='Hindu'){
+                        $(".pegawai").find("select[name=agama]").val('Hindu');
+                    }
+                    if(data.agama =='Budha'){
+                        $(".pegawai").find("select[name=agama]").val('Budha');
+                    }
+                    if(data.agama =='Konghucu'){
+                        $(".pegawai").find("select[name=agama]").val('Konghucu');
+                    }
+
+                    $(".pegawai").find("input[name='no_kep_jabatan']").val(data.no_kep_jabatan);
+                    $(".pegawai").find("input[name='nik']").val(data.nik);
+                    // s menikah
+                    if(data.status_menikah =='Kawin'){
+                        $(".pegawai").find("select[name=status_menikah]").val('Kawin');
+                    }
+                    if(data.status_menikah =='Belum Kawin'){
+                        $(".pegawai").find("select[name=status_menikah]").val('Belum Kawin');
+                    }
+                    if(data.status_menikah =='Janda'){
+                        $(".pegawai").find("select[name=status_menikah]").val('Janda');
+                    }
+                    if(data.status_menikah =='Duda'){
+                        $(".pegawai").find("select[name=status_menikah]").val('Duda');
+                    }
+                    $(".pegawai").find("input[name='no_kk']").val(data.no_kk);
+                    $(".pegawai").find("input[name='hobi']").val(data.hobi);
+                    $(".pegawai").find("input[name='no_tlp']").val(data.no_tlp);
+                    $(".pegawai").find("input[name='no_hp']").val(data.no_hp);
+                    $(".pegawai").find("input[name='tgl_masuk']").val(data.tgl_masuk);
+                    $(".pegawai").find("input[name='tinggi_badan']").val(data.tinggi_badan);
+                    $(".pegawai").find("input[name='berat_badan']").val(data.berat_badan);
+                    $(".pegawai").find("input[name='warna_rambut']").val(data.warna_rambut);
+                    $(".pegawai").find("input[name='bentuk_muka']").val(data.bentuk_muka);
+                    $(".pegawai").find("input[name='warna_kulit']").val(data.warna_kulit);
+                    $(".pegawai").find("input[name='ciri_khas']").val(data.ciri_khas);
+                    $(".pegawai").find("input[name='cacat_tubuh']").val(data.cacat_tubuh);
+                    // foto
+                    $("#foto").attr("src",'{{ URL::asset('img/')}}'+'/'+data.foto);
+                    $(".pegawai").find("input[name='is_status']").val(data.is_status);
+                    // unit kerja
+                    var i;
+                    var x= document.getElementById("id_unit_kerja_pegawai");
+                    for(i=0; i<x.options.length;i++){
+                        if(x.options[i].value == data.id_unit_kerja){
+                            $(".pegawai").find("select[name=id_unit_kerja]").val(data.id_unit_kerja);
+                        }
+                        else{
+                            $(".pegawai").find("select[name=id_unit_kerja]").val();
+
+                        }
+                        // console.log(x.options[i].value);
+                    }
+                    // divisi
+
+                    $.ajax({
+                        type:'POST',
+                        url:'{{route('mutasi_internal.editdivisi')}}',
+                        data:{id:data.id_unit_kerja,selected:data.id_divisi},
+                        success:function(data){
+                            $('.pegawai #id_divisi_pegawai').html(data);
+                        }
+                    })
+
+                } //ss
+            });
+        } //tutup akhir tampil
+        //Simpan
+
+            $(".btn-edit-pegawai").click(function(e){
+                e.preventDefault();
+                    var nip_nrp= $(".pegawai").find("input[name='nip_nrp']").val();
+                    var nama_pegawai =$(".pegawai").find("input[name='nama_pegawai']").val();
+                    var email =$(".pegawai").find("input[name='email']").val();
+                    var gelar_depan =$(".pegawai").find("input[name='gelar_depan']").val();
+                    var gelar_belakang= $(".pegawai").find("input[name='gelar_belakang']").val();
+                    var no_kta_pegawai= $(".pegawai").find("input[name='no_kta_pegawai']").val();
+                    var agama= $(".pegawai").find("select[name='agama']").val();
+                    // jenis p
+                    var jenis_pegawai =$(".pegawai").find("select[name=jenis_pegawai]").val();
+                    var nidn= $(".pegawai").find("input[name='nidn']").val();
+                    var alamat= $(".pegawai").find("input[name='alamat']").val();
+                    var tempat_lahir= $(".pegawai").find("input[name='tempat_lahir']").val();
+                    var tanggal_lahir= $(".pegawai").find("input[name='tanggal_lahir']").val();
+                    // jk
+                    var jk= $(".pegawai").find("select[name=jk]").val();
+                    var no_kep_jabatan =$(".pegawai").find("input[name='no_kep_jabatan']").val();
+                    var nik =$(".pegawai").find("input[name='nik']").val();
+                    // s menikah
+                    var status_menikah= $(".pegawai").find("select[name=status_menikah]").val();
+                    var nik= $(".pegawai").find("input[name='nik']").val();
+                    var hobi =$(".pegawai").find("input[name='hobi']").val();
+                    var no_tlp =$(".pegawai").find("input[name='no_tlp']").val();
+                    var no_hp =$(".pegawai").find("input[name='no_hp']").val();
+                    var tgl_masuk =$(".pegawai").find("input[name='tgl_masuk']").val();
+                    var tinggi_badan =$(".pegawai").find("input[name='tinggi_badan']").val();
+                    var berat_badan =$(".pegawai").find("input[name='berat_badan']").val();
+                    var warna_rambut =$(".pegawai").find("input[name='warna_rambut']").val();
+                    var bentuk_muka =$(".pegawai").find("input[name='bentuk_muka']").val();
+                    var warna_kulit =$(".pegawai").find("input[name='warna_kulit']").val();
+                    var ciri_khas=$(".pegawai").find("input[name='ciri_khas']").val();
+                    var cacat_tubuh=$(".pegawai").find("input[name='cacat_tubuh']").val();
+                    // foto
+                   
+                   
+                    var id_unit_kerja =$(".pegawai").find("select[name=id_unit_kerja]").val();
+                    var id_divisi= $(".pegawai").find("select[name=id_divisi]").val();
+                    var foto =$(".pegawai").find("input[name=foto]")[0].files[0];
+
+                var form = new FormData();
+                form.append('nip_nrp', nip_nrp);
+                form.append('nama_pegawai', nama_pegawai);
+                form.append('email', email);
+                form.append('gelar_depan', gelar_depan);
+                form.append('gelar_belakang', gelar_belakang);
+                form.append('no_kta_pegawai',no_kta_pegawai );
+                form.append('jenis_pegawai', jenis_pegawai);
+                form.append('nidn', nidn);
+                form.append('agama', agama);
+                form.append('alamat', alamat);
+                form.append('tempat_lahir', tempat_lahir);
+                form.append('tanggal_lahir', tanggal_lahir);
+                form.append('jk', jk);
+                form.append('no_kep_jabatan', no_kep_jabatan);
+                form.append('nik', nik);
+                form.append('status_menikah', status_menikah);
+                form.append('nik', nik);
+                form.append('hobi', hobi);
+                form.append('no_tlp', no_tlp);
+                form.append('no_hp', no_hp);
+                form.append('tgl_masuk', tgl_masuk);
+                form.append('tinggi_badan', tinggi_badan);
+                form.append('berat_badan', berat_badan);
+                form.append('warna_rambut', warna_rambut);
+                form.append('warna_kulit', warna_kulit);
+                form.append('bentuk_muka', bentuk_muka);
+                form.append('ciri_khas', ciri_khas);
+                form.append('cacat_tubuh', cacat_tubuh);
+                form.append('id_divisi', id_divisi);
+                form.append('id_unit_kerja', id_unit_kerja);
+                form.append('foto', foto);
+                form.append('_token', '{{csrf_token()}}' );
+                event.preventDefault();
+                $.ajax({
+                    dataType: 'json',
+                    type:'post',
+                    url: '{{route('master.update')}}',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data:form,
+                    success: function(data){
+                        console.log(data);
+                    }
+                }).done(function(data){
+                    tampil_data_pegawai();
+                    $(".modal").modal('hide');
+                    toastr.success('Post Created Successfully.', 'Success Alert', {timeOut: 5000});
+                })
+
+
+            })
+        // klik delete
+        $("body").on("click",".delete-kecakapan-brevet",function(){
+            var id = $(this).parent("td").data('id');
+            $("#hapus-kecakapan-brevet").find("input[name='id_hapus']").val(id);
+
+        });
+        /* Remove Post (Hapus) */
+        $("#btn-hapus-kecakapan-brevet").click(function(e){
+            event.preventDefault();
+            var id = $("#hapus-kecakapan-brevet").find("input[name='id_hapus']").val();
+            var c_obj = $(this).parents("tr");
+            $.ajax({
+                dataType: 'json',
+                type:'POST',
+                data:{id:id,_token: '{{csrf_token()}}'},
+                url: '{{route('kecakapan_brevet.delete')}}',
+            }).done(function(data){
+                c_obj.remove();
+                toastr.success('Post Deleted Successfully.', 'Success Alert', {timeOut: 5000});
+                tampil_data_pegawai();
+                $(".modal").modal('hide');
+            });
+        })
+
+    })//end ready
+</script>
+<!----------------------------------------------------------------akhir data pegawai-------------------------------------------->
 
 @endsection

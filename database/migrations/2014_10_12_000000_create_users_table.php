@@ -49,6 +49,8 @@ class CreateUsersTable extends Migration
             $table->string('foto',200);
             $table->unsignedinteger('id_unit_kerja');
             $table->foreign('id_unit_kerja')->references('id')->on('unit_kerjas');
+            $table->unsignedinteger('id_divisi');
+            $table->foreign('id_divisi')->references('id')->on('divisis');
             $table->boolean('is_status');
             $table->timestamps();
         });

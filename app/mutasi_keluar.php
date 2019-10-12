@@ -13,4 +13,5 @@ class mutasi_keluar extends Model
     'pejabat',
     'tanggal_sk',
     'tmt','keterangan'];
+
 }

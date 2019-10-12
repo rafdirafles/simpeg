@@ -18,7 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+// master pegawai
 Route::resource('/master','masterController');
+Route::post('/master/update','masterController@update')->name('master.update');
 Route::resource('/profile','ProfileController');
 
 // // ================setting controller ===========================// //
@@ -94,6 +96,12 @@ Route::post('/riwayat_jabatan/delete','Riwayat\RiwayatJabatanController@destroy'
 Route::resource('/mutasi_keluar','Mutasi\MutasiKeluarController');
 Route::post('/mutasi_keluar/update','Mutasi\MutasiKeluarController@update')->name('mutasi_keluar.update');
 Route::post('/mutasi_keluar/delete','Mutasi\MutasiKeluarController@destroy')->name('mutasi_keluar.delete');
+// Mutasi internal
+Route::resource('/mutasi_internal','Mutasi\MutasiInternalController');
+Route::post('/mutasi_internal/update','Mutasi\MutasiInternalController@update')->name('mutasi_internal.update');
+Route::post('/mutasi_internal/delete','Mutasi\MutasiInternalController@destroy')->name('mutasi_internal.delete');
+Route::post('/mutasi_internal/divisi','Mutasi\MutasiInternalController@divisi')->name('mutasi_internal.divisi');
+Route::post('/mutasi_internal/editdivisi','Mutasi\MutasiInternalController@editDivisi')->name('mutasi_internal.editdivisi');
 
 
 //
