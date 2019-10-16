@@ -60,7 +60,8 @@ class PendidikanUmumController extends Controller
                 'file' =>'mimes:pdf|max:10000',
             ]);
             $file = $request->file('file');
-            $nama_file = time()."_".$file->getClientOriginalName();
+            $text = str_replace(' ', '',$file->getClientOriginalName());
+            $nama_file = time()."_".$text;
             $tujuan_upload = 'file';
             $file->move($tujuan_upload,$nama_file);
         }
@@ -136,7 +137,8 @@ class PendidikanUmumController extends Controller
                 $image_path = public_path().'/file/'.$data->file;
                 unlink($image_path);
             }
-            $nama_file = time()."_".$file->getClientOriginalName();
+            $text = str_replace(' ', '',$file->getClientOriginalName());
+            $nama_file = time()."_".$text;
             $tujuan_upload = 'file';
             $file->move($tujuan_upload,$nama_file);
         }

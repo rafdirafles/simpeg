@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 class ProfileController extends Controller
 {
     /**
@@ -14,8 +15,8 @@ class ProfileController extends Controller
     public function index()
     {
         //
-        $data=user::where('id',auth::user()->id)->get();
-        return view('Profile.index',compact($data));
+        $data=user::where('nip_nrp',auth::user()->nip_nrp)->first();
+        return view('Profile.index',compact('data'));
         
     }
 
@@ -38,6 +39,25 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,[
+            'current_password'=>'required',
+            'new_password'=>'required|min:6',
+            'confirm_password'=>'required|min:6',
+       ]);
+       if(!Hash::check($request->get('current_password'),auth::user()->password)){
+            return redirect()->back()->with('succes','password yang anda masukkan tidak sama');
+       }
+       if(strcmp($request->get('current_password'),$request->get('new_password'))==0){
+            return redirect()->back()->with('succes','maaf password yang anda masukkan sama dengan password lama');
+       }
+       if(strcmp($request->get('new_password'),$request->get('confirm_password'))){
+            return redirect()->back()->with('succes','maaf confirm password tidak sama');
+       }
+       $user=auth::user();
+       $user->password=bcrypt($request->get('new_password'));
+       $user->save();
+       auth::logout();
+       return redirect()->route('login')->with('succes','password berhasil di rubah');
     }
 
     /**
@@ -60,6 +80,7 @@ class ProfileController extends Controller
     public function edit($id)
     {
         //
+        
     }
 
     /**
@@ -72,6 +93,7 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
     }
 
     /**

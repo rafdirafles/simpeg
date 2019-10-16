@@ -100,6 +100,7 @@ class PendidikanKejuruanController extends Controller
     public function show($id)
     {
         //
+       
         $data=Pendidikan_kejuruan::where('nip_nrp',$id)->get();
         return Response()->json($data);
     }

@@ -29,14 +29,14 @@
                     <span class="kt-portlet__head-icon">
                         <i class="kt-font-brand flaticon2-line-chart"></i>
                     </span>
-                    <h3 class="kt-portlet__head-title" style="margin-right:20px">TabelKuuu</h3>
+                    <h3 class="kt-portlet__head-title" style="margin-right:20px">Tabel Pegawai</h3>
                 </div>
                     <div class="kt-portlet__head-toolbar">
                         <div class="kt-portlet__head-wrapper">
                             <div class="kt-portlet__head-actions">
                                 <div class="dropdown dropdown-inline">
                                     <button type="button" class="btn btn-default btn-icon-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="la la-download"></i> Export
+                                        <i class="la la-download"></i> Import
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <ul class="kt-nav">
@@ -116,7 +116,7 @@
                         </td> --}}
                         <td>
                         <a class="flaticon-folder-1" href="{{route('master.show',$data->nip_nrp)}}" ></a>
-                        <a class="flaticon-edit" href="" ></a>
+                        <a class="flaticon-edit" href="{{route('master.edit_pegawai',$data->nip_nrp)}}" ></a>
                         <a href="#" class="flaticon-delete" data-catid={{$data->nip_nrp}} data-toggle="modal" data-target="#delete"></a>
                         </td>
                     </tr>
@@ -132,33 +132,36 @@
     </div>
 </div>
 
-
-
-<div class="modal modal-danger fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title text-center" id="myModalLabel">Delete Confirmation</h4>
-        </div>
-        <form action="{{route('master.destroy','test')}}" method="post">
+{{-- hapus --}}
+<div class="modal fade" id="delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Hapus Data</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <form action="{{route('master.destroy','test')}}" method="post">
                 {{method_field('delete')}}
                 {{csrf_field()}}
-            <div class="modal-body">
-                <center><img src="{{asset('/img/police_stop.gif')}}" alt=""></center>
-                <p class="text-center" style="color:red ">
-                    Are you sure you want to delete this?
-                </p>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <p>Apakah Anda Yakin Menghapus Data </strong>
+                    </div>
                     <input type="hidden" name="id" id="cat_id" value="">
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">No, Cancel</button>
-            <button type="submit" class="btn btn-warning">Yes, Delete</button>
-            </div>
-        </form>
-    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="btn-hapus-pendidikan-non-formal">Hapus</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
 @endsection
 @section('asset-buttom')
  <script src="{{ asset('template/assets/plugins/custom/datatables/datatables.bundle.js')}}" type="text/javascript"></script>

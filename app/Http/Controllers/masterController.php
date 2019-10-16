@@ -17,6 +17,7 @@ use App\Pendidikan_polri;
 use App\Riwayat_gaji_berkala;
 use App\Riwayat_jabatan;
 use App\Tanda_jasa_Prestasi;
+use App\Divisi;
 use Illuminate\Http\Request;
 
 class masterController extends Controller
@@ -40,8 +41,8 @@ class masterController extends Controller
     public function create()
     {
         //
-        $datas=Unit_kerja::all();
-        return view('master.create',compact('datas'));
+        $unit_kerja=Unit_kerja::all();
+        return view('master.create',compact('unit_kerja'));
     }
 
     /**
@@ -55,11 +56,11 @@ class masterController extends Controller
         //
         $this->validate($request,[
             'foto' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
-            'nip_nrp'=>['required'],
+            'nip_nrp'=>'required|numeric',
             'nama_pegawai'=>'required|string',
             'gelar_depan'=>'required',
             'gelar_belakang'=>'required',
-            'no_kta_pegawai'=>'required',
+            'no_kta_pegawai'=>'required|unique:users',
             'jenis_pegawai'=>'required',
             'email'=>'required|unique:users',
             'password'=>'min:6|required_with:re_password|same:re_password',
@@ -125,11 +126,10 @@ class masterController extends Controller
             'ciri_khas'=> $request->ciri_khas,
             'cacat_tubuh'=> $request->cacat_tubuh,
             'id_unit_kerja'=> $request->id_unit_kerja,
+            'id_divisi'=> $request->id_divisi,
             'is_status'=>1
-
-
         ]);
-        return back()->with('success','data berhasil ditambahkan');
+        return redirect('/master.index')->with('success','data berhasil ditambahkan');
         // return $request->all();
     }
 
@@ -176,6 +176,7 @@ class masterController extends Controller
         $pangkats=Pangkat::all();
         return view('master.show',compact('datas','p_umum','p_kejuruan','keluargas','k_bahasa','k_olahraga','k_brevet',
         'tanda_jasas','p_polris','r_gaji','jabatan','pangkats','unit_kerja'));
+
     }
 
     /**
@@ -186,10 +187,49 @@ class masterController extends Controller
      */
     public function edit($id)
     {
+
         //
         $data =User::where('nip_nrp',$id)->with('unit_kerja')->first();
         // $data=User::all();
         return Response()->json($data);
+    }
+    public function edit_pegawai($id)
+    {
+        //
+        $datas=user::findOrFail($id);
+        $p_umum=Pendidikan_umum::where('nip_nrp',$id)->get();
+        $p_umum->groupBy('nip_nrp');
+        //
+        $p_kejuruan=Pendidikan_kejuruan::where('nip_nrp',$id)->get();
+        $p_kejuruan->groupBy('nip_nrp');
+        //
+        $keluargas=Data_keluarga::where('nip_nrp',$id)->get();
+        $keluargas->groupBy('nip_nrp');
+        //
+        $k_bahasa=Kecakapan_bahasa::where('nip_nrp',$id)->get();
+        $k_bahasa->groupBy('nip_nrp');
+        //
+        $k_olahraga=Kecakapan_olahraga_dan_beladiri::where('nip_nrp',$id)->get();
+        $k_olahraga->groupBy('nip_nrp');
+        //
+        $k_brevet=Kecakapan_brevet::where('nip_nrp',$id)->get();
+        $k_brevet->groupBy('nip_nrp');
+        //
+        $tanda_jasas=Tanda_jasa_Prestasi::where('nip_nrp',$id)->get();
+        $tanda_jasas->groupBy('nip_nrp');
+        //
+        $p_polris=Pendidikan_polri::where('nip_nrp',$id)->get();
+        $p_polris->groupBy('nip_nrp');
+        //
+        $r_gaji=Riwayat_gaji_berkala::where('nip_nrp',$id)->get();
+        $r_gaji->groupBy('nip_nrp');
+        //
+        $jabatan=Jabatan::all();
+        $unit_kerja=Unit_kerja::all();
+        // pangkat
+        $pangkats=Pangkat::all();
+        return view('master.edit',compact('datas','p_umum','p_kejuruan','keluargas','k_bahasa','k_olahraga','k_brevet',
+        'tanda_jasas','p_polris','r_gaji','jabatan','pangkats','unit_kerja'));
     }
 
     /**
@@ -246,10 +286,10 @@ class masterController extends Controller
 
                 'foto' =>'file|image|mimes:jpeg,png,jpg|max:2048',
             ]);
-           
+
                 $image_path = public_path().'/img/'.$data->foto;
                 unlink($image_path);
-            
+
             $file = $request->file('foto');
             $text = str_replace(' ', '',$file->getClientOriginalName());
             $nama_file = time()."_".$text;
@@ -275,7 +315,7 @@ class masterController extends Controller
             'no_kep_jabatan'=>$request->no_kep_jabatan,
             'nik'=> $request->nik,
             'status_menikah'=> $request->status_menikah,
-          
+
             'hobi'=> $request->hobi,
             'no_tlp'=> $request->no_tlp,
             'no_hp'=> $request->no_hp,
@@ -289,7 +329,7 @@ class masterController extends Controller
             'cacat_tubuh'=> $request->cacat_tubuh,
             'id_unit_kerja'=> $request->id_unit_kerja,
             'id_divisi'=> $request->id_divisi,
-           
+
         ]);
         return Response()->json($request->all());
     }
@@ -306,6 +346,20 @@ class masterController extends Controller
         $data=User::findOrFail($request->id);
         $data->delete();
         return back()->with("success","data berhasil di Hapus");
+    }
+    public function divisis(Request $request)
+    {
+        //
+        $id=$request->id;
+        $datas=Divisi::where('id_unit_kerja',$id)->get();
+        $output="<option > pilih </option>";
+
+        foreach($datas as $data){
+            $output .=
+            '<option value="'.$data->id.'" '. ($request->id_selected == $data->id ? "selected":"").'>'.$data->nama_devisi.'</option>';
+            // echo '<option value="'.$data->id.'">'.$data->nama_devisi.'</option>';
+        }
+        return $output;
     }
 
 }

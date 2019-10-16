@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 // master pegawai
 Route::resource('/master','masterController');
 Route::post('/master/update','masterController@update')->name('master.update');
+Route::get('/master/{id}/edit_pegawai','masterController@edit_pegawai')->name('master.edit_pegawai');
+Route::post('/master/divisis','masterController@divisis')->name('master.divisis');
 Route::resource('/profile','ProfileController');
 
 // // ================setting controller ===========================// //
