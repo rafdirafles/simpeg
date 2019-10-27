@@ -12,7 +12,7 @@
                         </div>
                     @endif
 
-                    welcom {{auth::user()->nama_pegawai}}
+                    welcome {{auth::user()->nama_pegawai}}
                 </div>
             </div>
         </div>

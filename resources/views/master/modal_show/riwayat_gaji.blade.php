@@ -127,7 +127,7 @@
                               <div class="help-block with-errors"></div>
                           </div>
                           <div class="form-group">
-                              <button type="submit" class="btn btn-success edit-r_jabatan">Submit</button>
+                              <button type="submit" class="btn btn-brand btn-bold edit-r_jabatan">Submit</button>
                           </div>
                       </form>
                 </div>

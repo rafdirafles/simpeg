@@ -115,9 +115,9 @@
                             @endforeach
                         </td> --}}
                         <td>
-                        <a class="flaticon-folder-1" href="{{route('master.show',$data->nip_nrp)}}" ></a>
-                        <a class="flaticon-edit" href="{{route('master.edit_pegawai',$data->nip_nrp)}}" ></a>
-                        <a href="#" class="flaticon-delete" data-catid={{$data->nip_nrp}} data-toggle="modal" data-target="#delete"></a>
+                        <a class="fa-folder-open" href="{{route('master.show',$data->nip_nrp)}}" ></a>
+                        <a class="fas fa-fw fa-edit" href="{{route('master.edit_pegawai',$data->nip_nrp)}}" ></a>
+                        <a href="#" class="fas fa-fw fa-trash" data-catid={{$data->nip_nrp}} data-toggle="modal" data-target="#delete"></a>
                         </td>
                     </tr>
                     @endforeach

@@ -16,9 +16,9 @@
                 <div class="kt-container ">
                     <div class="kt-subheader__main">
                         <button class="kt-subheader__mobile-toggle" id="kt_subheader_mobile_toggle"><span></span></button>
-                        <h3 class="kt-subheader__title">Profile 1</h3>
+                        <h3 class="kt-subheader__title">Menu Profil </h3>
                         <span class="kt-subheader__separator kt-subheader__separator--v"></span>
-                        <span class="kt-subheader__desc">#XRS-45670</span>
+                        <span class="kt-subheader__desc">{{auth::user()->nama_pegawai}}</span>
                     </div>
                 </div>
             </div>

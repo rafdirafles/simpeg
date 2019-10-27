@@ -73,6 +73,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem; }
 
+/* menambahkan error */
+.error{
+  color: red;
+}
+
 p {
   margin-top: 0;
   margin-bottom: 1rem; }
@@ -4834,9 +4839,10 @@ a.close.disabled {
   height: 50px;
   overflow: scroll; }
 
+/* benerin modalbox */
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    max-width: 630px;
     margin: 1.75rem auto; }
   .modal-dialog-scrollable {
     max-height: calc(100% - 3.5rem); }
@@ -4847,7 +4853,7 @@ a.close.disabled {
     .modal-dialog-centered::before {
       height: calc(100vh - 3.5rem); }
   .modal-sm {
-    max-width: 300px; } }
+    max-width: 992px; } }
 
 @media (min-width: 1024px) {
   .modal-lg,
@@ -8621,24 +8627,24 @@ a.text-dark:hover, a.text-dark:focus {
     .alert.alert-danger .alert-close i {
       color: #ffffff; }
   .alert.alert-outline-danger {
-    border: 1px solid #fd397a;
-    color: #fd397a; }
+    border: 1px solid red;
+    color: red; }
     .alert.alert-outline-danger .alert-icon i {
-      color: #fd397a; }
+      color: red; }
     .alert.alert-outline-danger .alert-text {
-      color: #fd397a; }
+      color: red; }
     .alert.alert-outline-danger .alert-close i {
-      color: #fd397a; }
+      color: red; }
   .alert.alert-solid-danger {
     background: rgba(253, 57, 122, 0.1);
     border-color: transparent;
-    color: #fd397a; }
+    color: red; }
     .alert.alert-solid-danger .alert-icon i {
-      color: #fd397a; }
+      color: red; }
     .alert.alert-solid-danger .alert-text {
-      color: #fd397a; }
+      color: red; }
     .alert.alert-solid-danger .alert-close i {
-      color: #fd397a; }
+      color: red; }
   .alert.alert-secondary .alert-icon i {
     color: #74788d; }
   .alert.alert-secondary .alert-text {
@@ -10904,7 +10910,8 @@ code {
     -webkit-transition: all 0.3s;
     transition: all 0.3s; }
     .modal .modal-content .modal-header .close:before {
-      content: ""; }
+      content: "";
+    color: red; }
     .modal .modal-content .modal-header .close:hover {
       -webkit-transition: all 0.3s;
       transition: all 0.3s; }
@@ -32395,7 +32402,7 @@ strong {
     -ms-flex-align: start;
     align-items: flex-start; }
     .kt-widget.kt-widget--user-profile-1 .kt-widget__head .kt-widget__media img {
-      width: 130%;
+      width: 160%;
       max-width: 200%;
       border-radius: 8px; }
     .kt-widget.kt-widget--user-profile-1 .kt-widget__head .kt-widget__content {
@@ -32437,8 +32444,9 @@ strong {
       justify-content: space-between;
       padding-bottom: 0.5rem; }
       .kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__content .kt-widget__info .kt-widget__label {
-        color: #48465b;
-        font-weight: 500; }
+        color: #000000;
+        font-weight: 500;
+        font-size: 110%;}
       .kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__content .kt-widget__info .kt-widget__data {
         color: #74788d;
         font-weight: 400; }
@@ -32463,10 +32471,10 @@ strong {
     .kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__items .kt-widget__item.kt-widget__item--active {
       -webkit-transition: color 0.3s ease;
       transition: color 0.3s ease;
-      background: #f2f3f7;
+      background: #ffff00;
       border-radius: 4px; }
       .kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__items .kt-widget__item.kt-widget__item--active .kt-widget__section .kt-widget__desc {
-        color: #5d78ff; }
+        color: #000000; }
       .kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__items .kt-widget__item.kt-widget__item--active .kt-widget__section .kt-widget__icon .kt-svg-icon g [fill] {
         fill: #000000; }
     .kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__items .kt-widget__item .kt-widget__section .kt-widget__icon svg {
@@ -32481,7 +32489,7 @@ strong {
     .kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__items .kt-widget__item:hover {
       -webkit-transition: color 0.3s ease;
       transition: color 0.3s ease;
-      background: #f2f3f7;
+      background: #c2c0c0;
       cursor: pointer;
       border-radius: 4px; }
       .kt-widget.kt-widget--user-profile-1 .kt-widget__body .kt-widget__items .kt-widget__item:hover .kt-widget__desc {
